@@ -1,0 +1,581 @@
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+<!-- 砍价商品详情 -->
+
+<view class='canvas-view'>
+  <canvas style='width: {{canvasWidth}}px;height: {{canvasHeight}}px;position:fixed;left:100000px' canvas-id="canvas">
+  </canvas>
+</view>
+
+<view wx:if='{{show}}' style='z-index: 999'>
+  <order-socket value='goods' type='3'></order-socket>
+  <!-- 1 -->
+  <view>
+    <!-- 轮播图 -->
+    <swiper indicator-dots="{{treasure.goods.product_img.length>1?true:flase}}" indicator-color="#E0E0E1" indicator-active-color="#FD5739" class='swiper'>
+      <swiper-item wx:for="{{treasure.goods.product_img}}" wx:key="pic" bindtap='goSwiper' data-itemurl='{{item.url}}'>
+        <image lazy-load src="{{item.url?item.url:''}}" mode='aspectFill'></image>
+      </swiper-item>
+    </swiper>
+    <image lazy-load src='/images/btn_xiangqing_yesshoucang@2x.png' class='swiper-image' wx:if='{{is_collection}}' bindtap='goCollection'></image>
+    <image lazy-load src='/images/btn_xiangqing_noshoucang@2x.png' class='swiper-image' wx:else bindtap='goCollection'></image>
+    <!-- 价格和时间 -->
+    <view class='flex'>
+      <!-- 活动价 -->
+      <view class='treasure-top-text flex-cc' style='{{time<86400}}?"width: 524rpx":""'>
+        <view class='treasure-one-left flex'>
+          <view class='one-left-icon'>¥</view>
+          <view class='one-left-num'>{{treasure.group_buy_price-0}}</view>
+        </view>
+        <view class='treasure-one-right'>
+          <view class='one-right-top flex-cc'>
+            <view>门店原价</view>
+            <view class='right-top-price'>￥{{treasure.origin_price-0}}</view>
+          </view>
+          <view class='flex-cc right-bot'>
+            <progress class='right-bot-xian' stroke-width='12rpx' percent="{{treasure.progress_bar*100}}" activeColor='#ffb927' backgroundColor='#EDEDED' border-radius='11rpx' />
+            <view class='right-bot-text'>剩余{{treasure.stock-treasure.sold-treasure.frozen_num}}件</view>
+          </view>
+        </view>
+      </view>
+      <!-- 活动剩余时间 -->
+      <block wx:if='{{treasure.activity_status==1}}'>
+        <view class='flex-ra-cc treasure-top-time' wx:if='{{time<86400}}'>
+          <view class='top-time-text'>距结束还剩</view>
+          <!-- <view class='top-time1'>{{common.difference_time(time)}}</view> -->
+          <view class='top-time flex-cc'>
+            <view class='top-time-time'>{{common.difference_time(countDownNum).hour}}</view>
+            <view class='top-time-dian'>:</view>
+            <view class='top-time-time'>{{common.difference_time(countDownNum).min}}</view>
+            <view class='top-time-dian'>:</view>
+            <view class='top-time-time'>{{common.difference_time(countDownNum).second}}</view>
+          </view>
+        </view>
+        <view class='flex-ra-cc treasure-top-time1' wx:else>
+          <view class='top-time-text'>距结束还剩</view>
+          <view class='top-time1'>{{common.difference_time(countDownNum).day}}天</view>
+        </view>
+      </block>
+      <view class='treasure-top-end flex-rc-cc' wx:elif='{{treasure.activity_status==2}}'>活动已结束</view>
+    </view>
+    <!-- 转发 -->
+    <view class='flex one-forward'>
+      <view class='flex-rb-cc forward-one'>
+        <view class='forward-left'>{{treasure.goods.product_name}}</view>
+        <!-- <button open-type="share" class='button-share flex-cc' wx:if='{{shareImage}}'>
+          <image lazy-load class='forward-right' src='/images/ic_goods_share_2@2x.png'></image>
+          <view class='forward-right-text'>分享</view>
+        </button> -->
+        <view class='button-share flex-cc' bindtap='goShare'>
+          <image lazy-load class='forward-right' src='/images/ic_goods_share_2@2x.png'></image>
+          <view class='forward-right-text'>分享</view>
+        </view>
+      </view>
+      <view class='forward-two'>{{treasure.goods.product_desc}}</view>
+    </view>
+  </view>
+
+  <!-- 2 -->
+  <view class='two-forward-nice'>
+    <view class='flex-rb-cc two-forward' bindtap='goService'>
+      <view class='two-left flex-cc'>
+        <view class='two-left-text'>商家服务</view>
+        <view class='two-left1'>
+          <view class='two-left-title' wx:for='{{treasure.goods.product_service_label}}' wx:key='index'>
+            <text>{{item.content}}</text>
+            <text class='two-left-dian'>·</text>
+          </view>
+        </view>
+      </view>
+      <image lazy-load src='/images/ic_goods_enter@3x.png' class='two-image'></image>
+    </view>
+    <view class='flex-rb-cc two-forward1' bindtap='goParameter'>
+      <view class='two-left flex-cc'>
+        <view class='two-left-text'>商品参数</view>
+        <view class='two-left-title'>规格尺寸、型号、颜色...</view>
+      </view>
+      <image lazy-load src='/images/ic_goods_enter@3x.png' class='two-image'></image>
+    </view>
+  </view>
+
+  <!-- 3 -->
+  <view class='three-forward'>
+    <view class='flex-rb-cc three-top-nice'>
+      <view class='flex-cc'>
+        <!-- <view class='three-top-text'>砍价帮</view> -->
+        <view class='flex-cc three-top-huode'>
+          <view>获得资格</view>
+          <view class='three-top-dayu'>></view>
+          <view>8刀砍到0.01</view>
+          <view class='three-top-dayu'>></view>
+          <view>到店兑换</view>
+        </view>
+      </view>
+      <block wx:if='{{obj}}'>
+        <view class='flex-cc' bindtap='showAll' wx:if='{{showAll}}'>
+          <view class='three-top-title'>查看全部</view>
+          <image lazy-load src='/images/ic_goods_enter@2x.png' class='three-top-image'></image>
+        </view>
+        <view class='flex-cc' bindtap='hideAll' wx:else>
+          <view class='three-top-title'>收起全部</view>
+          <image lazy-load src='/images/ic_goods_up@2x.png' class='three-top-image'></image>
+        </view>
+      </block>
+    </view>
+    <block wx:if='{{obj}}'>
+      <view wx:if='{{showAll}}' style='position: relative'>
+        <!-- <view class='swiper-layer'></view> -->
+        <swiper class='three-bottom-nice1' autoplay circular vertical display-multiple-items='{{obj.length>1?"2":"1"}}' interval='3000' style='{{obj.length>1?"":"height: 104rpx"}}'>
+          <swiper-item class='three-bottom1' wx:for='{{obj}}' wx:key='index' bindtap='goList' data-id='{{item.order_id}}' data-index='{{index}}' data-item='{{item}}'>
+            <view class='flex-rb-cc three-xian'>
+              <view style='width: 66rpx;' class='flex'>
+                <image lazy-load mode='aspectFill' class='three-image' src='{{item.head_pic?item.head_pic:"/images/ic_my_head_def@3x.png"}}'></image>
+              </view>
+              <view class='flex-rb-cc three-text'>
+                <view class='flex-cc' style='width: 100%'>
+                  <!-- <view class='three-bottom-text'>{{item.nickname?item.nickname:""}}</view> -->
+                  <view class='three-bottom-text1 flex'>已砍{{item.count_likes}}刀</view>
+                  <view class='three-bottom-text2 flex' wx:if='{{item.data.type == "push_order"}}'>砍价中</view>
+                  <view class='three-bottom-text2 flex' wx:else>{{item.status==1?"砍价成功":"砍价中"}}</view>
+                  <view class='three-bottom-text3 flex'>{{common.tTime(item.add_time,"dates")}}</view>
+                </view>
+                <view class='flex'>
+                  <image lazy-load class='three-bottom-image' src='/images/ic_goods_enter@3x.png'></image>
+                </view>
+              </view>
+            </view>
+          </swiper-item>
+        </swiper>
+      </view>
+      <scroll-view scroll-y class='three-bottom-nice' catchtap='goClick' wx:else>
+        <view class='three-bottom' wx:for='{{obj}}' wx:key='index'>
+          <view class='flex-rb-cc three-xian' bindtap='goList' data-id='{{item.order_id}}' data-index='{{index}}' data-item='{{item}}'>
+            <view style='width: 66rpx;' class='flex'>
+              <image lazy-load mode='aspectFill' class='three-image' src='{{item.head_pic?item.head_pic:"/images/ic_my_head_def@3x.png"}}'></image>
+            </view>
+            <view class='flex-rb-cc three-text'>
+              <view class='flex' style='width: 100%'>
+                <!-- <view class='three-bottom-text'>{{item.nickname?item.nickname:""}}</view> -->
+                <view class='three-bottom-text1 flex'>已砍{{item.count_likes}}刀</view>
+                <view class='three-bottom-text2'>{{item.status==1?"砍价成功":"砍价中"}}</view>
+                <view class='three-bottom-text3'>{{common.tTime(item.add_time,"dates")}}</view>
+              </view>
+              <view>
+                <image lazy-load class='three-bottom-image flex' src='/images/ic_goods_enter@3x.png' wx:if='{{hideIcon}}'></image>
+                <image lazy-load class='three-bottom-image flex' src='/images/ic_shangpin_off@2x.png' wx:else></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </scroll-view>
+    </block>
+    <view class='swiper-none flex-rc-cc' wx:else>暂无砍价动态</view>
+  </view>
+
+  <!-- 4 -->
+  <view class='four-forward' bindtap='goChange'>
+    <view class='flex-rb-cc'>
+      <view class='four-top-text'>兑换券说明</view>
+      <image lazy-load src='/images/ic_goods_enter@3x.png' class='four-top-image'></image>
+    </view>
+    <view class='flex-cc four-icon-list'>
+      <view class='flex-cc'>
+        <icon type="success" size='19rpx' color='red'></icon>
+        <view class='four-icon-text'>随时退</view>
+        <icon type="success" size='19rpx' color='red'></icon>
+        <view class='four-icon-text'>不成功自动退</view>
+        <icon type="success" size='19rpx' color='red'></icon>
+        <view class='four-icon-text'>到店兑换</view>
+        <icon type="success" size='19rpx' color='red'></icon>
+        <view class='four-icon-text'>过期自动退</view>
+      </view>
+    </view>
+    <view class='flex-cc four-tt'>
+      <view class='four-dian'></view>
+      <view class='four-one'>此商品由{{treasure.store.brand}}（{{treasure.store.market}}）特约赞助, 砍价成功后凭券码到门店兑换。</view>
+    </view>
+    <view class='flex-cc'>
+      <view class='four-dian'></view>
+      <view class='four-two'>同一客户在同一店铺最多兑换一次“新人免费领”商品。</view>
+    </view>
+  </view>
+
+  <!-- 5 -->
+  <view class='five-forward flex'>
+    <view class='five-text'>商家信息</view>
+    <view class='flex-rb-cc' bindtap='goStore'>
+      <view class='flex five-left-text'>
+        <view wx:for='{{treasure.store.store_cover}}' wx:key='index'>
+          <image lazy-load class='five-left-image' src='{{item.url}}'></image>
+        </view>
+        <view class='five-middle'>
+          <view class='flex-cc'>
+            <view class='middle-top'>{{treasure.store.brand}}</view>
+            <view class='middle-top-title'>（{{treasure.store.market}}）</view>
+          </view>
+          <view class='flex-cc'>
+            <image lazy-load class='five-icon' src='/images/ic_goods_clock@2x.png'></image>
+            <view class='middle-mid-title'>营业时间: {{treasure.store.business_hours_begin}}{{treasure.store.business_hours_end}}</view>
+          </view>
+          <view class='flex-cc'>
+            <image lazy-load class='five-icon' src='/images/ic_goods_location@2x.png'></image>
+            <view class='top-left-tilte'>{{treasure.store.city}}{{treasure.store.area}}{{treasure.store.address}}</view>
+          </view>
+        </view>
+      </view>
+      <view>
+        <image lazy-load class='five-right-image' src='/images/ic_goods_phone@2x.png' catchtap='goIphon'></image>
+      </view>
+    </view>
+  </view>
+
+  <assemble-sales vest='{{treasure.store.vest}}'></assemble-sales>
+
+  <!-- 店铺推荐 -->
+  <view class='store-view' wx:if='{{indexShow.length>0}}'>
+    <view class='store-top-view flex-rb-cc'>
+      <view class='store-left-text'>店铺推荐</view>
+      <view class='flex-rc-cc' bindtap='goStore'>
+        <view class='store-right-text'>查看全部</view>
+        <view class='flex'>
+          <image lazy-load src='/images/ic_goods_enter@3x.png' class='store-top-icon'></image>
+        </view>
+      </view>
+    </view>
+    <view class='store-bottom-view flex-cc'>
+      <view class='store-views' wx:for='{{indexShow}}' wx:key='index' data-item='{{item}}' bindtap='goGoods'>
+        <view>
+          <view class='flex store-image-view'>
+            <image lazy-load src='{{item.data.goods.img_url}}' class='store-image'></image>
+            <view class='store-image-icon1 flex-rc-cc' wx:if='{{item.type=="spike"}}'>免费领</view>
+            <view class='store-image-icon2 flex-rc-cc' wx:elif='{{item.type=="group_buy"}}'>去拼团</view>
+            <view class='store-image-icon3 flex-rc-cc' wx:elif='{{item.type=="temai"}}'>特价样品</view>
+          </view>
+        </view>
+        <view class='store-image-text flex'>{{item.data.goods.product_name}}</view>
+        <view class='flex-cc store-money-view'>
+          <view class='store-money'>¥</view>
+          <view class='store-price'>{{item.data.group_buy_price-0}}</view>
+          <view class='store-old-price'>{{item.data.origin_price-0}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 6 -->
+  <view class='six-view' wx:if='{{page_size>0}}'>
+    <view class='flex-rb-cc six-forward'>
+      <view class='six-top-text'>商品评价（{{page_size}}）</view>
+      <view class='flex-cc' bindtap='goEvaluate' wx:if='{{follow != ""}}'>
+        <view class='six-top-title'>全部评价</view>
+        <image lazy-load class='six-top-image' src='/images/ic_goods_enter@3x.png'></image>
+      </view>
+    </view>
+    <block wx:if='{{follow != ""}}'>
+      <view wx:for='{{follow}}' wx:key='index'>
+        <view class='flex six-bottom'>
+          <view>
+            <image lazy-load mode='aspectFill' class='six-image' src='{{item.user.head_pic?item.user.head_pic:"/images/ic_my_head_def@3x.png"}}'></image>
+          </view>
+          <view class='six-bottom-right'>
+            <view class='flex-rb-cc'>
+              <view class='six-bottom-phone'>{{item.user.nickname}}</view>
+              <view class='six-bottom-time'>{{item.comment.add_time}}</view>
+            </view>
+            <view class='flex-cc six-bottom-hearts'>
+              <view class='flex-cc six-bottom-heart'>
+                <view class='six-bottom-star'>导购：</view>
+                <image lazy-load wx:for='{{item.comment.vest_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_pre2@2x.png'></image>
+                <image lazy-load wx:for='{{5-item.comment.vest_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_def2@2x.png'></image>
+              </view>
+              <view class='flex-cc six-bottom-heart'>
+                <view class='six-bottom-star'>商品：</view>
+                <image lazy-load wx:for='{{item.comment.goods_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_pre2@2x.png'></image>
+                <image lazy-load wx:for='{{5-item.comment.goods_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_def2@2x.png'></image>
+              </view>
+              <view class='flex-cc six-bottom-heart'>
+                <view class='six-bottom-star'>送装：</view>
+                <image lazy-load wx:for='{{item.comment.load_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_pre2@2x.png'></image>
+                <image lazy-load wx:for='{{5-item.comment.load_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_def2@2x.png'></image>
+              </view>
+            </view>
+            <view class='six-bottom-text'>{{item.comment.content?item.comment.content:''}}</view>
+          </view>
+        </view>
+      </view>
+    </block>
+    <!-- <view class='none-text flex-rc-cc' wx:else>当前商品暂无评价</view> -->
+  </view>
+
+  <!-- 7 -->
+
+  <view class='seven-forward'>
+    <view class='seven-text'>商品详情</view>
+    <rich-text nodes='{{text}}'></rich-text>
+  </view>
+
+  <!-- 垫子 -->
+  <view class='cushion' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'></view>
+
+  <!-- 8 -->
+
+  <view class='eight-forward' style='{{modelX!="-1"?"bottom: 68rpx":""}}'>
+    <!-- <view class='eight-share-view flex'>
+      <view class='eight-share flex-rc-cc' catchtap='goOrder'><text>待完成订单</text></view> -->
+    <!-- <image class='eight-share' src='/images/ic_share@2x.png' catchtap='goOrder'></image> -->
+    <!-- </view> -->
+    <view class='flex-cc {{treasure.progress_bar==1 || treasure.activity_status==2 ? "eight-forward1" : "eight-forward2"}}'>
+      <view class='eight-left flex-rc-cc'>
+        <view bindtap='goIndex' class='flex-cc eight-icon'>
+          <image lazy-load src='/images/ic_group_home@2x.png' class='eight-icon-image1'></image>
+          <view class='eight-text'>首页</view>
+        </view>
+        <view class='eight-boder'></view>
+        <view class='flex-cc eight-icon' bindtap='goStore'>
+          <image lazy-load src='/images/ic_group_shop@2x.png' class='eight-icon-image'></image>
+          <view class='eight-text'>店铺</view>
+        </view>
+        <view class='eight-boder'></view>
+        <view bindtap='goCustomer' class='flex-cc eight-icon'>
+          <image lazy-load src='/images/ic_group_kefu@2x.png' class='eight-icon-image'></image>
+          <view class='eight-text'>客服</view>
+        </view>
+      </view>
+      <view wx:if='{{treasure.activity_status==1}}' class='{{treasure.progress_bar!=1?"eight-right-end2":"eight-right-end1"}}'>
+        <view wx:if='{{treasure.progress_bar!=1}}'>
+          <view catchtap='goBuy' class='eight-right' wx:if='{{token}}'>￥0.01
+            <text> 领走</text>
+          </view>
+          <block wx:else>
+            <button bindgetuserinfo='bindgetuserinfo' open-type='getUserInfo' class='eight-right'>￥0.01
+              <text> 领走</text>
+            </button>
+          </block>
+        </view>
+        <view class='eight-right-end flex-rc-cc' wx:else>已抢光</view>
+      </view>
+      <view wx:elif='{{treasure.activity_status==2}}' class='eight-right-end1'>
+        <view class='eight-right-end flex-rc-cc'>已抢光</view>
+      </view>
+    </view>
+  </view>
+
+  <view class='nine-share-view flex-cc' catchtap='goOrder' wx:if='{{orderLength>0}}'>
+    <view class='nine-share-text'>进行中订单</view>
+    <view class='flex-cc'>
+      <image lazy-load src='/images/ic_enter@2x.png' class='nine-share-icon'></image>
+    </view>
+  </view>
+
+  <view class="modelView" wx:if='{{modelX!="-1"}}'></view>
+</view>
+
+<!-- 覆盖层 -->
+
+<!-- <view style='width:0rpx;height:0rpx;overflow:hidden;z-index:0'>
+  <canvas class='forecast_canvas' style='width: 750rpx;height: 600rpx' canvas-id="canvas"></canvas>
+</view> -->
+
+<!-- 分享 -->
+<view class='viewBG' catchtouchmove='preventMove' catchtap='goAll' wx:if='{{share}}'>
+</view>
+<view class='share-view {{share?"openBG1":""}}' catchtouchmove='preventMove' catchtap='goClick' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}' wx:if='{{share}}'>
+  <view class='share-text1 flex-rc-cc'>分享到</view>
+  <button class='share-button' open-type='share' hover-class='none' data-item='{{item}}'>
+    <image lazy-load src='/images/ic_wechat_share@2x.png' class='share-image'></image>
+  </button>
+  <view class='share-text2 flex-rc-cc border-bottom'>微信</view>
+  <!-- <view class='share-text3 flex-rc-cc' catchtap='goAll'>取消</view> -->
+</view>
+
+<!-- 第二层 -->
+<view class='dynamic-view' wx:if='{{dynamic}}' catchtouchmove='preventMove' catchtap='goAll'>
+  <view class='dynamic' style='{{itemObj.status!=1?"background: #fff":""}}' catchtap='goClick'>
+    <view class='dynamic-success' wx:if='{{itemObj.status==1}}'>
+      <image lazy-load class='dynamic-success-image' mode='aspectFill' src='/images/img_succeed@2x.png'></image>
+      <view class='dynamic-xian'></view>
+    </view>
+    <view class='dynamic-top flex-rc-cc' wx:elif='{{itemObj.status==0}}'>
+      <view class='dynamic-texts flex-rc-cc'>砍价进行中</view>
+      <view class='dynamic-text-all flex-rc-cc'>
+        <text>还差</text>
+        <view class='flex-rc-cc dynamic-all-sub'>{{count_likes}}</view>
+        <text>刀砍成</text>
+      </view>
+      <!-- <view class='flex-rc-cc dynamic-all-sub'>{{count_likes}}</view> -->
+      <view catchtap='goAll' class='flex-cc dynamic-del-view'>
+        <image lazy-load class='dynamic-del' src='/images/ic_service_close@2x.png'></image>
+      </view>
+    </view>
+    <view class='dynamic-views' style='{{itemObj.status==1?"padding-top: 18rpx":""}}'>
+      <view class='flex-rb-cc dynamic-view-me'>
+        <view class='flex-cc'>
+          <view class='flex'>
+            <image lazy-load mode='aspectFill' class='dynamic-image' src='{{itemObj.head_pic?itemObj.head_pic:"/images/ic_my_head_def@3x.png"}}'></image>
+          </view>
+          <view class='dynamic-text'>{{itemObj.nickname?itemObj.nickname:""}}</view>
+        </view>
+        <view class='flex-rb-cc dynamic-title-view'>
+          <view class='three-bottom-view-time flex-cc'>{{common.tTime(itemObj.add_time, 'secord')}}</view>
+          <view class='dynamic-title flex-cc'>发起砍价</view>
+        </view>
+      </view>
+      <view wx:for='{{obj2.data}}' wx:key='index'>
+        <view class='three-bottom-view flex-rb-cc'>
+          <view class='flex-cc'>
+            <view class='flex-cc'>
+              <image lazy-load mode='aspectFill' class='dynamic-bottom-image' src='{{item.head_pic?item.head_pic:"/images/ic_my_head_def@3x.png"}}'></image>
+            </view>
+            <view class='dynamic-bottom-name'>{{item.nickname?item.nickname:''}}</view>
+          </view>
+          <view class='flex-rb-cc three-bottom-views'>
+            <view class='three-bottom-view-time flex-cc'>{{common.tTime(item.likes_time, 'secord')}}</view>
+            <view class='three-bottom-view-title flex-cc'>砍第{{index+1}}刀</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='flex-cc dynamic-del-success' catchtap='goAll' wx:if='{{itemObj.status == 1}}'>
+      <image lazy-load src='/images/ic_xiaoxiao@2x.png' class='dynamic-del-image'></image>
+    </view>
+  </view>
+</view>
+
+<!-- 风险提示 -->
+<view class='refuse flex-rc-cc' wx:if='{{refuse}}' catchtouchmove='preventMove'>
+  <view class='refuse-concent flex-rc-cc'>
+    <view class='refuse-text'>温馨提示</view>
+    <view class='refuse-title'>您在此店铺已参与过新人免费领活动，商家有权拒绝您此次兑换。</view>
+    <view class='flex-ra-cc refuse-button'>
+      <view class='refuse-left flex-rc-cc' bindtap='goNice'>继续购买</view>
+      <view class='refuse-right flex-rc-cc' bindtap='goAll'>取消</view>
+    </view>
+  </view>
+</view>
+
+<!-- 免费领次数 -->
+<view class='refuse flex-rc-cc' wx:if='{{codes}}' catchtouchmove='preventMove'>
+  <view class='refuse-concent flex-rc-cc'>
+    <view class='refuse-text'>温馨提示</view>
+    <view class='refuse-title'>您当前的免费领资格为0，暂时无法参与，快去做任务赚取资格。</view>
+    <view class='flex-ra-cc refuse-button'>
+      <view class='refuse-left flex-rc-cc' bindtap='goAll'>取消</view>
+      <view class='refuse-right flex-rc-cc' bindtap='goCore'>去做任务</view>
+    </view>
+  </view>
+</view>
+
+<!-- 服务政策 -->
+<view class='viewBG' wx:if='{{service}}' catchtouchmove='preventMove' bindtap='goAll'>
+</view>
+<view class='service {{service?"openBG":"closeBG"}}' catchtouchmove='preventMove' catchtap='goClick' wx:if='{{showView}}'>
+  <view class='service-top flex'>
+    <view class='service-top-text flex-rc-cc'>商家服务政策</view>
+    <image lazy-load src='/images/ic_service_close@2x.png' class='service-top-image' bindtap='goAll'></image>
+  </view>
+  <view class='service-bottom' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'>
+    <view class='service-one' wx:for='{{treasure.goods.product_service_label}}' wx:key='index'>
+      <view class='flex-cc'>
+        <!-- <image lazy-load src='/images/ic_anzhuang@2x.png' class='service-bottom-image'></image> -->
+        <view class='service-bottom-text1'>{{item.content}}</view>
+      </view>
+      <view class='service-bottom-title1'>{{item.service_content}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- 兑换券说明 -->
+<view class='viewBG' wx:if='{{change}}' catchtouchmove='preventMove' bindtap='goAll'>
+</view>
+<view class='service {{change?"openBG":"closeBG"}}' catchtouchmove='preventMove' catchtap='goClick' wx:if='{{showView}}'>
+  <view class='service-top flex'>
+    <view class='service-top-text flex-rc-cc'>兑换券说明</view>
+    <image lazy-load src='/images/ic_service_close@2x.png' class='service-top-image' bindtap='goAll'></image>
+  </view>
+  <view class='service-bottom' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'>
+    <view class='service-one'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_tui@2x.png' class='service-bottom-image'></image>
+        <view class='service-bottom-text'>随时退</view>
+      </view>
+      <view class='service-bottom-title'>未到线下门店兑换前，可随时退款。</view>
+    </view>
+    <view class='service-one'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_kulian@2x.png' class='service-bottom-image'></image>
+        <view class='service-bottom-text'>不成功自动退</view>
+      </view>
+      <view class='service-bottom-title'>砍价不成功即自动退款，消耗免费领次数自动退还。</view>
+    </view>
+    <view class='service-one'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_duihuan@2x.png' class='service-bottom-image'></image>
+        <view class='service-bottom-text'>到店兑换</view>
+      </view>
+      <view class='service-bottom-title'>凭商品券到门店兑换，可享受与门店相同的售前售后服务。</view>
+    </view>
+    <view class='service-one'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_time@2x.png' class='service-bottom-image'></image>
+        <view class='service-bottom-text'>过期自动退</view>
+      </view>
+      <view class='service-bottom-title'>商品券到期后，未兑换的商品券即自动退款。</view>
+    </view>
+  </view>
+</view>
+
+<!-- 产品参数 -->
+<view class='viewBG' wx:if='{{parameter}}' catchtouchmove='preventMove' bindtap='goAll'>
+</view>
+<view class='parameter {{parameter?"openBG":"closeBG"}}' catchtouchmove='preventMove' catchtap='goClick' wx:if='{{showView}}'>
+  <view class='service-top flex'>
+    <view class='service-top-text flex-rc-cc'>商品参数</view>
+    <image lazy-load src='/images/ic_service_close@2x.png' class='service-top-image' bindtap='goAll'></image>
+  </view>
+  <view class='parameter-bottom' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'>
+    <view class='parameter-top flex-cc'>
+      <view class='parameter-bottom-text'>品牌</view>
+      <view class='parameter-bottom-title'>{{treasure.store.brand}}
+      </view>
+    </view>
+    <view class='parameter-one flex-cc'>
+      <view class='parameter-bottom-text'>型号</view>
+      <view class='parameter-bottom-title'>{{treasure.goods.product_type}}</view>
+    </view>
+    <view class='parameter-one flex-cc'>
+      <view class='parameter-bottom-text'>材质</view>
+      <view class='parameter-bottom-title'>{{treasure.goods.product_material}}</view>
+    </view>
+    <view class='parameter-one flex-cc' wx:for='{{treasure.goods.extend_attribute}}' wx:key='index'>
+      <view class='parameter-bottom-text'>{{item.name}}</view>
+      <view class='parameter-bottom-title'>{{item.value}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- 客服 -->
+<view class='customer-view' wx:if="{{customer}}" catchtouchmove='preventMove' bindtap='goAll'>
+  <view class='customer'>
+    <view class='customer-content' catchtap='goClick'>
+      <view class='customer-text'>选择导购</view>
+      <view scroll-y class='customer-middle'>
+        <view wx:for='{{treasure.store.vest}}' wx:key='index' class='customer-bottom  flex-rb-cc' catchtap='goIphons' data-mobile='{{item.mobile}}'>
+          <view class='flex-cc'>
+            <image lazy-load class='customer-image' src='{{item.url}}'></image>
+            <view class='customer-name'>{{item.nickname}}</view>
+          </view>
+          <image lazy-load class='customer-icon' src='/images/ic_people_phone@2x.png'></image>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 导购不可参团 -->
+<view class='viewBG' catchtouchmove='preventMove' wx:if='{{vest}}'>
+  <view class='center45 vest-image'>
+    <view class='vest-view border-bottom flex-rc'>
+      <view class='vest-text flex-cc'>抱歉，您的账号为导购账号,不可以发起免费领活动呦~</view>
+    </view>
+    <view class='vest-text1 flex-rc-cc' catchtap='goAll'>我知道了</view>
+  </view>
+</view>

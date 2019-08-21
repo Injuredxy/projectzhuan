@@ -1,0 +1,432 @@
+page {
+  background: #f8f8f8;
+}
+
+/* 1 */
+
+.direct-one {
+  background: linear-gradient(90deg, rgba(248, 82, 78, 1) 0%, rgba(255, 75, 43, 1) 100%);
+  opacity: 0.99;
+  padding: 50rpx 28rpx 50rpx 40rpx;
+  margin-top: 16rpx;
+}
+
+.text-top-left {
+  font-size: 32rpx;
+  width: 450rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #333;
+  font-weight: 400;
+}
+
+.one-left {
+  font-size: 36rpx;
+  color: #fff;
+}
+
+.pay-title {
+  font-size: 28rpx;
+  margin-top: 10rpx;
+}
+
+.one-right {
+  width: 220rpx;
+  height: 96rpx;
+}
+
+.one-right1 {
+  width: 216rpx;
+  height: 96rpx;
+}
+
+.one-right-one {
+  width: 158rpx;
+  height: 96rpx
+}
+
+/* 2 */
+
+.treasure-top {
+  padding: 20rpx 24rpx 24rpx;
+  background: #fff;
+  margin: 16rpx 0;
+}
+
+.top-image {
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 8rpx;
+}
+
+.top-text {
+  margin-left: 16rpx;
+}
+
+.top-top {
+  width: 550rpx;
+}
+
+.top-text-left {
+  font-size: 32rpx;
+}
+
+.text-top-right {
+  font-size: 24rpx;
+  color: #9b9b9b;
+}
+
+.bottom-suishi {
+  color: #9b9b9b;
+  font-size: 22rpx;
+}
+
+.goods_right_dian {
+  width: 4rpx;
+  height: 4rpx;
+  border-radius: 50%;
+  background: rgba(74, 74, 74, 1);
+  margin: 0 10rpx;
+}
+
+.goods_view:last-child .goods_right_dian {
+  display: none;
+}
+
+.middle-mid {
+  border-radius: 16rpx;
+  font-size: 20rpx;
+  color: #f8524e;
+  padding: 4rpx 16rpx;
+  margin-right: 6rpx;
+  background: #ffeef0;
+}
+
+.top-middle {
+  margin: 16rpx 0;
+  flex-wrap: wrap;
+  overflow: hidden;
+  height: 36rpx;
+  width: 450rpx;
+}
+
+/* 3 */
+
+.direct-three {
+  background: #fff;
+}
+
+.three-top {
+  padding: 38rpx 0 16rpx 0;
+  margin: 0 36rpx 0 32rpx;
+  border-bottom: 1rpx solid rgba(204, 204, 204, 0.2);
+}
+
+.three-icon {
+  width: 40rpx;
+  height: 40rpx;
+  margin-right: 16rpx;
+}
+
+.three-top-right {
+  color: #f8524e;
+  font-size: 28rpx;
+  padding: 6rpx 24rpx;
+  border-radius: 26rpx;
+  border: 2rpx solid rgba(248, 82, 78, 1);
+}
+
+.three-bottom-right {
+  color: #9b9b9b;
+  font-size: 28rpx;
+}
+
+.three-top-text {
+  font-size: 32rpx;
+}
+
+.three-top-title {
+  font-size: 28rpx;
+  color: #9b9b9b;
+  margin-top: 16rpx;
+}
+
+.three-bottom {
+  padding: 22rpx 50rpx 30rpx 84rpx;
+}
+
+.three-bottom-num {
+  font-size: 44rpx;
+}
+
+.three-bottom-num-none {
+  font-size: 44rpx;
+  text-decoration: line-through;
+}
+
+.three-bottom-image {
+  width: 48rpx;
+  height: 48rpx;
+}
+
+/* 4 */
+
+.defeat-three {
+  background: #fff;
+  margin: 16rpx 0;
+  padding: 16rpx 40rpx 32rpx 32rpx;
+}
+
+.three-one-image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.three-one-text {
+  font-size: 32rpx;
+  margin-left: 16rpx;
+  font-weight: 500;
+  color: #333;
+}
+
+.three-two-left {
+  font-weight: 500;
+}
+
+.three-two-text {
+  font-size: 28rpx;
+  margin: 20rpx 0 16rpx;
+  color: #333;
+}
+
+.three-three-image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.three-three-text {
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  color: #9b9b9b;
+}
+
+.three-three {
+  margin-bottom: 16rpx;
+}
+
+.three-four {
+  width: 550rpx;
+}
+
+.three-image {
+  width: 50rpx;
+  height: 50rpx;
+  /* margin-right: rpx; */
+}
+
+/* 5 */
+
+.defeat-four {
+  background: #fff;
+  padding: 16rpx 32rpx 36rpx;
+  margin-bottom: 38rpx;
+}
+
+.four-image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.four-one-text {
+  font-size: 32rpx;
+  margin-left: 16rpx;
+  color: #333;
+  font-weight: 500;
+}
+
+.four-text {
+  font-size: 28rpx;
+  color: #333;
+  font-weight: 400;
+  margin-top: 20rpx;
+}
+
+.four-text-last {
+  font-size: 28rpx;
+  margin-top: 20rpx;
+  color: #f8524e;
+}
+
+/* 垫子 */
+
+.cushion {
+  width: 100%;
+  height: 108rpx;
+}
+
+/* 6 */
+
+.direct-six {
+  background: #fff;
+  padding: 24rpx 0;
+  flex-direction: row-reverse;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  border-top: 1rpx solid rgba(155, 155, 155, 0.4);
+}
+
+.modelView {
+  position: fixed;
+  bottom: 0;
+  height: 68rpx;
+  width: 100%;
+  background: #fff;
+}
+
+.modelView1 {
+  height: 68rpx;
+  width: 100%;
+  background: #fff;
+}
+
+.six-left {
+  font-size: 28rpx;
+  color: #9b9b9b;
+  padding: 8rpx 24rpx;
+  border-radius: 28rpx;
+  border: 1rpx solid rgba(155, 155, 155, 1);
+  margin-left: 24rpx;
+}
+
+.six-right {
+  font-size: 28rpx;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(208, 2, 27, 1) 0%, rgba(248, 80, 50, 1) 100%);
+  box-shadow: 0rpx 4rpx 12rpx 0rpx rgba(217, 217, 217, 0.5);
+  border-radius: 30rpx;
+  opacity: 0.99;
+  padding: 8rpx 38rpx;
+  margin-left: 24rpx;
+  margin-right: 32rpx;
+}
+
+/* 取消订单 */
+
+.cancel-view {
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  bottom: 0;
+}
+
+.cancel {
+  background: #fff;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.cancel-top {
+  padding: 38rpx 32rpx 0 36rpx;
+  font-size: 32rpx;
+}
+
+.cancel-image {
+  width: 30rpx;
+  height: 30rpx;
+}
+
+.cancel-middle {
+  padding-top: 60rpx;
+  margin: 0 30rpx;
+  border-bottom: 1rpx solid rgba(155, 155, 155, 0.2);
+}
+
+.cancel-input {
+  padding: 0 0 12rpx 20rpx;
+  height: 40rpx;
+  color: #333;
+}
+
+.cancel-button {
+  padding: 20rpx 124rpx;
+  background: linear-gradient(135deg, rgba(208, 2, 27, 1) 0%, rgba(248, 80, 50, 1) 100%);
+  border-radius: 8rpx;
+  color: #fff;
+  margin: 76rpx 0 52rpx;
+}
+
+/* 查看券码 */
+
+.code {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+.code-bg {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.code-tan {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.code-button {
+  width: 462rpx;
+  height: 84rpx;
+  background: rgba(248, 82, 78, 1);
+  border-radius: 42rpx;
+  padding: 0;
+  margin: 0;
+  color: #fff;
+  font-size: 32rpx;
+}
+
+.code-text {
+  flex-direction: column;
+  position: absolute;
+  height: 644rpx;
+}
+
+.code-image {
+  width: 510rpx;
+  height: 644rpx;
+}
+
+.code-text-top {
+  font-size: 40rpx;
+  margin-top: 44rpx;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 56rpx;
+}
+
+.code-xian {
+  width: 482rpx;
+  height: 2rpx;
+  background: rgba(155, 155, 155, 0.2);
+  margin-bottom: 50rpx;
+}
+
+.code-text-image {
+  width: 250rpx;
+  height: 250rpx;
+}
+
+.code-text-bottom {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 40rpx;
+  font-size: 28rpx;
+  margin-bottom: 92rpx;
+}

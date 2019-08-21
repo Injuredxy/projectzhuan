@@ -1,0 +1,102 @@
+<view wx:if="{{show}}">
+  <!-- 拼团订单页 -->
+  <view class='wrap'>
+    <view class='wrap_goods'>
+      <view class='goods'>
+        <view class='goods_left'>
+          <image lazy-load wx:for='{{nice}}' wx:key='index' src='{{item.url}}' style="width: 144rpx; height: 144rpx;border-radius:8rpx;"></image>
+        </view>
+        <view class='goods_right'>
+          <view class='goods_right_top'>
+            <view class='goods_right_tit'>{{mini.goods.product_name}}</view>
+            <view class='goods_right_pri'>￥{{mini.origin_price-0}}</view>
+          </view>
+          <view class='goods_right_mid'>
+            <view class='goods_right_mid_item' wx:for="{{mini.goods.product_service_label}}" wx:key="index" wx:if='{{index<4}}'>{{item.content}}</view>
+          </view>
+          <view class='goods_right_bot'>
+            <view wx:for="{{mini.goods.product_label}}" wx:key="index" class='flex-cc goods_view'>
+              <view class='goods_right_bot_item'>{{item.content}}</view>
+              <view class='goods_right_dian'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <block wx:if='{{mini.group_buy_price>100}}'>
+      <view class="submit-info">
+        <view class="flex-cc submit-info-item">
+          <view class="submit-info-item-name">数量</view>
+          <view class="submit-info-item-value">1</view>
+        </view>
+        <view class="flex-cc submit-info-item">
+          <view class="submit-info-item-name">直接购买价</view>
+          <view class="submit-info-item-value">
+            <text>¥{{mini.direct_price-0}}</text>
+          </view>
+        </view>
+        <view class="flex-cc submit-info-item">
+          <view class="submit-info-item-name">支付¥100抵¥{{new_price}}</view>
+          <view class="submit-info-item-value1">-¥{{new_price}}</view>
+        </view>
+        <view class="flex-cc submit-info-item">
+          <view class="submit-info-item-name">{{mini.assemble_people_number}}人拼团价</view>
+          <view>
+            <image lazy-load src="/images/ic_group_order@3x.png" class='flex-cc'></image>
+          </view>
+          <view class="submit-info-item-price">¥{{mini.group_buy_price-0}}</view>
+        </view>
+        <view class="flex-cc submit-info-item">
+          <view class="submit-info-item-name1">线上定金：¥100</view>
+          <view class="submit-info-item-name1" style='margin-left: 60rpx'>到店尾款：¥{{mini.group_buy_price-100}}</view>
+        </view>
+      </view>
+      <view class="submit-tips">听说分享到业主群，拼团更容易成功哦</view>
+      <view class='submit-btn' bindtap='goList' wx:if='{{token}}'>支付¥100定金</view>
+      <button class='submit-btn' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" wx:else>支付¥100定金</button>
+    </block>
+
+    <block wx:else>
+      <view class="submit-info">
+        <view class="flex-cc submit-info-item">
+          <view class="submit-info-item-name">数量</view>
+          <view class="submit-info-item-value">1</view>
+        </view>
+        <view class="flex-cc submit-info-item">
+          <view class="submit-info-item-name">直接购买价</view>
+          <view class="submit-info-item-value">
+            <text>{{mini.direct_price-0}}</text>
+          </view>
+        </view>
+        <view class="flex-cc submit-info-item">
+          <view class="submit-info-item-name">{{mini.assemble_people_number}}人拼团立减</view>
+          <view>
+            <image lazy-load src="/images/ic_group_order@3x.png" class='flex-cc'></image>
+          </view>
+          <view class="submit-info-item-value1">{{new_price}}</view>
+        </view>
+        <view class="flex-cc submit-info-item">
+          <view class="submit-info-item-name">实付金额</view>
+          <view class="submit-info-item-value submit-info-item-price">{{mini.group_buy_price-0}}</view>
+        </view>
+      </view>
+      <view class="submit-tips">听说分享到业主群，拼团更容易成功哦</view>
+      <view class='submit-btn' bindtap='goList' wx:if='{{token}}'>￥{{mini.group_buy_price-0}}提交订单</view>
+      <button class='submit-btn' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" wx:else>￥{{mini.group_buy_price-0}}提交订单</button>
+    </block>
+
+  </view>
+</view>
+
+<!-- 遮盖层 -->
+
+<!-- 导购不可参团 -->
+<view class='viewBG' catchtouchmove='preventMove' wx:if='{{vest}}'>
+  <view class='center45 vest-image'>
+    <view class='vest-view border-bottom flex-rc'>
+      <view class='vest-text flex-cc'>抱歉，您的账号为导购账号,不可以参加拼团活动呦~</view>
+    </view>
+    <view class='vest-text1 flex-rc-cc' catchtap='goAll'>我知道了</view>
+  </view>
+</view>

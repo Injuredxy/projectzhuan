@@ -1,0 +1,294 @@
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<view wx:if='{{show}}'>
+
+  <!-- 头部 -->
+  <view class='user-head'>
+    <view class='flex-cc'>
+      <image lazy-load src='/images/img_my_backdrop@2x.png' class='top-image'></image>
+    </view>
+    <!-- 已登录 -->
+    <view class='user-view flex-rb-cc' wx:if='{{token}}'>
+      <view class='flex-cc'>
+        <view class='flex-cc'>
+          <image lazy-load mode='aspectFill' class='user-avatar' src="{{userInfo.head_pic}}"></image>
+        </view>
+        <view>
+          <view class="user-name">{{userInfo.nickname}}</view>
+        </view>
+      </view>
+      <navigator hover-class='none' url='setting' class='flex-cc user-left-view'>
+        <view class='user-bg-view'>
+          <image lazy-load src='/images/btn_xiaoxidrop@2x.png' class='user-bg'></image>
+          <view class='user-left-text'>消息({{message_count?message_count:'0'}})</view>
+          <view class='flex'>
+            <image lazy-load src='/images/ic_my_into@2x.png' class='user-left-icon'></image>
+          </view>
+        </view>
+      </navigator>
+    </view>
+    <!-- 未登录 -->
+    <button open-type='getUserInfo' hover-class='none' bindgetuserinfo='bindgetuserinfo' class='user-view flex-rb-cc' wx:else>
+      <view class='flex-cc'>
+        <view class='flex-cc'>
+          <image lazy-load class='user-avatar' src="/images/ic_my_head_def@3x.png"></image>
+        </view>
+        <view>
+          <view class="user-name flex">点击登录</view>
+          <view class='user-text'>新人免费领千元商品</view>
+        </view>
+      </view>
+    </button>
+  </view>
+
+  <!-- middle -->
+  <view class='middle-view'>
+    <view class='flex-rb-cc middle-one'>
+      <view class='middle-top-text'>我的订单</view>
+      <view catchtap='goOrder' class='flex' wx:if='{{token}}'>
+        <view class='middle-left-text'>全部订单</view>
+        <view class='flex'>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='middle-left-icon'></image>
+        </view>
+      </view>
+      <button open-type='getUserInfo' hover-class='none' class='flex' wx:else>
+        <view class='middle-left-text'>全部订单</view>
+        <view class='flex'>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='middle-left-icon'></image>
+        </view>
+      </button>
+    </view>
+    <block>
+      <view class='flex-ra-cc' wx:if='{{token}}'>
+        <view class='flex-rc-cc middle-icon-view' catchtap='goOrder1'>
+          <view class='middle-icon1'>
+            <view class='flex'>
+              <image class='middle-image1' src='/images/ic_my_waitfinish@2x.png'></image>
+            </view>
+            <view class='middle-num flex-rc-cc' wx:if='{{token&&list_count.WAIT_FINISH>0}}'>{{list_count.WAIT_FINISH}}</view>
+          </view>
+          <view class='middle-text'>待完成</view>
+        </view>
+        <view class='flex-rc-cc middle-icon-view' catchtap='goOrder2'>
+          <view class='middle-icon2'>
+            <view class='flex'>
+              <image class='middle-image2' src='/images/ic_my_waitright@2x.png'></image>
+            </view>
+            <view class='middle-num flex-rc-cc' wx:if='{{token&&list_count.WAIT_EXCHANGE>0}}'>{{list_count.WAIT_EXCHANGE}}</view>
+          </view>
+          <view class='middle-text'>待兑换</view>
+        </view>
+        <view class='flex-rc-cc middle-icon-view' catchtap='goOrder3'>
+          <view class='middle-icon2'>
+            <view class='flex'>
+              <image class='middle-image3' src='/images/ic_my_waittalkabout@2x.png'></image>
+            </view>
+            <view class='middle-num flex-rc-cc' wx:if='{{token&&list_count.WAIT_CCOMMENT>0}}'>{{list_count.WAIT_CCOMMENT}}</view>
+          </view>
+          <view class='middle-text'>待评价</view>
+        </view>
+        <view class='flex-rc-cc middle-icon-view' catchtap='goOrder4'>
+          <view class='middle-icon1'>
+            <view class='flex'>
+              <image class='middle-image4' src='/images/ic_my_backmoney@2x.png'></image>
+            </view>
+            <!-- <view class='middle-num flex-rc-cc' wx:if='{{token&&list_count.REFUND>0}}'>{{list_count.REFUND}}</view> -->
+          </view>
+          <view class='middle-text'>已退款</view>
+        </view>
+      </view>
+      <button open-type='getUserInfo' hover-class='none' bindgetuserinfo='bindgetuserinfo' class='flex-ra-cc' wx:else>
+        <view class='flex-rc-cc middle-icon-view'>
+          <view class='middle-icon1'>
+            <view class='flex'>
+              <image class='middle-image1' src='/images/ic_my_waitfinish@2x.png'></image>
+            </view>
+            <view class='middle-num flex-rc-cc' wx:if='{{token&&list_count.WAIT_FINISH>0}}'>{{list_count.WAIT_FINISH}}</view>
+          </view>
+          <view class='middle-text'>待完成</view>
+        </view>
+        <view class='flex-rc-cc middle-icon-view'>
+          <view class='middle-icon2'>
+            <view class='flex'>
+              <image class='middle-image2' src='/images/ic_my_waitright@2x.png'></image>
+            </view>
+            <view class='middle-num flex-rc-cc' wx:if='{{token&&list_count.WAIT_EXCHANGE>0}}'>{{list_count.WAIT_EXCHANGE}}</view>
+          </view>
+          <view class='middle-text'>待兑换</view>
+        </view>
+        <view class='flex-rc-cc middle-icon-view'>
+          <view class='middle-icon2'>
+            <view class='flex'>
+              <image class='middle-image3' src='/images/ic_my_waittalkabout@2x.png'></image>
+            </view>
+            <view class='middle-num flex-rc-cc' wx:if='{{token&&list_count.WAIT_CCOMMENT>0}}'>{{list_count.WAIT_CCOMMENT}}</view>
+          </view>
+          <view class='middle-text'>待评价</view>
+        </view>
+        <view class='flex-rc-cc middle-icon-view'>
+          <view class='middle-icon1'>
+            <view class='flex'>
+              <image class='middle-image4' src='/images/ic_my_backmoney@2x.png'></image>
+            </view>
+            <!-- <view class='middle-num flex-rc-cc' wx:if='{{token&&list_count.REFUND>0}}'>{{list_count.REFUND}}</view> -->
+          </view>
+          <view class='middle-text'>已退款</view>
+        </view>
+      </button>
+      <view class='middle-list flex-cc' wx:if="{{orderList}}">
+        <view class='flex-cc'>
+          <image lazy-load src='{{orderList.data.goods.product_img[0]}}' class='middle-list-image'>
+            <view class='middle-list-icon flex-rc-cc' style='{{orderList.type=="group_buy"?"":"background:#FFAC1B"}}'>{{orderList.type=="group_buy"?"待成团":"待砍价"}}</view>
+          </image>
+        </view>
+        <view class='middle-list-view flex-rb-cc'>
+          <view class='flex-rb column' style='height: 100%'>
+            <view class='middle-list-text1 flex-cc'>距结束仅剩：
+              <view style='color: #F8524E'>{{common.difference_time(countDownNum).hour}}:{{common.difference_time(countDownNum).min}}:{{common.difference_time(countDownNum).second}}</view>
+            </view>
+            <view class='middle-list-text2 three'>{{orderList.data.goods.product_name}}</view>
+          </view>
+          <view class='middle-list-but flex-rc-cc' catchtap='goHelp'>{{orderList.type=="group_buy"?"邀请参团":"邀请砍价"}}</view>
+        </view>
+      </view>
+    </block>
+  </view>
+
+  <!-- bottom -->
+  <view class='bottom-view' style='{{orderList?"padding-top: 378rpx":""}}' wx:if='{{token}}'>
+    <!-- <navigator hover-class='none' url='red' class='flex-cc bottom-views'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_my_redpacket@2x.png' class='bottom-image4'></image>
+      </view>
+      <view class='flex-rb-cc bottom-text-view'>
+        <view class='bottom-text' wx:if='{{token}}'>红包（{{collection_count}}）</view>
+        <view class='bottom-text' wx:else>红包</view>
+        <view>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='bottom-icon'></image>
+        </view>
+      </view>
+    </navigator> -->
+    <navigator hover-class='none' url='collection' class='flex-cc bottom-views'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_my_shoucang@2x.png' class='bottom-image1'></image>
+      </view>
+      <view class='flex-rb-cc bottom-text-view'>
+        <view class='bottom-text' wx:if='{{token}}'>收藏（{{collection_count}}）</view>
+        <view class='bottom-text' wx:else>收藏</view>
+        <view>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='bottom-icon'></image>
+        </view>
+      </view>
+    </navigator>
+    <navigator hover-class='none' url='comment' class='flex-cc bottom-views'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_my_smallpingjia@2x.png' class='bottom-image2'></image>
+      </view>
+      <view class='flex-rb-cc bottom-text-view'>
+        <view class='bottom-text' wx:if='{{token}}'>评价（{{comment_count}}）</view>
+        <view class='bottom-text' wx:else>评价</view>
+        <view>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='bottom-icon'></image>
+        </view>
+      </view>
+    </navigator>
+    <navigator hover-class='none' url='deal' class='flex-cc bottom-views'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_my_shop@2x.png' class='bottom-image3'></image>
+      </view>
+      <view class='flex-rb-cc bottom-text-view'>
+        <view class='bottom-text'>成交商家</view>
+        <view>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='bottom-icon'></image>
+        </view>
+      </view>
+    </navigator>
+    <!-- <navigator hover-class='none' url='' class='flex-cc bottom-views'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_my_shezhi@2x.png' class='bottom-image4'></image>
+      </view>
+      <view class='flex-rb-cc bottom-text-view'>
+        <view class='bottom-text'>设置</view>
+        <view>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='bottom-icon'></image>
+        </view>
+      </view>
+    </navigator> -->
+  </view>
+
+  <button open-type='getUserInfo' hover-class='none' bindgetuserinfo='bindgetuserinfo' class='bottom-view' style='z-index: 1' wx:else>
+    <!-- <view class='flex-cc bottom-views'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_my_redpacket@2x.png' class='bottom-image4'></image>
+      </view>
+      <view class='flex-rb-cc login-text-view'>
+        <view class='bottom-text' wx:if='{{token}}'>红包（{{collection_count}}）</view>
+        <view class='bottom-text' wx:else>红包</view>
+        <view>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='bottom-icon'></image>
+        </view>
+      </view>
+    </view> -->
+    <view class='flex-cc bottom-views'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_my_shoucang@2x.png' class='bottom-image1'></image>
+      </view>
+      <view class='flex-rb-cc login-text-view'>
+        <view class='bottom-text' wx:if='{{token}}'>收藏（{{collection_count}}）</view>
+        <view class='bottom-text' wx:else>收藏</view>
+        <view>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='bottom-icon'></image>
+        </view>
+      </view>
+    </view>
+    <view class='flex-cc bottom-views'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_my_smallpingjia@2x.png' class='bottom-image2'></image>
+      </view>
+      <view class='flex-rb-cc login-text-view'>
+        <view class='bottom-text' wx:if='{{token}}'>评价（{{comment_count}}）</view>
+        <view class='bottom-text' wx:else>评价</view>
+        <view>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='bottom-icon'></image>
+        </view>
+      </view>
+    </view>
+    <view class='flex-cc bottom-views'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_my_shop@2x.png' class='bottom-image3'></image>
+      </view>
+      <view class='flex-rb-cc login-text-view'>
+        <view class='bottom-text'>成交商家</view>
+        <view>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='bottom-icon'></image>
+        </view>
+      </view>
+    </view>
+    <!-- <view class='flex-cc bottom-views'>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_my_shezhi@2x.png' class='bottom-image4'></image>
+      </view>
+      <view class='flex-rb-cc login-text-view'>
+        <view class='bottom-text'>设置</view>
+        <view>
+          <image lazy-load src='/images/ic_my_into@2x.png' class='bottom-icon'></image>
+        </view>
+      </view>
+    </view> -->
+  </button>
+
+  <view class='tabbar-view flex-rb-cc border-top' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'>
+    <navigator open-type='switchTab' hover-class='none' url='/pages/index/index' class='flex-rc-cc tabbar-image-view '>
+      <image lazy-load src='/images/ic_tabbar_home_def@2x.png' class='tabbar-index'></image>
+      <view class='tabbar-index-text'>首页</view>
+    </navigator>
+    <navigator open-type='switchTab' hover-class='none' url='/pages/index/treasure' class='flex-rc-cc tabbar-image-view'>
+      <image lazy-load src='/images/btn_newpeoplezone@2x.png' class='tabbar-middle'></image>
+      <view></view>
+    </navigator>
+    <view class='flex-rc-cc tabbar-image-view'>
+      <image lazy-load src='/images/ic_tabbar_my_pre@2x.png' class='tabbar-me'></image>
+      <view class='tabbar-me-text'>我的</view>
+    </view>
+  </view>
+</view>

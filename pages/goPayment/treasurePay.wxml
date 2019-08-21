@@ -1,0 +1,38 @@
+<!-- 支付 -->
+<view>
+  <view class="payment">
+    <view class='flex-rc-cc payment-view'>
+      <text class="payment-unit">¥</text>
+      <view class='payment-price' wx:if='{{two_price!="-1"}}'>{{options.new_price-0}}</view>
+      <view class='payment-price' wx:else>{{options.new_price-0}}.00</view>
+    </view>
+    <view class="payment-name">{{options.product_name}}</view>
+  </view>
+
+  <view class="payment-way">
+    <view class="flex-cc payment-way-title">
+      <image lazy-load src="/images/ic_pay_wallet@2x.png"></image>
+      <view>支付方式</view>
+    </view>
+    <view class="flex-cc payment-way-item">
+      <image lazy-load class="payment-way-item-logo" src="/images/ic_pay_wechat@2x.png"></image>
+      <view class="payment-way-item-name">微信支付</view>
+      <image lazy-load class="payment-way-item-check" src="/images/ic_pay_select_pre@2x.png"></image>
+    </view>
+  </view>
+
+  <view class="payment-btn" bindtap="toPay" wx:if='{{token}}'>确认支付</view>
+  <button open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" class="payment-btn" wx:else>
+    确认支付
+  </button>
+</view>
+
+<!-- 导购不可参团 -->
+<view class='viewBG' catchtouchmove='preventMove' wx:if='{{vest}}'>
+  <view class='center45 vest-image'>
+    <view class='vest-view border-bottom flex-rc'>
+      <view class='vest-text flex-cc'>抱歉，您的账号为导购账号,不可以参加拼团活动呦~</view>
+    </view>
+    <view class='vest-text1 flex-rc-cc' catchtap='goAll'>我知道了</view>
+  </view>
+</view>

@@ -1,0 +1,49 @@
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<!-- 消息 -->
+<view wx:if='{{show}}'>
+  <block wx:if='{{token}}'>
+    <view class='setting' wx:if='{{msgs.length>0}}'>
+      <view wx:for='{{msgs}}' wx:key='index'>
+        <view class='flex-rc-cc'>
+          <view class='setting-time' wx:if='{{common.tTime(item.add_time, "day") == common.tTime(time, "day")}}'>{{common.tTime(item.add_time, "hour")}}</view>
+          <view class='setting-time' wx:elif='{{common.tTime(item.add_time, "year") == common.tTime(time, "year")}}'>{{common.tTime(item.add_time, "month")}}</view>
+        </view>
+        <view class='flex-rc-cc' bindtap='goDetails' data-item='{{item}}'>
+          <view class='setting-concent'>
+            <view class='flex-cc middle-top'>
+              <view class='middle-icon' wx:if='{{item.status==0}}'></view>
+              <view class='middle-text'>{{item.title}}</view>
+            </view>
+            <view class='middle-view flex-rc-cc'>
+              <view class='middle-title'>
+                {{item.message}}
+              </view>
+            </view>
+            <view class='bottom-bot'>
+              <view class='flex-cc'>
+                <view class='bottom-text'>查看详情</view>
+                <image lazy-load src='/images/ic_new_enter@2x.png' class='bottom-icon'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='else-view flex-rc-cc' wx:else>
+      <view>
+        <image lazy-load src='/images/img_new_emptystate@3x.png' class='else-image'></image>
+        <view class='else-text flex-rc-cc'>暂无接收到任何消息</view>
+      </view>
+    </view>
+
+  </block>
+
+  <!-- 缺省页 -->
+  <view wx:else class='flex-rc-cc else-view'>
+    <view>
+      <image lazy-load src='/images/img_new_emptystate@3x.png' class='else-image'></image>
+      <view class='else-text flex-rc-cc'>暂无接收到任何消息</view>
+    </view>
+  </view>
+</view>

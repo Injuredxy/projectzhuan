@@ -1,0 +1,32 @@
+<view class='all-view'>
+  <!-- 2 -->
+  <view class='flex-rc-cc'>
+    <view class='two-view'>
+      <view class='flex two-position'>
+        <image lazy-load src='/images/img_my_backdrop@2x.png' class='two-image'></image>
+        <view class='two-image-text  flex-rc'>
+          <text>每满</text>1000
+          <text>减</text>20
+          <text>元</text>
+        </view>
+      </view>
+      <view class='two-text'>规则说明</view>
+      <view class='flex-cc' style='margin-bottom: 30rpx'>
+        <view class='two-title1'>优惠规则：</view>
+        <text class='two-text1'>每满1000减20元，上不封顶</text>
+      </view>
+      <view class='flex-cc' style='margin-bottom: 30rpx'>
+        <view class='two-title2'>使用范围：</view>
+        <text class='two-text2'>无消费限制，可议价后使用</text>
+      </view>
+      <view class='two-title3 flex-cc'>
+        <view class='two-text3'>使用方法：</view>
+        <text class='two-text4'>到店后扫商家二维码进行支付，即可享受平台补贴</text>
+      </view>
+    </view>
+  </view>
+  <!-- 3 -->
+  <view class='flex-rc-cc'>
+    <view class='three-view flex-rc-cc' bindtap='toSweep'>买单</view>
+  </view>
+</view>

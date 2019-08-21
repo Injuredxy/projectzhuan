@@ -1,0 +1,7 @@
+<view class='login-view flex-rc-cc'>
+  <image src='/images/logo_login@2x.png' class='login-image'></image>
+  <button open-type='getPhoneNumber' bindgetphonenumber='getPhoneNumber' class='login-but flex-rc-cc'>微信用户一键登录</button>
+  <!-- <view class='login-text'>手机号码登录/注册</view> -->
+</view>
+
+<!-- <view class='login-bottom flex-rc-cc'>登录代表您已同意<view style='color: #F8524E'>聚装修用户协议、隐私协议</view></view> -->

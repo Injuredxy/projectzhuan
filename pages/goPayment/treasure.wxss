@@ -1,0 +1,155 @@
+page {
+  background: #f8f8f8;
+}
+
+/* top */
+
+.treasure-top {
+  background: #fff;
+  margin-top: 16rpx;
+  padding: 20rpx 24rpx 24rpx;
+}
+
+.top-image {
+  width: 144rpx;
+  height: 144rpx;
+  border-radius: 8rpx;
+}
+
+.top-top {
+  font-size: 32rpx;
+  width: 412rpx;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 44rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.top-price {
+  font-weight: 400;
+  color: rgba(155, 155, 155, 1);
+  line-height: 34rpx;
+  font-size: 24rpx;
+}
+
+.bottom-suishi {
+  font-weight: 400;
+  color: rgba(74, 74, 74, 1);
+  line-height: 28rpx;
+  font-size: 20rpx;
+}
+
+.goods_right_dian {
+  width: 4rpx;
+  height: 4rpx;
+  border-radius: 50%;
+  background: rgba(74, 74, 74, 1);
+  margin: 0 10rpx;
+}
+
+.goods_view:last-child .goods_right_dian {
+  display: none;
+}
+
+.middle-mid {
+  border-radius: 16rpx;
+  background: rgba(255, 238, 240, 1);
+  font-size: 20rpx;
+  color: #f8524e;
+  padding: 2rpx 14rpx;
+  margin-right: 6rpx;
+  margin-top: 10rpx
+}
+
+.top-text {
+  margin-left: 16rpx;
+}
+
+.top-middle {
+  padding-bottom: 14rpx;
+  flex-wrap: wrap;
+  padding-top: 4rpx
+}
+
+/* bottom */
+
+.treasure-bottom {
+  background: #fff;
+  margin-top: 16rpx;
+}
+
+.bottom-top {
+  margin-left: 32rpx;
+  padding: 26rpx 32rpx 26rpx 0;
+  border-bottom:2rpx solid rgba(155, 155, 155, 0.2);
+}
+
+.bottom-top-text {
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+  line-height: 40rpx;
+  font-size: 28rpx;
+}
+
+.bottom-bot {
+  padding: 24rpx 32rpx;
+}
+
+.icon-image {
+  width: 36rpx;
+  height: 36rpx;
+  margin-left: 10rpx;
+  z-index: 1;
+  position: relative;
+}
+
+.icon-text {
+  position: absolute;
+  margin: 6rpx 0 0 17rpx;
+  font-size: 22rpx;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 32rpx;
+  z-index: 2;
+}
+
+.bottom-old_price {
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 40rpx;
+  font-size: 28rpx;
+}
+
+.bottom-bot-text2 {
+  font-weight: 500;
+  color: rgba(248, 82, 78, 1);
+  line-height: 50rpx;
+  font-size: 36rpx;
+}
+
+/* 按钮 */
+
+.sweep-button::after {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+button::after {
+  border: none;
+}
+
+/* 按钮文字 */
+
+.sweep-button-text {
+  font-size: 36rpx;
+  color: #fff;
+  height: 104rpx;
+  width: 470rpx;
+  background: rgba(248, 82, 78, 1);
+  box-shadow: 0 4rpx 16rpx 0rpx rgba(218, 30, 53, 0.6);
+  border-radius: 52rpx;
+  margin-top: 100rpx;
+}

@@ -1,0 +1,57 @@
+.comment-item{
+  padding: 30rpx 20rpx 32rpx 24rpx;
+  margin-top: 16rpx;
+  background-color: #fff;
+}
+.comment-item-avatar{
+  width: 80rpx;
+  min-width: 80rpx;
+  height: 80rpx;
+  margin-right: 16rpx;
+  border-radius: 50%;
+  background-color: #f2f2f2;
+}
+.comment-item-name{
+  font-size: 28rpx;
+}
+.comment-item-time{
+  font-size: 24rpx;
+  color: #9B9B9B;
+}
+.comment-item-detail{
+  padding: 20rpx 30rpx;
+  margin-top: 20rpx;
+  margin-right: 30rpx;
+  border: 1rpx solid #f2f2f2;
+  border-radius: 8rpx;
+}
+.comment-item-goods{
+  line-height: 38rpx;
+  font-size: 28rpx;
+  color: #4A4A4A;
+}
+.comment-item-goods image{
+  width: 84rpx;
+  min-width: 84rpx;
+  height: 84rpx;
+  margin-right: 16rpx;
+  border-radius: 8rpx;
+}
+.comment-item-content{
+  margin-top: 26rpx;
+  margin-right: 30rpx;
+  line-height: 34rpx;
+  font-size: 24rpx;
+}
+.comment-item-score{
+  margin-top: 22rpx;
+}
+.comment-item-score-name{
+  line-height: 28rpx;
+  font-size: 20rpx;
+  color: #999;
+}
+.comment-item-star{
+  width: 20rpx;
+  height: 20rpx;
+}

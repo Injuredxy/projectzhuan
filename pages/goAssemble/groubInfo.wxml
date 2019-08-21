@@ -1,0 +1,177 @@
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<view wx:if='{{show}}' style='z-index: 999'>
+
+  <order-socket1 value='activity' goodType='assemble' type='2'></order-socket1>
+
+  <navigator hover-class='none' open-type='switchTab' url='/pages/index/index'>
+    <image lazy-load src='/images/btn_home@2x.png' class='btn-image'></image>
+  </navigator>
+
+  <view class="recommend-item" bindtap="goShop">
+    <view class="flex-rc-cc recommend-item-head">
+      <image lazy-load src="/images/ic_shop_shangjiaxinxi@2x.png"></image>
+      <view class="recommend-item-company">{{fabulous.store.brand}}</view>
+      <view class="recommend-item-shop">（{{fabulous.store.market}}）</view>
+      <view class="recommend-item-distance">{{fabulous.distance ? common.tDistance(fabulous.distance) : ''}}</view>
+    </view>
+    <view class="flex recommend-item-detail">
+      <image lazy-load class="recommend-item-pic" src="{{fabulous.activity_group_buy.goods.img_url}}"></image>
+      <view class="recommend-item-info flex-rb">
+        <view>
+          <view class="text-over-2 recommend-item-name">{{fabulous.activity_group_buy.goods.product_name}}</view>
+          <view class="flex-wrap recommend-item-services">
+            <view class="recommend-item-service flex-rc-cc" wx:for="{{fabulous.activity_group_buy.goods.product_service_label}}" wx:key="service" wx:if='{{index<4}}'>{{item.content}}</view>
+          </view>
+        </view>
+        <view class="flex-rb">
+          <view class="flex-cc recommend-item-price">
+            <view class="recommend-item-price-new">
+              <text>¥</text>{{fabulous.activity_group_buy.group_buy_price-0}}</view>
+            <view class="recommend-item-price-old">¥{{fabulous.price-0}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 拼团中 -->
+  <view class='groub' wx:if='{{status==0}}' style='{{in_order==1?"padding-bottom: 0":""}}'>
+    <view class='group-detail-tit flex-rc-cc' wx:if='{{fabulous.need_num-fabulous.has_num==1}}'>
+      还差1人，完成拼团!
+    </view>
+    <view class='group-detail-tit flex-rc-cc' wx:else>
+      再邀{{fabulous.need_num-fabulous.has_num}}人,立即成团!
+    </view>
+    <view class='flex-rc-cc group-detail-time'>
+      <view class='group-detail-time-name'>剩余时间</view>
+      <view class='group-detail-time-value flex-rc-cc'>{{common.difference_time(countDownNum).hour}}</view>
+      <text> : </text>
+      <view class='group-detail-time-value flex-rc-cc'>{{common.difference_time(countDownNum).min}}</view>
+      <text> : </text>
+      <view class='group-detail-time-value flex-rc-cc'>{{common.difference_time(countDownNum).second}}</view>
+    </view>
+    <view class='group-detail-head flex-rc-cc'>
+      <view class='head-view' wx:for="{{fabulous.users}}" wx:key="index">
+        <image lazy-load src="{{item}}" class='head1'></image>
+        <view class='head-text flex-rc-cc' wx:if='{{index==0}}'>团长</view>
+      </view>
+      <image lazy-load wx:for='{{fabulous.need_num-fabulous.has_num}}' wx:key='index' src='/images/ic_queren@2x.png' class='head'></image>
+    </view>
+    <view wx:if='{{token}}'>
+      <view class='group-detail-view flex-rc-cc' wx:if='{{in_order==0}}'>
+        <view bindtap='goJoin' class='group-detail-btn flex-rc-cc'>{{fabulous.activity_group_buy.group_buy_price>100?"我要参团 (支付 ¥100 定金)":"我要参团"}}</view>
+      </view>
+      <view class='group-detail-view flex-rc-cc' wx:elif='{{in_order==1}}'>
+        <view class='group-detail-btn flex-rc-cc' catchtap='goShare'>邀请好友参团</view>
+        <view class='group-detail-text'>不成团自动退款</view>
+      </view>
+    </view>
+    <view class='group-detail-view flex-rc-cc' wx:else>
+      <button open-type="getUserInfo" bindgetuserinfo="bindgetuserinfo2" class='group-detail-btn'>{{fabulous.activity_group_buy.group_buy_price>100?"我要参团 (支付 ¥100 定金)":"我要参团"}}</button>
+    </view>
+  </view>
+
+  <!-- 拼团成功 -->
+  <view class='groub' wx:elif='{{status==1}}'>
+    <view class='group-success-text1 flex-rc-cc'>已成团</view>
+    <view class='group-success-text2 flex-rc-cc'>拼团成功，兑换券已发放</view>
+    <view class='group-success-head flex-rc-cc'>
+      <view class='head-view' wx:for="{{fabulous.users}}" wx:key="index">
+        <image lazy-load src="{{item}}" class='head1'></image>
+        <view class='head-text flex-rc-cc' wx:if='{{index==0}}'>团长</view>
+      </view>
+      <image lazy-load wx:for='{{fabulous.need_num-fabulous.users.length}}' wx:key='index' src='/images/ic_queren@2x.png' class='head'></image>
+    </view>
+    <view wx:if='{{in_order==1}}' class='group-success-btn flex-rc-cc'>
+      <view class='group-success-left flex-rc-cc' catchtap='goDetails'>查看订单</view>
+      <navigator hover-class='none' url='/pages/goAssemble/list' class='group-success-right flex-rc-cc'>查看其他拼团</navigator>
+    </view>
+    <view class='flex-rc-cc' wx:else>
+      <navigator hover-class='none' url='/pages/goAssemble/list' class='group-success-other flex-rc-cc'>查看其他拼团</navigator>
+    </view>
+  </view>
+
+  <!-- 拼团失败 -->
+  <view class='groub' wx:else>
+    <view class='group-success-text1 flex-rc-cc'>拼团失败</view>
+    <view class='group-success-text2 flex-rc-cc' wx:if='{{in_order==1}}'>该团未能按时凑齐人数，拼团失败已退款</view>
+    <view class='group-success-text2 flex-rc-cc' wx:else>拼团失败，已极速退款</view>
+    <view class='group-success-head flex-rc-cc'>
+      <view class='head-view' wx:for="{{fabulous.users}}" wx:key="index">
+        <image lazy-load src="{{item}}" class='head1'></image>
+        <view class='head-text flex-rc-cc' wx:if='{{index==0}}'>团长</view>
+      </view>
+      <image lazy-load wx:for='{{fabulous.need_num-fabulous.users.length}}' wx:key='index' src='/images/ic_queren@2x.png' class='head'></image>
+    </view>
+    <view wx:if='{{in_order==1}}' class='group-success-btn flex-rc-cc'>
+      <view class='group-success-left flex-rc-cc' catchtap='goRefund'>查看退款详情</view>
+      <navigator hover-class='none' url='/pages/goAssemble/list' class='group-success-right flex-rc-cc'>查看其他拼团</navigator>
+    </view>
+    <view class='flex-rc-cc' wx:else>
+      <navigator hover-class='none' url='/pages/goAssemble/list' class='group-success-other flex-rc-cc'>查看其他拼团</navigator>
+    </view>
+  </view>
+
+  <assemble-groub id='group' fabulous='{{fabulous}}'></assemble-groub>
+
+  <!-- 垫子 -->
+  <!-- <view class='cushion' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'></view> -->
+
+  <!-- 6 -->
+  <!-- <block wx:if='{{in_order==1}}'>
+    <view class='direct-six flex-cc' wx:if='{{status==0}}' style='{{modelX!="-1"?"padding-bottom: 92rpx":""}}'>
+      <view class='six-left' bindtap='goCancel'>申请退款</view>
+    </view>
+  </block> -->
+</view>
+
+<!-- 覆盖层 -->
+
+<!-- 申请退款 -->
+<view class='viewBG' wx:if='{{cancel}}' catchtouchmove='preventMove' bindtap='goAll'>
+</view>
+<view class='cancel {{cancel?"openBG":"closeBG"}}' catchtouchmove='preventMove' catchtap='goClick' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}' wx:if='{{showView}}'>
+  <view class='cancel-top flex-rb-cc'>
+    <view>退款原因：</view>
+    <image lazy-load class='cancel-image' src='/images/ic_service_close@2x.png' bindtap='goAll'></image>
+  </view>
+  <view class='cancel-middle'>
+    <input class='cancel-input' maxlength='100' placeholder='点击填写（最多输入50个字）' cursor-spacing='105' show-confirm-bar='{{false}}' bindinput='textInput'></input>
+  </view>
+  <view class='flex-rc-cc'>
+    <view class='cancel-button' bindtap='goCancelText'>确定</view>
+  </view>
+</view>
+
+<!-- 分享 -->
+<view class='viewBG' catchtouchmove='preventMove' catchtap='goAll' wx:if='{{share}}'>
+</view>
+<view class='share-view {{share?"openBG1":""}}' catchtouchmove='preventMove' catchtap='goClick' wx:if='{{share}}'>
+  <view class='share-text3 flex-rc-cc'>拼团已发起，人满后自动发券</view>
+  <view class='share-view1' style='{{modelX!="-1"?"padding-bottom: 120rpx":""}}'>
+    <view class='share-text1 flex-rc-cc'>还差
+      <text>{{fabulous.need_num-fabulous.has_num}}</text>人，赶快邀请邻居好友来参团吧</view>
+    <button class='share-button' open-type='share' hover-class='none' data-item='{{item}}'>
+      <image lazy-load src='/images/ic_wechat_share@2x.png' class='share-image'></image>
+    </button>
+    <view class='share-text2 flex-rc-cc'>邀请好友进度
+      <text>{{fabulous.has_num}}/{{fabulous.need_num}}</text>
+    </view>
+  </view>
+</view>
+
+<!-- 导购不可参团 -->
+<view class='viewBG' catchtouchmove='preventMove' wx:if='{{vest}}'>
+  <view class='center45 vest-image'>
+    <view class='vest-view border-bottom flex-rc'>
+      <view class='vest-text flex-cc'>抱歉，您的账号为导购账号,不可以参加拼团活动呦~</view>
+    </view>
+    <view class='vest-text1 flex-rc-cc' catchtap='goAll'>我知道了</view>
+  </view>
+</view>
+
+<view style='height:0;width:0;overflow:hidden;z-index: -1'>
+  <canvas style='width: {{canvasWidth}}px;height: {{canvasHeight}}px; position:fixed; left:100000px' canvas-id="canvas">
+  </canvas>
+</view>

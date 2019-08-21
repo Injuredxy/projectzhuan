@@ -1,0 +1,47 @@
+/* 分享 */
+
+.share-view {
+  width: 750rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0rpx 4rpx 20rpx 0rpx rgba(0, 0, 0, 0.3);
+  border-radius: 30rpx 30rpx 0rpx 0rpx;
+  z-index: 9999;
+  flex-direction: column;
+  position: fixed;
+  bottom: 0
+}
+
+.share-image {
+  width: 100rpx;
+  height: 100rpx;
+  margin-top: 40rpx;
+}
+
+.share-text1 {
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 50rpx;
+  font-size: 36rpx;
+  padding-top: 30rpx;
+}
+
+.share-text2 {
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 40rpx;
+  font-size: 28rpx;
+  margin-top: 28rpx;
+  padding-bottom: 30rpx;
+}
+
+.share-text3 {
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 50rpx;
+  font-size: 36rpx;
+  padding: 28rpx 0 30rpx
+}
+
+.share-button {
+  background: #fff
+}

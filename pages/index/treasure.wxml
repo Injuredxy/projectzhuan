@@ -1,0 +1,87 @@
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<!-- scroll-view scroll-y bindscrolltolower='goBottom' class="recommend-list"  -->
+<view wx:if='{{show}}'>
+
+  <order-socket value='goods' type='3'></order-socket>
+  <!-- 免费领 -->
+  <view class='recommend-head'>
+    <!-- 任务中心 -->
+    <image lazy-load src='/images/img_aokshf@2x.png' class='recommend-head-image'></image>
+    <view class='recommend-head-top'>
+      <!-- <view>你拥有<text>{{getCount.count?getCount.count:0}}</text>次免费领资格</view> -->
+      <navigator hover-class='none' url='/pages/goPayment/core' class='flex-rb-cc recommend-top-right1' wx:if='{{token}}'>
+        <view class='flex-rc-cc'>您拥有
+          <view class='top-count'>{{getCount.count}}</view>次活动资格</view>
+        <image lazy-load style='width:24rpx;height:24rpx' src='../../images/ic_one_enter@2x.png'></image>
+      </navigator>
+      <button class='flex-rb-cc recommend-top-right1' open-type="getUserInfo" bindgetuserinfo="bindgetuserinfo" wx:else>
+        <view class='flex-rc-cc'>您拥有
+          <view class='top-count'>1</view>次活动资格</view>
+        <image lazy-load style='width:24rpx;height:24rpx' src='../../images/ic_one_enter@2x.png'></image>
+      </button>
+    </view>
+  </view>
+
+  <!-- 商品列表 -->
+  <view>
+    <view class="recommend-item" wx:for="{{treasure.list}}" wx:key="treasure" bindtap="toTreasure" data-index="{{index}}">
+      <!-- 上 -->
+      <view class="flex-rc-cc recommend-item-head">
+        <image lazy-load src="/images/ic_shop_shangjiaxinxi@2x.png"></image>
+        <view class="recommend-item-company">{{item.store.brand}}</view>
+        <view class="recommend-item-shop">（{{item.store.market}}）</view>
+        <view class="recommend-item-distance">{{item.distance ? common.tDistance(item.distance) : ''}}</view>
+      </view>
+      <!-- 下 -->
+      <view class="flex recommend-item-detail">
+        <!-- 下左 -->
+        <image lazy-load class="recommend-item-pic" src="{{item.goods.img_url}}"></image>
+        <!-- 下右 -->
+        <view class="recommend-item-info flex-rb">
+          <view>
+            <view class="text-over-2 recommend-item-name">{{item.goods.product_name}}</view>
+          </view>
+          <view>
+            <view class="flex recommend-item-price recommend-item-services">
+              <view class="{{item.progress_bar==1?'recommend-item-price-end':'recommend-item-price-new'}}">
+                <text style='font-size: 24rpx;'>¥ </text>{{item.group_buy_price-0}}</view>
+              <view class="recommend-item-price-old">¥{{item.origin_price-0}}</view>
+            </view>
+            <view class='flex-rb-cc treasure-item-view'>
+              <view class="flex-cc ">
+                <progress class='treasure-item-bar' stroke-width='12rpx' percent="{{item.progress_bar*100}}" activeColor='{{item.progress_bar==1?"#DCDCDC":"#F8524E"}}' backgroundColor='#EDEDED' border-radius='22rpx' />
+                <view class="treasure-item-remain" wx:if='{{item.frozen_num}}'>剩余{{item.stock-item.sold-item.frozen_num}}件</view>
+                <view class="treasure-item-remain" wx:else>剩余{{item.stock-item.sold}}件</view>
+              </view>
+              <view class="{{item.progress_bar==1?'recommend-btn-end':'recommend-item-btn'}}">{{item.progress_bar==1?'已抢光':'免费领'}}</view>
+            </view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+  <!-- 垫子 -->
+  <view class='cushion' style='{{modelX!="-1"?"height: 180rpx":""}}'></view>
+  <!-- <view class="recommend-list-more">点击加载更多</view> -->
+
+  <view class='tabbar-view flex-rb-cc border-top' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'>
+    <navigator open-type='switchTab' hover-class='none' url='/pages/index/index' class='flex-rc-cc tabbar-image-view '>
+      <image lazy-load src='/images/ic_tabbar_home_def@2x.png' class='tabbar-index'></image>
+      <view class='tabbar-index-text'>首页</view>
+    </navigator>
+    <view class='flex-rc-cc tabbar-image-view'>
+      <image lazy-load src='/images/btn_newpeoplezone@2x.png' class='tabbar-middle'></image>
+      <view></view>
+    </view>
+    <navigator open-type='switchTab' hover-class='none' url='/pages/user/index' class='flex-rc-cc tabbar-image-view'>
+      <image lazy-load src='/images/ic_tabbar_my_def@2x.png' class='tabbar-me'></image>
+      <view class='tabbar-me-text'>我的</view>
+    </navigator>
+  </view>
+
+  <order-list id="homeItem" />
+
+</view>

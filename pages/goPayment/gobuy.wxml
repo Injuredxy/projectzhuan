@@ -1,0 +1,140 @@
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<view class='fabulous-one'>
+  <view class='flex-rb'>
+    <view class='flex-cc one-left'>
+      <!-- <view>
+        <image lazy-load class='flex one-left-image' src='/images/ic_my_head_def@3x.png'></image>
+      </view> -->
+      <view class="logo flex">
+        <open-data type="userAvatarUrl" class="flex one-left-image" id="userinfo"></open-data>
+      </view>
+       <!-- <view class='flex-cc' style='margin-left: 26rpx;' wx:if='{{times}}'>
+        <view class='one-left-text flex-rc-cc'>12</view>
+        <view class='one-left-dian'>:</view>
+        <view class='one-left-text flex-rc-cc'>00</view>
+        <view class='one-left-dian'>:</view>
+        <view class='one-left-text flex-rc-cc'>00</view>
+      </view> -->
+      <view class='flex-cc' style='margin-left: 26rpx;'>
+        <view class='one-left-text flex-rc-cc'>{{common.difference_time(countDownNum).hour}}</view>
+        <view class='one-left-dian'>:</view>
+        <view class='one-left-text flex-rc-cc'>{{common.difference_time(countDownNum).min}}</view>
+        <view class='one-left-dian'>:</view>
+        <view class='one-left-text flex-rc-cc'>{{common.difference_time(countDownNum).second}}</view>
+      </view>
+      <view class='one-left-over'>后结束</view>
+    </view>
+    <view class='one-right' bindtap='goPlay'>
+      <view class='flex-cc'>
+        <view class='two-text'>规则</view>
+        <image lazy-load src='../../images/ic_one_rule@2x.png' class='two-icon'></image>
+      </view>
+    </view>
+  </view>
+  <view class='flex-rb-cc one-middle-view'>
+    <view class='one-middle'>
+      <view class='flex-cc'>
+        <image lazy-load class='one-middle-image' src='{{options.image}}'></image>
+      </view>
+      <view class='one-middle-title'>{{options.name}}</view>
+      <view class='flex-cc one-price'>
+        <view class='flex one-price-new'>
+          <view class='one-price-icon'>￥</view>
+          <view class='one-price-num'>{{options.price-0}}</view>
+        </view>
+        <view class='one-price-old'>￥{{options.old_price-0}}</view>
+      </view>
+    </view>
+  </view>
+  <view class='one-nice'>
+    <view class='flex-rc-cc' style='width: 100%'>
+      <view class='flex-rc-cc one-nice-tiao'>
+        <block>
+          <progress class='one-progress' percent='0' stroke-width='8rpx' border-radius='10rpx' activeColor='#F8524E'></progress>
+        </block>
+        <image lazy-load src='/images/ic_one_circle_pre@2x.png' class='progress-icon icon-one'></image>
+        <image lazy-load src='/images/ic_one_circle_def@2x.png' class='progress-icon1 icon-two'></image>
+        <image lazy-load src='/images/ic_one_circle_def@2x.png' class='progress-icon1 icon-three'></image>
+        <image lazy-load src='/images/ic_one_circle_def@2x.png' class='progress-icon1 icon-four'></image>
+        <image lazy-load src='/images/ic_one_circle_def@2x.png' class='progress-icon1 icon-five'></image>
+        <block>
+          <view class='progress-view' style='left: -42rpx'>
+            <view style='position: relative'>
+              <image lazy-load src='{{progress_image}}' class='progress-text-image'></image>
+            </view>
+            <view class='progress-texts'>支付0.01 开始砍价</view>
+          </view>
+        </block>
+      </view>
+    </view>
+    <view class='flex-rb-cc one-jihe '>
+      <view class='dao-view flex-rc-cc '>开始砍价</view>
+      <view class='dao-view flex-rc-cc '>1刀</view>
+      <view class='dao-view flex-rc-cc '>3刀</view>
+      <view class='dao-view flex-rc-cc '>5刀</view>
+      <view class='dao-view flex-rc-cc '>8刀</view>
+    </view>
+  </view>
+</view>
+<view class='share-text flex-rc-cc'>分享到业主群，很快就集满8刀了喔！</view>
+<!-- 按钮 -->
+<button class='flex-rc-cc sweep-button-text' bindtap='goBuy' wx:if='{{token}}'>点击支付</button>
+<button class='flex-rc-cc sweep-button-text' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" wx:else>点击支付</button>
+
+<!-- 玩法介绍 -->
+<view class='play-view' wx:if='{{play}}' catchtouchmove='preventMove' bindtap='goAll'>
+  <image lazy-load src='/images/img_wanfabeijing@2x.png' class='play-image'></image>
+  <view class='play' catchtap='goClick'>
+    <view class='play-son'>
+      <image lazy-load src='/images/ic_wanfa_longline@2x.png' class='play-xian'></image>
+      <view class='play-fa flex-rc-cc'>— 砍价玩法 —</view>
+      <view class='flex-cc'>
+        <view>
+          <image lazy-load class='flex-cc play-icon1' src='/images/ic_wanfa_one@2x.png'></image>
+        </view>
+        <view class='play-text1'>获取新人免费领资格。</view>
+      </view>
+      <view class='flex-cc'>
+        <view>
+          <image lazy-load class='flex-cc play-icon2' src='/images/ic_wanfa_two@2x.png'></image>
+        </view>
+        <view class='play-text2'>支付0.01元，锁定商品。</view>
+      </view>
+      <view class='flex-cc'>
+        <view>
+          <image lazy-load class='flex-cc play-icon3' src='/images/ic_wanfa_three@2x.png'></image>
+        </view>
+        <view class='play-text3'>分享到业主群，让好友帮忙砍价。</view>
+      </view>
+      <view class='flex-cc'>
+        <view>
+          <image lazy-load class='flex-cc play-icon4' src='/images/ic_wanfa_four@2x.png'></image>
+        </view>
+        <view class='play-text4'>砍够8刀，发放券码，到店兑换。</view>
+      </view>
+      <view class='play-button flex-rc-cc' bindtap='goAll'>我知道了</view>
+    </view>
+  </view>
+</view>
+
+<!-- 风险提示 -->
+<view class='refuse flex-rc-cc' wx:if='{{refuse}}' catchtouchmove='preventMove'>
+  <view class='refuse-concent flex-rc-cc' catchtap='goClick'>
+    <view class='refuse-title flex-rc-cc'>确定放弃当前新人免费领？</view>
+    <view class='flex-ra-cc refuse-button'>
+      <view class='refuse-right flex-rc-cc' catchtap='goAll'>确定</view>
+      <view class='refuse-left flex-rc-cc' catchtap='goAll'>取消</view>
+    </view>
+  </view>
+</view>
+
+<!-- 导购不可参团 -->
+<view class='viewBG' catchtouchmove='preventMove' wx:if='{{vest}}'>
+  <view class='center45 vest-image'>
+    <view class='vest-view border-bottom flex-rc'>
+      <view class='vest-text flex-cc'>抱歉，您的账号为导购账号,不可以发起免费领活动呦~</view>
+    </view>
+    <view class='vest-text1 flex-rc-cc' catchtap='goAll'>我知道了</view>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+<!-- 销售顾问 -->
+<view class='sales-view' wx:if='{{vest.length>0}}'>
+  <view class='sales-text'>销售顾问</view>
+  <scroll-view scroll-x class='sales-list1'>
+    <view class='flex-cc sales-list2'>
+      <view class='sales-item flex-rb-cc' wx:for='{{vest}}' wx:key='index' catchtap='goIphons' data-mobile='{{item.mobile}}'>
+        <view class='flex-rc-cc sales-views'>
+          <view class='flex-cc'>
+            <view class='sales-image-view' wx:if='{{item.vest_grade==3}}'>
+              <image lazy-load src='{{item.url?item.url:item.avatar_url}}' class='sales-image' style='position: absolute' mode='aspectFill'>
+              </image>
+              <image lazy-load class='sales-image-icon' src='/images/ic_goldmedal@2x.png'></image>
+            </view>
+            <view class='sales-image-view' wx:elif='{{item.vest_grade==2}}'>
+              <image lazy-load src='{{item.url?item.url:item.avatar_url}}' class='sales-image' style='position: absolute' style='border: 4rpx solid rgba(189,189,189,1)' mode='aspectFill'>
+              </image>
+              <image lazy-load class='sales-image-icon' src='/images/ic_silvermedal @2x.png'></image>
+            </view>
+
+            <image lazy-load src='{{item.url?item.url:item.avatar_url}}' class='sales-image' style='border: 4rpx solid rgba(90,167,61,1)' mode='aspectFill' wx:elif='{{item.vest_grade==1}}'></image>
+          </view>
+          <view class='sales-name three'>{{item.nickname}}</view>
+        </view>
+        <view class='flex-cc'>
+          <image lazy-load src='/images/img_sale_gold@2x.png' class='sales-image1' wx:if='{{item.vest_grade==3}}'></image>
+          <image lazy-load src='/images/img_sale_ag@2x.png' class='sales-image1' wx:elif='{{item.vest_grade==2}}'></image>
+          <image lazy-load src='/images/img_sale_cu@2x.png' class='sales-image1' wx:elif='{{item.vest_grade==1}}'></image>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

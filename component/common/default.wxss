@@ -1,0 +1,25 @@
+.icon{
+  display: block;
+  width: 292rpx;
+  height: 280rpx;
+  margin: 148rpx auto 28rpx;
+}
+.msg{
+  margin-bottom: 44rpx;
+  text-align: center;
+  font-size: 28rpx;
+  color: #999;
+}
+.btn{
+  margin-top: 44rpx 0;
+}
+.btn view{
+  padding: 0 50rpx;
+  border-radius: 8rpx;
+  margin: 0 auto;
+  border: 1rpx solid #F8524E;
+  text-align: center;
+  line-height: 70rpx;
+  font-size: 28rpx;
+  color: #F8524E;
+}

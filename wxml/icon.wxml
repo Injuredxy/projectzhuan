@@ -1,0 +1,5 @@
+<template name="icon">
+  <image lazy-load src="/images/ic_shop_shangjiaxinxi@2x.png" style="width: 36rpx; min-width: 36rpx; height: 36rpx;" wx:if="{{type == 'shop'}}"></image>
+  <image lazy-load src="/images/ic_focous_time@2x.png" style="width: 28rpx; min-width: 28rpx; height: 28rpx;" wx:if="{{type == 'clock'}}"></image>
+  <image lazy-load src="/images/ic_focous_position@2x.png" style="width: 28rpx; min-width: 28rpx; height: 28rpx;" wx:if="{{type == 'location'}}"></image>
+</template>

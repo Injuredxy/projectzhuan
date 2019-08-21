@@ -1,0 +1,98 @@
+<!-- 我的收藏 -->
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<!-- 头部 -->
+<view class='flex-cc store-view'>
+  <view class='store flex-rc-cc'>
+    <view class='{{show?"goods":""}}' bindtap='goXian1'>商家</view>
+  </view>
+  <view class='store flex-rc-cc'>
+    <view class='{{nice?"goods":""}}' bindtap='goXian2'>商品</view>
+  </view>
+</view>
+
+<!-- 商家 -->
+<import src="/wxml/icon.wxml" />
+
+<view class="follow-list" wx:if='{{show}}'>
+  <view wx:if='{{concernList}}'>
+    <view class="flex follow-item {{item.isTouchMove ? 'touch-move-active' : ''}}" wx:for="{{concernList}}" wx:key="follow" bindtap='goStore' data-item='{{item}}' data-index='{{index}}' bindtouchstart="touchstart" bindtouchmove="touchmove">
+      <view class="flex-cc follow-item-body">
+        <image lazy-load class="follow-item-pic" src='{{item.img_url}}'></image>
+        <view class="follow-item-info">
+          <view class="flex-cc">
+            <view class="follow-item-company">{{item.brand}}</view>
+            <view class="follow-item-shop">（{{item.market}}）</view>
+          </view>
+          <view class="flex-cc follow-item-detail follow-detail">
+            <template is="icon" data="{{type: 'clock'}}" />
+            <view>营业时间：{{item.business_hours_begin}}{{item.business_hours_end}}</view>
+          </view>
+          <view class="flex-cc follow-item-detail">
+            <template is="icon" data="{{type: 'location'}}" />
+            <view class='address-text'>{{item.city}}{{item.area}}{{item.address}}</view>
+          </view>
+        </view>
+        <view>
+          <image lazy-load class='follow-item-iphon' src='/images/ic_focous_phone@2x.png' catchtap='goIphon' data-item='{{item}}'></image>
+        </view>
+      </view>
+      <view class="concernList-item-delete flex-rc-cc" catchtap="storeDel" data-index="{{index}}" data-item='{{item}}'>取消收藏</view>
+    </view>
+  </view>
+  <!-- 缺省页 -->
+  <view wx:else>
+    <view class='flex-rc'>
+      <image lazy-load src='/images/img_collect_emptystate@2x.png' class='page-image'></image>
+    </view>
+    <view class='page-text flex-rc'>暂没有任何收藏</view>
+  </view>
+</view>
+
+<!-- 商品 -->
+<view class="follow-list" wx:else>
+  <view wx:if='{{collection}}'>
+    <view class="follow-item collection-nice {{item.isTouchMove ? 'touch-move' : ''}}" wx:for='{{collection}}' wx:key='index' bindtap='{{item.data.effective==0?"":"goShop"}}' data-item='{{item}}' data-index='{{index}}' bindtouchstart="touchstart1" bindtouchmove="touchmove1">
+      <view class='shopping'>
+        <view class='flex-rb-cc shopping-top'>
+          <view class='flex-cc'>
+            <image lazy-load src='/images/ic_home_shop2@2x.png' class='shopping-icon'></image>
+            <view class='shopping-text flex-cc'>{{item.data.store.brand}}
+              <text>（{{item.data.store.market}}）</text>
+            </view>
+          </view>
+          <view class='shopping-distance'>{{item.data.store.distance ? common.tDistance(item.data.store.distance) : ''}}</view>
+        </view>
+        <view class='flex shopping-bottom'>
+          <view class='bottom-left flex-rc-cc'>
+            <image lazy-load class='shopping-image' src='{{item.data.goods.img_url}}'></image>
+            <view class='image-view flex-rc-cc' wx:if='{{item.data.effective==0}}'>
+              <text class='iamge-text flex-rc-cc'>活动\n已结束</text>
+            </view>
+          </view>
+          <view style='width: 100%; flex-direction: column' class='flex-rb'>
+            <view class='{{item.data.effective==0?"shopping-title1":"shopping-title2"}}'>{{item.data.goods.product_name}}</view>
+            <view class='flex-rb shopping-price'>
+              <view class='flex shopping-nice'>
+                <view class='{{item.data.effective==0?"new-price1":"new-price2"}}'>
+                  <text>￥</text> {{item.data.group_buy_price-0}}</view>
+                <view class='old-price'>￥{{item.data.origin_price-0}}</view>
+              </view>
+              <view class='shopping-button1 flex-rc-cc' wx:if='{{item.type == "group_buy"}}'>聚拼团</view>
+              <view class='shopping-button2 flex-rc-cc' wx:elif='{{item.type == "spike"}}'>一元夺宝</view>
+              <view class='shopping-button3 flex-rc-cc' wx:elif='{{item.type == "temai"}}'>特价样品</view>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="collection-item-delete flex-rc-cc" catchtap="goodsDel" data-index="{{index}}" data-item='{{item}}'>删除</view>
+    </view>
+  </view>
+  <!-- 缺省页 -->
+  <view wx:else>
+    <view class='flex-rc'>
+      <image lazy-load src='/images/img_collect_emptystate@2x.png' class='page-image'></image>
+    </view>
+    <view class='page-text flex-rc'>暂没有任何收藏</view>
+  </view>
+</view>

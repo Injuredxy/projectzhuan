@@ -1,0 +1,73 @@
+.six-forward {
+  padding: 16rpx 0 0 24rpx;
+  background: #fff;
+  margin: 16rpx 0;
+}
+
+six-top-text {
+  font-size: 32rpx;
+}
+
+.six-top-title {
+  font-size: 24rpx;
+  color: #999;
+  padding-right: 24rpx;
+}
+
+.six-top-icon {
+  width: 24rpx;
+  height: 24rpx;
+}
+
+.six-bottom {
+  align-items: flex-start;
+  padding: 24rpx 20rpx 0 4rpx;
+}
+
+.six-image {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  background: #ccc;
+}
+
+.six-bottom-right {
+  margin-left: 16rpx;
+  border-bottom: 1rpx solid rgba(61, 61, 61, 0.1);
+  width: 100%;
+}
+
+/* .six-bottom-right:last-child{
+  border-bottom: none
+} */
+
+.six-bottom-text {
+  font-size: 24rpx;
+  margin: 0 44rpx 28rpx 2rpx;
+}
+
+.six-bottom-phone {
+  font-size: 28rpx;
+}
+
+.six-bottom-time {
+  font-size: 24rpx;
+  color: #9b9b9b;
+}
+
+.six-bottom-heart {
+  margin-right: 8rpx;
+}
+
+.six-bottom-star {
+  font-size: 24rpx;
+}
+
+.six-bottom-hearts {
+  margin: 10rpx 0 20rpx 0;
+}
+
+.six-heart {
+  width: 20rpx;
+  height: 20rpx;
+}

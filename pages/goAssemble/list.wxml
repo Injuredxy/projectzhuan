@@ -1,0 +1,74 @@
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<view class='flex-cc list-top-view border-top'>
+  <view class='flex-rc-cc list-top-time' style='{{current==1?"color: #F8524E":""}}' bindtap='clickTab1'>正在拼团中</view>
+  <view class='flex-rc-cc list-top-time' style='{{current==2?"color: #F8524E":""}}' bindtap='clickTab2'>已成团</view>
+  <view class='weui-navbar__slider' style="transform: translateX({{sliderOffset}}rpx); -webkit-transform: translateX({{sliderOffset}}rpx);"></view>
+</view>
+
+<!-- 拼团中 -->
+<view class='list-success' wx:if='{{current==1}}'>
+  <view class='list-success-item border-bottom flex' catchtap='goGoods' data-item='{{item}}' wx:for='{{underwayList}}' wx:key='index'>
+    <view class='flex-cc'>
+      <image lazy-load class='list-success-image' src='{{item.product_img}}'></image>
+    </view>
+    <view style='width: 100%'>
+      <view class='flex-cc'>
+        <view class='flex-rc-cc list-success-num'>{{item.need_num}}人团</view>
+        <view class='three list-success-name'>{{item.product_name}}</view>
+      </view>
+      <view class='list-success-time'>剩余 {{common.difference_time(item.time).hour}}:{{common.difference_time(item.time).min}}:{{common.difference_time(item.time).second}}</view>
+      <view class='flex-cc' style='margin-bottom: 16rpx'>
+        <view class='list-image-view' wx:for='{{item.order_list}}' wx:key='index'>
+          <image class='list-success-one1' src='{{item.head_pic?item.head_pic:"/images/ic_my_head_def@3x.png"}}' mode='aspectFill'></image>
+          <view class='list-success-icon flex-rc-cc' wx:if='{{index==0}}'>团长</view>
+        </view>
+        <image lazy-load wx:for='{{item.need_num - item.has_num}}' wx:key='index' src='/images/ic_queren@2x.png' class='list-success-one'></image>
+        <view class='list-success-text flex-cc'>还差
+          <view style='color: #F8524E'>{{item.need_num - item.has_num}}人</view>拼团成功</view>
+      </view>
+      <view class='flex-rb-cc list-price-view'>
+        <view class='flex-cc list-price1' style='margin-top: 10rpx'>
+          <view class='flex-cc list-price1'>
+            <view class='list-success-icon1'>¥</view>
+            <view class='list-success-price'>{{item.group_buy_price-0}}</view>
+          </view>
+          <view class='list-success-price1'>￥{{item.origin_price-0}}</view>
+        </view>
+        <view class='list-success-but flex-rc-cc'>去参团</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!-- 已成团 -->
+<view class='list-success' wx:else>
+  <view class='list-success-item border-bottom flex' catchtap='goGoods' data-item='{{item}}' wx:for='{{successList}}' wx:key='index'>
+    <view class='flex-cc'>
+      <image lazy-load class='list-success-image' src='{{item.product_img}}'></image>
+    </view>
+    <view style='width: 100%'>
+      <view class='flex-cc'>
+        <view class='flex-rc-cc list-success-num'>{{item.need_num}}人团</view>
+        <view class='three list-success-name'>{{item.product_name}}</view>
+      </view>
+      <view class='flex-cc' style='margin-bottom: 62rpx;margin-top: 18rpx'>
+        <view class='list-image-view' wx:for='{{item.order_list}}' wx:key='index'>
+          <image lazy-load class='list-success-one1' src='{{item.head_pic?item.head_pic:"/images/ic_my_head_def@3x.png"}}' mode='aspectFill'></image>
+          <view class='list-success-icon flex-rc-cc' wx:if='{{index==0}}'>团长</view>
+        </view>
+        <image lazy-load class='list-fail-text flex-cc' src='/images/text_group_success@2x.png'></image>
+      </view>
+      <view class='flex-rb-cc list-price-view'>
+        <view class='flex-cc list-price1' style='margin-top: 10rpx'>
+          <view class='flex-cc list-price1'>
+            <view class='list-success-icon1'>¥</view>
+            <view class='list-success-price'>{{item.group_buy_price-0}}</view>
+          </view>
+          <view class='list-success-price1'>￥{{item.origin_price-0}}</view>
+        </view>
+        <view class='list-success-but flex-rc-cc' style='background:linear-gradient(319deg,rgba(241,130,59,1) 0%,rgba(250,167,105,1) 100%);'>已成团</view>
+      </view>
+    </view>
+  </view>
+</view>

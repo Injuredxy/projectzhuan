@@ -1,0 +1,36 @@
+<!-- 评价 -->
+<view class="comment-list" wx:if='{{show}}'>
+  <view class="flex comment-item" wx:for="{{comment}}" wx:key='index'>
+    <image lazy-load mode='aspectFill' mode='aspectFill' class="comment-item-avatar" src='{{item.user.head_pic}}'></image>
+    <view style='width: 100%'>
+      <view class="flex-rb">
+        <view class="comment-item-name">{{item.user.nickname}}</view>
+        <view class="comment-item-time">{{item.comment.add_time}}</view>
+      </view>
+      <view class="comment-item-detail">
+        <view class="flex-cc comment-item-goods">
+          <image lazy-load src='{{item.order_goods.image_url}}'></image>
+          <view>{{item.order_goods.product_name}}</view>
+        </view>
+        <view class="flex-rb comment-item-score">
+          <view class="flex-rc-cc">
+            <view class="comment-item-score-name">导购：</view>
+              <image lazy-load wx:for='{{item.comment.vest_comment}}' wx:key='index' class='comment-item-star' src='/images/ic_goods_star_pre2@2x.png'></image>
+              <image lazy-load wx:for='{{5-item.comment.vest_comment}}' wx:key='index' class='comment-item-star' src='/images/ic_goods_star_def2@2x.png'></image>
+          </view>
+          <view class="flex-rc-cc">
+            <view class="comment-item-score-name">商品：</view>
+            <image lazy-load wx:for='{{item.comment.goods_comment}}' wx:key='index' class='comment-item-star' src='/images/ic_goods_star_pre2@2x.png'></image>
+              <image lazy-load wx:for='{{5-item.comment.goods_comment}}' wx:key='index' class='comment-item-star' src='/images/ic_goods_star_def2@2x.png'></image>
+          </view>
+          <view class="flex-rc-cc">
+            <view class="comment-item-score-name">送装：</view>
+            <image lazy-load wx:for='{{item.comment.load_comment}}' wx:key='index' class='comment-item-star' src='/images/ic_goods_star_pre2@2x.png'></image>
+              <image lazy-load wx:for='{{5-item.comment.load_comment}}' wx:key='index' class='comment-item-star' src='/images/ic_goods_star_def2@2x.png'></image>
+          </view>
+        </view>
+      </view>
+      <view class="comment-item-content">{{item.comment.content}}</view>
+    </view>
+  </view>
+</view>

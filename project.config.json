@@ -1,0 +1,146 @@
+{
+	"description": "项目配置文件",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": false,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true,
+		"autoAudits": false,
+		"checkInvalidKey": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.7.4",
+	"appid": "wx13c3cf71665d7d0d",
+	"projectname": "%E8%81%9A%E8%A3%85%E4%BF%AE",
+	"debugOptions": {
+		"hidedInDevtools": []
+	},
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 3,
+			"list": [
+				{
+					"id": -1,
+					"name": "首页",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的",
+					"pathName": "pages/user/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "订单",
+					"pathName": "pages/order/order",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 3,
+					"name": "拼团列表",
+					"pathName": "pages/index/assemble",
+					"query": "scene = '123'",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "免费领列表",
+					"pathName": "pages/index/treasure",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "拼团进行中列表",
+					"pathName": "pages/goAssemble/list",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "参团",
+					"pathName": "pages/goAssemble/groubInfo",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 7,
+					"name": "参团",
+					"pathName": "component/assemble/sales",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 8,
+					"name": "订单详情",
+					"pathName": "pages/goAssemble/details",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "任务中心",
+					"pathName": "pages/goPayment/core",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "导购",
+					"pathName": "component/assemble/sales",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "sdfaasfd",
+					"pathName": "pages/index/assemble",
+					"query": "",
+					"scene": 1048
+				},
+				{
+					"id": -1,
+					"name": "惠支付",
+					"pathName": "pages/order/details",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "登陆",
+					"pathName": "pages/user/login",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

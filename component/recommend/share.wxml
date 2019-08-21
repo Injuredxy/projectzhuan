@@ -1,0 +1,13 @@
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<!-- 分享 -->
+<view class='viewBG' catchtouchmove='preventMove' catchtap='goAll' wx:if='{{share}}'>
+</view>
+<view class='share-view {{share?"openBG1":""}}' catchtouchmove='preventMove' catchtap='goClick' wx:if='{{share}}'>
+  <view class='share-text1 flex-rc-cc'>分享到</view>
+  <button class='share-button' open-type='share' hover-class='none' data-item='{{item}}'>
+    <image lazy-load src='/images/ic_wechat_share@2x.png' class='share-image'></image>
+  </button>
+  <view class='share-text2 flex-rc-cc border-bottom'>微信</view>
+  <view class='share-text3 flex-rc-cc' catchtap='goAll'>取消</view>
+</view>

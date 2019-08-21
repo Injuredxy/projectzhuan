@@ -1,0 +1,4 @@
+<!--pages/web//cash.wxml-->
+<!-- <web-view src="{{scan_uri}}"></web-view> -->
+<button bindtap='pay' type='primary'>支付</button>
+

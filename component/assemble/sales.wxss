@@ -1,0 +1,75 @@
+@import "/wxss/common.wxss";
+
+.sales-view {
+  padding: 16rpx 0 14rpx 27rpx;
+  background: #fff;
+  margin-top: 16rpx;
+}
+
+.sales-text {
+  font-weight: 500;
+  color: rgba(51, 51, 51, 1);
+  line-height: 44rpx;
+  font-size: 32rpx;
+}
+
+.sales-list1 {
+  height: 278rpx;
+  width: 100%;
+}
+
+.sales-list2 {
+  height: 278rpx;
+  padding-left: 10rpx;
+}
+
+.sales-item {
+  margin-right: 30rpx;
+  padding-top: 30rpx;
+  flex-direction: column;
+  box-shadow: 0rpx 2rpx 20rpx 0rpx rgba(209, 202, 202, 0.43);
+  border-radius: 8rpx;
+  height: 238rpx;
+  box-sizing: border-box;
+}
+
+.sales-image {
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+  border: 4rpx solid rgba(243, 185, 126, 1);
+}
+
+.sales-name {
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 40rpx;
+  font-size: 28rpx;
+  margin-top: 4rpx;
+  width: 198rpx;
+  text-align: center;
+}
+
+.sales-image1 {
+  width: 198rpx;
+  height: 54rpx;
+}
+
+.sales-views {
+  flex-direction: column;
+}
+
+.sales-image-icon {
+  width: 60rpx;
+  height: 56rpx;
+  position: absolute;
+  top: -24rpx;
+  left: -22rpx;
+  z-index: 9;
+}
+
+.sales-image-view {
+  position: relative;
+  width: 96rpx;
+  height: 96rpx;
+}

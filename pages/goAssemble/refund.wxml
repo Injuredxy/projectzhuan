@@ -1,0 +1,141 @@
+<view wx:if='{{show}}'>
+  <!-- 退款 -->
+
+  <view class='refund'>
+    <view class='refund-tit'>
+      退款状态：已退款 ¥{{fabulous.activity_group_buy.group_buy_price>100?100:fabulous.activity_group_buy.group_buy_price-0 || nice.direct_price-0 || treasure.group_buy_price-0 || sample.group_buy_price-0}}
+    </view>
+    <view class='refund-info'>
+      <view class='refund-info-title'>退款流程</view>
+      <view class='refund-info-detail'>
+
+        <view class='refund-info-item'>
+          <view class='flex-rb-cc refund-info-item-top'>
+            <view class='flex-cc'>
+              <view class='refund-info-item-top-left'></view>
+              <view class='refund-info-item-top-mid'>退款申请已提交</view>
+            </view>
+            <view class='refund-info-item-top-right'>
+              {{fabulous.activity_group_buy_order.fund_time || treasure.order_info.fund_time || nice.order_info.fund_time || sample.order_info.fund_time}}
+            </view>
+          </view>
+          <view class='refund-info-item-bot'>
+            <view>您的退款申请已成功提交</view>
+          </view>
+        </view>
+
+
+        <view class='refund-info-item'>
+          <view class='flex-rb-cc refund-info-item-top'>
+            <view class='flex-cc'>
+              <view class='refund-info-item-top-left'></view>
+              <view class='refund-info-item-top-mid'>平台审核已通过</view>
+            </view>
+            <view class='refund-info-item-top-right'>
+              {{fabulous.activity_group_buy_order.fund_time || treasure.order_info.fund_time || nice.order_info.fund_time|| sample.order_info.fund_time}}
+            </view>
+          </view>
+          <view class='refund-info-item-bot'>
+            <view>您的退款申请已通过审核，等待微信受理。</view>
+          </view>
+        </view>
+
+        <view class='refund-info-item'>
+          <view class='flex-rb-cc refund-info-item-top'>
+            <view class='flex-cc'>
+              <view class='refund-info-item-top-left'></view>
+              <view class='refund-info-item-top-mid'>微信受理退款</view>
+            </view>
+            <view class='refund-info-item-top-right'>
+              {{fabulous.activity_group_buy_order.fund_time || treasure.order_info.fund_time || nice.order_info.fund_time || sample.order_info.fund_time}}
+            </view>
+          </view>
+          <view class='refund-info-item-bot'>
+            <view>您的退款已被微信受理</view>
+          </view>
+        </view>
+
+
+        <view class='refund-info-item'>
+          <view class='flex-rb-cc refund-info-item-top'>
+            <view class='flex-cc'>
+              <image lazy-load class='refund-info-item-top-left-false' src='/images/ic_gouxuan@2x.png'></image>
+              <view class='refund-info-item-top-mid-false'>退款成功</view>
+            </view>
+            <view class='refund-info-item-top-right'>
+              {{fabulous.activity_group_buy_order.refund_to_account_time || treasure.order_info.refund_to_account_time || nice.order_info.refund_to_account_time || sample.order_info.refund_to_account_time}}
+            </view>
+          </view>
+          <view class='refund-info-item-bot no-border'>
+            <view style='width: 612rpx'>微信已将您的退款入账至您的支付用户的零钱，如有问题请拨打聚装修客服
+              <text bindtap='goIphon' class='text-iphon' style='color: #007AFF'>400-800-5563</text>咨询</view>
+          </view>
+        </view>
+
+      </view>
+    </view>
+  </view>
+
+  <!-- 2 -->
+  <view class='treasure-top flex' bindtap='goShop'>
+    <view wx:if='{{options.type=="group"||options.type=="spike"}}'>
+      <image lazy-load mode='aspectFill' src='{{fabulous.activity_group_buy.goods.img_url || treasure.goods.product_img.url}}' class='top-image'></image>
+    </view>
+    <view wx:for='{{nice.goods.product_img || sample.goods.product_img}}' wx:key='index' wx:if='{{options.type=="direct" || options.type=="sample"}}'>
+      <image lazy-load mode='aspectFill' src='{{item.url}}' class='top-image'></image>
+    </view>
+    <view class='top-text'>
+      <view class='top-top flex-rb-cc'>
+        <view class='text-top-left'>{{fabulous.activity_group_buy.goods.product_name || nice.goods.product_name || treasure.goods.product_name || sample.goods.product_name}}</view>
+        <view class='text-top-right'>￥{{fabulous.activity_group_buy.origin_price-0 || nice.origin_price-0 || treasure.origin_price-0 || sample.origin_price-0}}</view>
+      </view>
+      <view class='flex top-middle'>
+        <view wx:for='{{fabulous.activity_group_buy.goods.product_service_label || nice.goods.product_service_label || treasure.goods.product_service_label || sample.goods.product_service_label}}' wx:key='index' class='middle-mid' wx:if='{{index<4}}'>{{item.content}}</view>
+      </view>
+      <view class='top-bottom flex-cc'>
+        <view wx:for="{{fabulous.activity_group_buy.goods.product_label || nice.goods.product_label || treasure.goods.product_label || sample.goods.product_label}}" wx:key="index" class='flex-cc goods_view'>
+          <view class='bottom-suishi'>{{item.content}}</view>
+          <view class='goods_right_dian'></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 5 -->
+  <view class='defeat-four'>
+    <view class='flex-cc'>
+      <image lazy-load src='../../images/ic_order@2x.png' class='four-image'></image>
+      <view class='four-one-text'>订单信息</view>
+    </view>
+    <view class='flex-cc four-text'>
+      <view>订单号：</view>
+      <view>{{fabulous.activity_group_buy_order.order_sn || nice.order_info.order_sn || treasure.order_info.order_sn || sample.order_info.order_sn}}</view>
+    </view>
+    <view class='flex-cc four-text'>
+      <view>手机号：</view>
+      <view>{{fabulous.activity_group_buy_order.mobile || nice.order_info.mobile || treasure.order_info.mobile || sample.order_info.mobile}}</view>
+    </view>
+    <view class='flex-cc four-text'>
+      <view>付款时间：</view>
+      <view>{{fabulous.activity_group_buy_order.add_time || nice.order_info.add_time || treasure.order_info.pay_time || sample.order_info.pay_time}}</view>
+    </view>
+    <view class='flex four-text1'>
+      <view class='four-text-value'>申请原因：
+        <text>{{fabulous.activity_group_buy_order.fund_reason || treasure.order_info.fund_reason || nice.order_info.fund_reason || sample.order_info.fund_reason}}</text>
+      </view>
+
+    </view>
+    <view class='flex-cc four-text'>
+      <view>数量：</view>
+      <view>{{fabulous.activity_group_buy_order.direct_num || nice.order_info.direct_num || treasure.order_info.direct_num || sample.order_info.direct_num}}</view>
+    </view>
+    <view class='flex-cc four-text'>
+      <view>总价：</view>
+      <view>¥{{fabulous.activity_group_buy.origin_price || nice.order_info.total_price || treasure.order_info.total_price || sample.order_info.pay_total_price}}</view>
+    </view>
+    <view class='flex-cc four-text-last'>
+      <view>实付：</view>
+      <view>¥{{fabulous.activity_group_buy.group_buy_price>100?'100.00':fabulous.activity_group_buy.group_buy_price || nice.order_info.actual_price || treasure.order_info.actual_price || sample.order_info.price}}</view>
+    </view>
+  </view>
+</view>

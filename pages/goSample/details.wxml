@@ -1,0 +1,223 @@
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<view wx:if='{{show}}'>
+  <!-- 直购 -->
+
+  <!-- 1 -->
+  <view class='direct-one flex-rb-cc' wx:if='{{order_status==7}}'>
+    <view>
+      <view class='one-left' style='font-size: 40rpx;margin-bottom: 2rpx'>兑换券已过期</view>
+      <view class='flex-cc' bindtap='toRefund'>
+        <view class='one-left-right'>查看退款详情</view>
+        <view class='flex'>
+          <image lazy-load src='/images/ic_orders_enter1@2x.png' class='one-left-icon'></image>
+        </view>
+      </view>
+    </view>
+    <view class='flex-cc' bindtap='goAssemble'>
+      <image lazy-load src='/images/btn_chakanshangp@2x.png' class='one-right'></image>
+    </view>
+  </view>
+
+  <view class='direct-one flex-rb-cc' wx:else>
+    <view class='one-left'>恭喜你，购买成功</view>
+    <view class='flex-cc' bindtap='goAssemble'>
+      <image lazy-load src='/images/btn_jixuxuangou@2x.png' class='one-right'></image>
+    </view>
+  </view>
+
+  <!-- 2 -->
+  <view class='treasure-top flex' bindtap='goShop'>
+    <view class='flex-cc'>
+      <image lazy-load wx:for='{{fabulous.goods.product_img}}' src='{{item.url}}' wx:key='index' class='top-image'></image>
+    </view>
+    <view class='top-text'>
+      <view class='top-top flex-rb-cc'>
+        <view class='text-top-left'>{{fabulous.goods.product_name}}</view>
+        <view class='text-top-right'>￥{{fabulous.origin_price-0}}</view>
+      </view>
+      <view class='flex top-middle'>
+        <view wx:for='{{fabulous.goods.product_service_label}}' wx:key='index' class='middle-mid' wx:if='{{index<4}}'>{{item.content}}</view>
+      </view>
+      <view class='flex top-bottom'>
+        <view wx:for='{{fabulous.goods.product_label}}' wx:key='label' class='flex-cc goods_view'>
+          <view class='bottom-suishi'>{{item.content}}</view>
+          <view class='goods_right_dian'></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 3 -->
+  <!-- <view class='direct-three' wx:if='{{order_status!=0 || order_status!=2}}'>
+    <view class='three-top flex-rb-cc'>
+      <view class='flex-rb'>
+        <image lazy-load src='/images/ic_order_ticket@2x.png' class='three-icon'></image>
+        <view>
+          <view class='three-top-text'>商品兑换券</view>
+          <view class='three-top-title'>{{fabulous.order_info.exchange_code_end_time}} 到期</view>
+        </view>
+      </view>
+      <view class='three-bottom-right' wx:if='{{order_status==7}}'>已过期</view>
+      <block wx:else>
+        <view class='three-top-right' wx:if='{{exchange==2}}' bindtap='goRefund'>申请退款</view>
+        <view class='three-bottom-right' wx:elif='{{exchange==4}}'>已兑换</view>
+      </block>
+    </view>
+    <view class='three-bottom flex-rb'>
+      <view class='three-bottom-num-none' wx:if='{{order_status==7}}'>{{exchange_code1}}</view>
+      <block wx:else>
+        <view class='three-bottom-num' wx:if='{{exchange==2}}'>{{exchange_code1}}</view>
+        <view class='three-bottom-num-none' wx:elif='{{exchange==4}}'>{{exchange_code1}}</view>
+      </block>
+      <image lazy-load class='three-bottom-image' src='/images/ic_order_code@2x.png' catchtap='{{exchange==4?"":"goVolume"}}'></image>
+    </view>
+  </view> -->
+
+  <view class='direct-three' wx:if='{{order_status!=0 || order_status!=2}}'>
+    <view class='three-top flex-rb-cc'>
+      <view class='flex' style='width: 100%'>
+        <image lazy-load src='/images/ic_order_ticket@2x.png' class='three-icon'></image>
+        <view style='width: 100%'>
+          <view class='three-top-text'>商品兑换券</view>
+          <view class='flex-rb-cc'>
+            <view class='flex-rc-cc group-detail-time' wx:if='{{order_status==1||order_status==4}}'>
+              <view class='group-detail-time-value1 flex-rc-cc'>{{common.difference_time1(countDownNum).day}}</view>
+              <text>天</text>
+              <view class='group-detail-time-value1 flex-rc-cc'>{{common.difference_time1(countDownNum).hour}}</view>
+              <text>时</text>
+              <view class='group-detail-time-value1 flex-rc-cc'>{{common.difference_time1(countDownNum).min}}</view>
+              <text>分</text>
+              <view class='group-detail-time-value1 flex-rc-cc'>{{common.difference_time1(countDownNum).second}}</view>
+              <text>秒</text>
+              <view class='three-time-end'>后过期</view>
+            </view>
+            <view class='three-top-title' wx:else>{{fabulous.order_info.exchange_code_end_time}} 过期</view>
+            <view class='three-top-right' wx:if='{{exchange==2}}' bindtap='goRefund'>申请退款</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='three-bottom flex-rb' catchtap='{{exchange==2?"webSocket":""}}'>
+      <view class='three-top-left' wx:if='{{exchange==2}}'>查看券码</view>
+      <view class='three-top-left' wx:if='{{exchange==3}}'>已过期</view>
+      <view class='three-top-left' wx:elif='{{exchange==4}}'>已兑换</view>
+      <image lazy-load class='three-bottom-image' src='/images/ic_order_code@2x.png'></image>
+    </view>
+  </view>
+
+
+  <!-- 4 -->
+  <view class='defeat-three' bindtap='goStore'>
+    <view class='flex-cc'>
+      <image lazy-load src='../../images/ic_shop_shangjiaxinxi@2x.png' class='three-one-image'></image>
+      <view class='three-one-text'>商家信息</view>
+    </view>
+    <view class='flex-rb-cc'>
+      <view class='flex-cc three-two-text'>
+        <view class='three-two-left'>{{fabulous.store.brand}}</view>
+        <view>（{{fabulous.store.market}}）</view>
+      </view>
+      <image lazy-load src='../../images/ic_focous_phone@2x.png' class='three-image' catchtap='goIphon'></image>
+    </view>
+    <view class='flex-rb-cc'>
+      <view>
+        <view class='flex-cc three-three'>
+          <image lazy-load src='../../images/ic_focous_time@2x.png' class='three-three-image'></image>
+          <view class='three-three-text'>营业时间：{{fabulous.store.business_hours_begin}}{{fabulous.store.business_hours_end}}</view>
+        </view>
+        <view class='flex-cc'>
+          <image lazy-load src='../../images/ic_focous_position@2x.png' class='three-three-image'></image>
+          <view class='three-four three-three-text'>{{fabulous.store.city}}{{fabulous.store.area}}{{fabulous.store.address}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 5 -->
+  <view class='defeat-four'>
+    <view class='flex-cc'>
+      <image lazy-load src='../../images/ic_order@2x.png' class='four-image'></image>
+      <view class='four-one-text'>订单信息</view>
+    </view>
+    <view class='flex-cc four-text'>
+      <view>订单号：</view>
+      <view>{{fabulous.order_info.order_sn}}</view>
+    </view>
+    <view class='flex-cc four-text'>
+      <view>手机号：</view>
+      <view>{{fabulous.order_info.mobile}}</view>
+    </view>
+    <view class='flex-cc four-text'>
+      <view>付款时间：</view>
+      <view>{{fabulous.order_info.add_time}}</view>
+    </view>
+    <view class='flex-cc four-text'>
+      <view>数量：</view>
+      <view>{{fabulous.order_info.direct_num}}</view>
+    </view>
+    <view class='flex-cc four-text'>
+      <view>总价：</view>
+      <view>¥{{fabulous.order_info.pay_total_price}}</view>
+    </view>
+    <view class='flex-cc four-text-last'>
+      <view>实付：</view>
+      <view>¥{{fabulous.order_info.price}}</view>
+    </view>
+  </view>
+
+  <!-- 垫子 -->
+  <view class='cushion' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'></view>
+  <!-- 立即评价 -->
+  <view class='direct-six flex-cc' wx:if='{{order_status==5}}' style='{{modelX!="-1"?"padding-bottom: 92rpx":""}}'>
+    <view class='six-right' bindtap='goComment'>立即评价</view>
+  </view>
+
+  <!-- 覆盖层 -->
+
+  <!-- 退款 -->
+  <view class='cancel-view' wx:if='{{refund}}' catchtouchmove='preventMove' bindtap='goAll'>
+    <view class='cancel' catchtap='goClick' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'>
+      <view class='cancel-top flex-rb-cc'>
+        <view>退款原因：</view>
+        <image lazy-load class='cancel-image' src='/images/ic_service_close@2x.png' catchtap='goAll'></image>
+      </view>
+      <view class='cancel-middle'>
+        <input class='cancel-input' maxlength='100' placeholder='点击填写（最多输入50个字）' cursor-spacing='105' show-confirm-bar='{{false}}' bindinput='textInput'></input>
+      </view>
+      <view class='flex-rc-cc'>
+        <view class='cancel-button' bindtap='goRefundText'>确定</view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 查看券码 -->
+  <view class='code' wx:if='{{code_image}}' catchtouchmove='preventMove' bindtap='goAll'>
+    <view class='code-bg'>
+      <view class='code-tan flex-rc-cc' catchtap='goClick'>
+        <image lazy-load src='/images/img_ticket@2x.png' class='code-image '></image>
+        <view class='code-text flex-rc-cc' style='z-index: 9' wx:if='{{codeLayer}}'>
+          <view class='code-close1' style='background: #fff'></view>
+          <view class='code-layer-text flex'>系统检测到截图，为保障您个人财产安全，该截图无效，请亲自到线下兑换</view>
+          <view class='code-know flex-rc-cc' catchtap='goLayer'>知道了</view>
+        </view>
+        <view class='flex-cc code-text' wx:else>
+          <view class='code-close' catchtap='goAll'></view>
+          <view class='code-text-top'>商家扫描券码即可消费</view>
+          <view class='code-xian'></view>
+          <image lazy-load class='code-text-image' src='{{code_image}}'></image>
+          <view class='code-text-bottom'>请亲自到线下兑换</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 兑换成功 -->
+  <view class='refuse' bindtap='goAll' catchtouchmove='preventMove' wx:if='{{exchangeStatus && spikeStatus}}'>
+    <view class='refuse-views' bindtap='goClick'>
+      <image lazy-load class='refuse-image' src='/images/img_asdsuccess@2x.png'></image>
+      <view class='refuse-image-view' catchtap='goTask'></view>
+    </view>
+  </view>
+
+</view>

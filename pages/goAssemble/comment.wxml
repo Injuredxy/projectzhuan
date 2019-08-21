@@ -1,0 +1,49 @@
+<!-- 评价 -->
+<view wx:if='{{show}}'>
+  <!-- 1 -->
+  <view class='flex one-view' bindtap='goBuy'>
+    <view>
+      <image lazy-load class='one-image' src='{{options.img_url}}'></image>
+    </view>
+    <view>
+      <view class='one-text'>{{options.name}}</view>
+      <view class='one-title'>¥{{options.price-0}}</view>
+    </view>
+  </view>
+  <!-- 2 -->
+  <view class='two-view'>
+    <view class='two-top'>
+      <view class='flex-cc'>
+        <view class='two-top-text'>导购满意度</view>
+        <view class='flex-cc'>
+          <image lazy-load class='two-image' src='/images/ic_evaluation_star_pre@2x.png' wx:for='{{vest_comment}}' wx:key='index' catchtap='in_vest' id='{{index+1}}' data-in='use_sc2'></image>
+          <image lazy-load class='two-image' src='/images/ic_evaluation_star_def@2x.png' wx:for='{{5-vest_comment}}' wx:key='index' catchtap='in_vest' id='{{index+1}}' data-in='use_sc'></image>
+        </view>
+        <view class='two-top-title'>{{vest_comment>3?"好评":"差评"}}</view>
+      </view>
+      <view class='flex-cc two-top-middle'>
+        <view class='two-top-text'>商品满意度</view>
+        <view class='flex-cc'>
+          <image lazy-load class='two-image' src='/images/ic_evaluation_star_pre@2x.png' wx:for='{{goods_comment}}' wx:key='index' catchtap='in_goods' id='{{index+1}}' data-in='use_sc2'></image>
+          <image lazy-load class='two-image' src='/images/ic_evaluation_star_def@2x.png' wx:for='{{5-goods_comment}}' wx:key='index' catchtap='in_goods' id='{{index+1}}' data-in='use_sc'></image>
+        </view>
+        <view class='two-top-title'>{{goods_comment>3?"好评":"差评"}}</view>
+      </view>
+      <view class='flex-cc'>
+        <view class='two-top-text'>送装满意度</view>
+        <view class='flex-cc'>
+          <image lazy-load class='two-image' src='/images/ic_evaluation_star_pre@2x.png' wx:for='{{load_comment}}' wx:key='index' catchtap='in_load' id='{{index+1}}' data-in='use_sc2'></image>
+          <image lazy-load class='two-image' src='/images/ic_evaluation_star_def@2x.png' wx:for='{{5-load_comment}}' wx:key='index' catchtap='in_load' id='{{index+1}}' data-in='use_sc'></image>
+        </view>
+        <view class='two-top-title'>{{load_comment>3?"好评":"差评"}}</view>
+      </view>
+    </view>
+    <view class='three-view'>
+      <view class='three-text'>商品评价</view>
+      <input placeholder='请写下您对商品的评价' placeholder-class='three-value' cursor-spacing='120' class='three-area' bindinput='textInput'></input>
+    </view>
+    <view class='flex-rc-cc'>
+      <view class='three-button flex-rc-cc' bindtap='goEvaluate'>发表评价</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,9 @@
+<view class="component-code" wx:if="{{show}}">
+  <view class="component-code-bg" bindtap="hide"></view>
+  <view class="component-code-body" style=" background: url('../../images/img_ticket@2x.png') no-repeat; background-size: cover;">
+    <view class="component-code-num">{{code}}</view>
+    <image src=""></image>
+    <view class="component-code-limit">有效期至：{{limit}}</view>
+  </view>
+</view>
+<view></view>

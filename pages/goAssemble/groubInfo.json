@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "order-socket1": "/component/order/socket",
+    "assemble-groub": "/component/assemble/groubInfo"
+  },
+  "enablePullDownRefresh": true,
+  "navigationBarTitleText": "拼团详情"
+}

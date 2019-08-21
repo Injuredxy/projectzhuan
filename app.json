@@ -1,0 +1,127 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/index/treasure",
+    "pages/index/assemble",
+    "pages/index/union",
+    "pages/index/sample",
+    "pages/index/sweep",
+    "pages/index/clearance",
+    "pages/user/collection",
+    "pages/user/comment",
+    "pages/user/setting",
+    "pages/user/index",
+    "pages/user/deal",
+    "pages/user/red",
+    "pages/cash/cash",
+    "pages/user/login"
+  ],
+  "subpackages": [
+    {
+      "root": "pages/details/",
+      "pages": [
+        "treasure",
+        "assemble",
+        "sample",
+        "clearance"
+      ]
+    },
+    {
+      "root": "pages/goPayment/",
+      "pages": [
+        "treasure",
+        "record",
+        "core",
+        "treasurePay",
+        "praise",
+        "help",
+        "gobuy"
+      ]
+    },
+    {
+      "root": "pages/order/",
+      "pages": [
+        "details",
+        "order"
+      ]
+    },
+    {
+      "root": "pages/goAssemble/",
+      "pages": [
+        "direct",
+        "goBuy",
+        "groubInfo",
+        "refund",
+        "comment",
+        "list",
+        "details"
+      ]
+    },
+    {
+      "root": "pages/goClearance/",
+      "pages": [
+        "details",
+        "goBuy"
+      ]
+    },
+    {
+      "root": "pages/goSample/",
+      "pages": [
+        "sample",
+        "details"
+      ]
+    },
+    {
+      "root": "pages/goStore/",
+      "pages": [
+        "index",
+        "picture",
+        "evaluate",
+        "sweep"
+      ]
+    },
+    {
+      "root": "pages/web/",
+      "pages": [
+        "sweep",
+        "success"
+      ]
+    }
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#F8F8F8"
+  },
+  "tabBar": {
+    "color": "#4A4A4A",
+    "backgroundColor": "#FAFAFA",
+    "selectedColor": "#F8524E",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/ic_tabbar_home_def@2x.png",
+        "selectedIconPath": "images/ic_tabbar_home_pre@2x.png"
+      },
+      {
+        "pagePath": "pages/index/treasure",
+        "iconPath": "images/btn_newpeoplezone@2x.png",
+        "selectedIconPath": "images/btn_newpeoplezone@2x.png"
+      },
+      {
+        "pagePath": "pages/user/index",
+        "text": "我的",
+        "iconPath": "images/ic_tabbar_my_def@2x.png",
+        "selectedIconPath": "images/ic_tabbar_my_pre@2x.png"
+      }
+    ]
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
+    }
+  },
+  "sitemapLocation": "sitemap.json"
+}

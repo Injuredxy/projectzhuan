@@ -1,0 +1,228 @@
+@import "/wxss/common.wxss";
+/* 玩法 */
+
+.one-text1 {
+  font-weight: 400;
+  color: rgba(153, 153, 153, 1);
+  line-height: 44rpx;
+  font-size: 32rpx;
+}
+
+.one-text2 {
+  font-weight: 400;
+  color: rgba(51, 51, 51, 1);
+  line-height: 40rpx;
+  font-size: 28rpx;
+}
+
+.one-text-view {
+  padding: 26rpx 24rpx;
+  background: #fff;
+  margin: 16rpx 0;
+}
+
+/* 商家信息 */
+
+.defeat-three {
+  background: #fff;
+  margin: 16rpx 0;
+  padding: 16rpx 32rpx 32rpx 32rpx;
+}
+
+.three-one-image {
+  width: 40rpx;
+  height: 40rpx;
+}
+
+.three-one-text {
+  font-size: 32rpx;
+  margin-left: 16rpx;
+  font-weight: 500;
+  color: 333;
+}
+
+.three-two-left {
+  font-weight: 500;
+}
+
+.three-two-text {
+  font-size: 28rpx;
+  margin: 20rpx 0 16rpx;
+  color: #333;
+}
+
+.three-three-image {
+  width: 32rpx;
+  height: 32rpx;
+}
+
+.three-three-text {
+  margin-left: 16rpx;
+  font-size: 24rpx;
+  color: #9b9b9b;
+}
+
+.three-three {
+  margin-bottom: 16rpx;
+}
+
+.three-four {
+  width: 550rpx;
+}
+
+.three-image {
+  width: 50rpx;
+  height: 50rpx;
+  /* margin-right: rpx; */
+}
+
+/* 推荐 */
+
+.hide-image {
+  width: 46rpx;
+  height: 32rpx;
+}
+
+.hide-image-view {
+  margin: 32rpx 0 12rpx;
+}
+
+.four-botom {
+  padding: 0 20rpx;
+  margin-bottom: 80rpx;
+  column-count: 2;
+  column-gap: 20rpx;
+}
+
+.four-view {
+  flex-direction: column;
+  margin-left: 20rpx;
+}
+
+.four-bottom-list {
+  width: 344rpx;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0rpx 0rpx 20rpx 0rpx rgba(0, 0, 0, 0.1);
+  border-radius: 8rpx;
+  margin-top: 20rpx;
+  display: inline-block;
+}
+
+.four-image {
+  width: 344rpx;
+  height: 344rpx;
+  position: absolute;
+  border-radius: 8rpx 8rpx 0 0;
+}
+
+.four-bottom-text {
+  width: 306rpx;
+  margin-top: 30rpx;
+  margin-bottom: 12rpx;
+  font-size: 28rpx;
+  font-weight: 400;
+  color: #333;
+  line-height: 40rpx;
+  flex-wrap: wrap;
+  text-overflow: -o-ellipsis-lastline;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.four-bottom-view {
+  margin-bottom: 18rpx;
+  margin-top: 16rpx;
+  align-items: baseline;
+}
+
+.four-bottom-price {
+  color: #999;
+  font-size: 24rpx;
+  margin-left: 8rpx;
+  text-decoration: line-through;
+}
+
+.four-bottom-icon {
+  font-size: 24rpx;
+}
+
+.four-bottom-num {
+  font-size: 36rpx;
+}
+
+.four-bottom-nice {
+  align-items: baseline;
+}
+
+.four-content {
+  height: 32rpx;
+  padding: 0 10rpx;
+  border-radius: 28rpx;
+  background: rgba(255, 238, 240, 1);
+  font-weight: 400;
+  font-size: 20rpx;
+  color: rgba(248, 82, 78, 1);
+  line-height: 28rpx;
+  margin-right: 6rpx;
+}
+
+.four-content-view {
+  width: 100%;
+  flex-wrap: wrap;
+  height: 32rpx;
+  overflow: hidden;
+}
+
+.four-image-view {
+  position: relative;
+  width: 344rpx;
+  height: 344rpx;
+}
+
+.four-image-text1 {
+  width: 96rpx;
+  height: 38rpx;
+  background: linear-gradient(142deg, rgba(255, 90, 95, 1) 0%, rgba(255, 58, 84, 1) 100%);
+  box-shadow: 0rpx 0rpx 10rpx 0rpx rgba(0, 0, 0, 0.1);
+  border-radius: 8rpx;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 34rpx;
+  font-size: 24rpx;
+  position: absolute;
+  bottom: -20rpx;
+  left: 20rpx;
+}
+
+.four-image-text2 {
+  width: 96rpx;
+  height: 38rpx;
+  background: linear-gradient(135deg, rgba(255, 196, 25, 1) 0%, rgba(252, 155, 5, 1) 100%);
+  box-shadow: 0rpx 0rpx 10rpx 0rpx rgba(0, 0, 0, 0.1);
+  border-radius: 8rpx;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 34rpx;
+  font-size: 24rpx;
+  position: absolute;
+  left: 20rpx;
+  bottom: -20rpx;
+}
+
+.four-image-text3 {
+  width: 112rpx;
+  height: 38rpx;
+  background: rgba(255, 102, 50, 1);
+  box-shadow: 0rpx 0rpx 10rpx 0rpx rgba(0, 0, 0, 0.1);
+  border-radius: 8rpx;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 34rpx;
+  font-size: 24rpx;
+  position: absolute;
+  left: 20rpx;
+  bottom: -20rpx;
+}

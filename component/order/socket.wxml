@@ -1,0 +1,28 @@
+<block wx:if='{{message1}}'>
+
+  <block wx:if='{{goodType=="assemble"}}'>
+    <view bindanimationstart='goStart' bindanimationiteration='goAnimation' catchtap='goList' class='barrage-view socket-animation flex-rc-cc' wx:if='{{value=="goods"}}'>
+      <rich-text nodes='{{message}}' data-item='{{message}}'></rich-text>
+      <view class='flex-cc'>
+        <image lazy-load src='/images/ic_lists_enter@2x.png' class='barrage-icon'></image>
+      </view>
+    </view>
+    <view class='flex-rc-cc' wx:else>
+      <view class='sweep-view swiper-animation flex-rc-cc'>
+        <rich-text bindanimationstart='goStart' bindanimationiteration='goAnimation' class='sweep-text sweep-animation flex-rc' nodes='{{message}}'></rich-text>
+      </view>
+    </view>
+  </block>
+
+  <block wx:else>
+    <rich-text nodes='{{message}}' bindanimationstart='goStart' bindanimationiteration='goAnimation' class='barrage-view socket-animation flex-rc-cc' wx:if='{{value=="goods"}}'>
+    </rich-text>
+    <view class='flex-rc-cc' wx:else>
+      <view class='sweep-view swiper-animation flex-rc-cc'>
+        <rich-text bindanimationstart='goStart' bindanimationiteration='goAnimation' class='sweep-text sweep-animation flex-rc' nodes='{{message}}'></rich-text>
+      </view>
+    </view>
+  </block>
+  <!-- 
+  <rich-text nodes='{{message}}' bindanimationstart='goStart' bindanimationiteration='goAnimation' style='top: 130rpx' class='barrage-view home-animation flex-rc-cc' wx:elif='{{value=="home"}}'></rich-text> -->
+</block>

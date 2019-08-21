@@ -1,0 +1,35 @@
+<view class='six-forward' wx:if='{{show}}'>
+  <view wx:for='{{follow}}' wx:key='index'>
+    <view class='flex six-bottom'>
+      <view>
+        <image lazy-load class='six-image' mode='aspectFill' src='{{item.user.head_pic?item.user.head_pic:"/images/ic_my_head_def@3x.png"}}'></image>
+      </view>
+      <view class='six-bottom-right'>
+        <view class='flex-rb-cc'>
+          <view class='six-bottom-phone'>{{item.user.nickname}}</view>
+          <view class='six-bottom-time'>{{item.comment.add_time}}</view>
+        </view>
+        <view class='flex-cc six-bottom-hearts'>
+          <view class='flex-cc six-bottom-heart'>
+            <view class='six-bottom-star'>导购：</view>
+            <image lazy-load wx:for='{{item.comment.vest_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_pre2@2x.png'></image>
+            <image lazy-load wx:for='{{5-item.comment.vest_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_def2@2x.png'></image>
+          </view>
+          <view class='flex-cc six-bottom-heart'>
+            <view class='six-bottom-star'>商品：</view>
+            <image lazy-load wx:for='{{item.comment.goods_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_pre2@2x.png'></image>
+            <image lazy-load wx:for='{{5-item.comment.goods_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_def2@2x.png'></image>
+          </view>
+          <view class='flex-cc six-bottom-heart'>
+            <view class='six-bottom-star'>送装：</view>
+            <image lazy-load wx:for='{{item.comment.load_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_pre2@2x.png'></image>
+            <image lazy-load wx:for='{{5-item.comment.load_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_def2@2x.png'></image>
+          </view>
+        </view>
+        <view class='six-bottom-text'>
+          {{item.comment.content}}
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

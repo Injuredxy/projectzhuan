@@ -1,0 +1,66 @@
+.follow-list {
+  overflow: hidden;
+  margin-top: 16rpx;
+}
+
+.follow-item {
+  border-bottom: 1rpx solid #f2f2f2;
+}
+
+.follow-item-body {
+  box-sizing: border-box;
+  width: 100%;
+  min-width: 100%;
+  padding: 28rpx 36rpx 20rpx 24rpx;
+  margin-left: 0;
+  background-color: #fff;
+  transition: 0.5s;
+}
+
+.follow-item-pic {
+  width: 160rpx;
+  min-width: 160rpx;
+  height: 160rpx;
+  margin-right: 16rpx;
+  background-color: #f2f2f2;
+  border-radius: 8rpx;
+}
+
+.follow-item-info {
+  width: 100%;
+}
+
+.follow-item-company {
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 44rpx;
+  font-size: 32rpx;
+}
+
+.follow-item-shop {
+  font-size: 24rpx;
+  font-weight: 400;
+  color: rgba(155, 155, 155, 1);
+  line-height: 34rpx;
+}
+
+.follow-detail {
+  margin-top: 20rpx;
+  margin-bottom: 14rpx;
+}
+
+.follow-item-detail {
+  font-weight: 400;
+  color: rgba(155, 155, 155, 1);
+  line-height: 34rpx;
+  font-size: 24rpx;
+}
+
+.follow-item-info image {
+  margin-right: 10rpx;
+}
+
+.follow-item-iphon {
+  width: 52rpx;
+  height: 52rpx;
+}

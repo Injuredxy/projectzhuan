@@ -1,0 +1,16 @@
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<!-- 砍价记录 -->
+
+<view class='praise-big'>
+  <view class='flex-rb-cc praise' wx:for='{{praise}}' wx:key='praise'>
+    <view class='flex-cc'>
+      <image lazy-load mode='aspectFill' class='praise-image' src='{{item.head_pic}}'></image>
+      <view class='praise-text'>{{item.nickname}}</view>
+    </view>
+    <view class='flex-cc'>
+      <view class='praise-money'>已砍{{item.money-0}}元</view>
+      <view class='praise-time'>{{common.tTime(item.likes_time, "date")}}</view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,52 @@
+  <!-- 进行中订单 -->
+  <view class='viewBG' style='z-index: 9999' catchtouchmove='preventMove' wx:if='{{orderAll == "true"}}'>
+    <view class='list-view'>
+      <image lazy-load src='{{orderLength == 1 ? "/images/img_order1@2x.png" : "/images/img_order@2x.png"}}' class='{{orderLength == 1 ? "list-image1" : "list-image"}}'>
+        <view class='list-text-view flex-cc' style='{{orderLength == 1 ? "height: 444rpx":""}}'>
+          <view class='list-text'>进行中订单</view>
+          <view class='list-text1' catchtap='goOrder'>查看所有订单</view>
+          <scroll-view scroll-y class='list-scroll' style='{{orderLength == 1 ? "height: 206rpx":""}}'>
+            <view class='list-scroll-item' wx:for='{{orderList}}' wx:key='index'>
+              <view class='flex-cc'>
+                <view class='flex-cc'>
+                  <image lazy-load src='{{item.order.goods.img_url}}' class='list-scroll-image'></image>
+                </view>
+                <view style='width: 100%'>
+                  <view class='flex-cc'>
+                    <view class='list-scroll-icon flex-rc-cc' style='background:linear-gradient(142deg,rgba(255,90,95,1) 0%,rgba(255,58,84,1) 100%);' wx:if='{{item.type == "group_buy"}}'>聚拼团</view>
+                    <view class='list-scroll-icon flex-rc-cc' wx:else>免费领</view>
+                    <view class='list-scroll-text three'>{{item.order.goods.product_name}}</view>
+                  </view>
+                  <view class='list-scroll-view1 flex-rb-cc'>
+                    <view class='flex-cc'>
+                      <view class='list-scroll-text1'>{{item.type == 'spike'?"砍价":"拼团"}}倒计时</view>
+                      <view class='flex-cc'>
+                        <view class='list-left-text flex-rc-cc'>{{common.difference_time(countDownNum[index]).hour}}</view>
+                        <view class='list-left-dian'>:</view>
+                        <view class='list-left-text flex-rc-cc'>{{common.difference_time(countDownNum[index]).min}}</view>
+                        <view class='list-left-dian'>:</view>
+                        <view class='list-left-text flex-rc-cc'>{{common.difference_time(countDownNum[index]).second}}</view>
+                      </view>
+                    </view>
+                    <view class='list-scroll-but flex-rc-cc' catchtap='goHelp' data-item='{{item}}'>邀请{{item.type == 'spike'?"砍价":"参团"}}</view>
+                  </view>
+                </view>
+              </view>
+              <view>
+                <view class='flex-cc list-scroll-pic-view'>
+                  <view wx:for='{{0}}' wx:key='scroll'>
+                    <image lazy-load mode='aspectFill' src='{{item.head_pic}}' class='flex list-scroll-pic'></image>
+                  </view>
+                  <view wx:for='{{2}}' wx:key='index'>
+                    <image lazy-load src='/images/ic_queren@2x.png' class='flex list-scroll-pic'></image>
+                  </view>
+                  <view class='list-group_buy' wx:if='{{item.type=="group_buy"}}'>还差1人拼团成功</view>
+                </view>
+              </view>
+            </view>
+          </scroll-view>
+        </view>
+      </image>
+      <image lazy-load src='/images/ic_order_close@2x.png' class='list-close' catchtap='goOrderClose'></image>
+    </view>
+  </view>

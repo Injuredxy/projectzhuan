@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "assemble-sales": "/component/assemble/sales"
+  }
+}

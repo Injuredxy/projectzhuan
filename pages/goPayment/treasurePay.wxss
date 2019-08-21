@@ -1,0 +1,123 @@
+page {
+  background-color: #fff;
+}
+
+.payment {
+  padding: 140rpx 0;
+  text-align: center;
+}
+
+.price {
+  font-size: 80rpx;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 112rpx;
+}
+
+.payment-view {
+  align-items: baseline
+}
+
+.payment-unit {
+  margin-right: 12rpx;
+  font-size: 40rpx;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 56rpx;
+}
+
+.payment-price {
+  font-size: 80rpx;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+  line-height: 112rpx;
+}
+
+.payment-name {
+  font-size: 24rpx;
+  color: #4a4a4a;
+}
+
+.payment-way-title {
+  padding-left: 30rpx;
+  margin-bottom: 16rpx;
+  font-weight: 500;
+}
+
+.payment-way-title image {
+  width: 44rpx;
+  height: 44rpx;
+  margin-right: 14rpx;
+}
+
+.payment-way-item {
+  padding: 16rpx 32rpx 16rpx 34rpx;
+}
+
+.payment-way-item-logo {
+  width: 60rpx;
+  min-width: 60rpx;
+  height: 60rpx;
+  margin-right: 16rpx;
+}
+
+.payment-way-item-name {
+  width: 100%;
+}
+
+.payment-way-item-check {
+  width: 36rpx;
+  min-width: 36rpx;
+  height: 36rpx;
+}
+
+.payment-btn {
+  width: 470rpx;
+  margin: 140rpx auto 0;
+  border-radius: 52rpx;
+  background-color: #d0021b;
+  box-shadow: 0 4rpx 16rpx #da1e35;
+  text-align: center;
+  line-height: 104rpx;
+  font-size: 36rpx;
+  color: #fff;
+  padding: 0;
+}
+
+button::after {
+  border: none
+}
+
+/* 导购不可参团 */
+
+.vest-image {
+  width: 540rpx;
+  height: 264rpx;
+  background: #fff;
+  border-radius: 16rpx;
+}
+
+.vest-text {
+  font-weight: 400;
+  color: rgba(3, 3, 3, 1);
+  line-height: 44rpx;
+  font-size: 32rpx;
+  width: 426rpx;
+  text-align: center;
+  margin-top: 52rpx;
+}
+
+.vest-view {
+  height: 176rpx;
+  width: 540rpx;
+}
+
+.vest-text1 {
+  height: 86rpx;
+  width: 540rpx;
+  font-size: 34rpx;
+  font-weight: 400;
+  color: rgba(0, 122, 255, 1);
+  line-height: 48rpx;
+}
+

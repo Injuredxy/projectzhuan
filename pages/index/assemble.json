@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "order-list": "/component/order/list",
+    "order-socket": "/component/order/socket"
+  },
+  "navigationBarTitleText": "聚拼团",
+  "enablePullDownRefresh": true
+}

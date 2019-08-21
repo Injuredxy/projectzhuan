@@ -1,0 +1,8 @@
+{
+  "usingComponents": {
+    "order-list": "/component/order/list",
+    "order-socket": "/component/order/socket"
+  },
+  "navigationBarTitleText": "新人免费领",
+  "enablePullDownRefresh": true
+}

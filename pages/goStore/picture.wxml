@@ -1,0 +1,3 @@
+<view class='flex-rb-cc picture'>
+  <image lazy-load class='picture-image' wx:for='{{store.store_cover}}' wx:key='cover' src='{{item.url}}'></image>
+</view>

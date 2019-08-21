@@ -1,0 +1,120 @@
+page {
+  background: rgba(248, 248, 248, 1);
+}
+
+/* recommend */
+
+.recommend-list {
+  margin: 16rpx 0 20rpx;
+}
+
+.recommend-item {
+  padding: 16rpx 32rpx 18rpx 32rpx;
+  border-bottom: 1rpx solid#f2f2f2;
+  background-color: #fff;
+  white-space: nowrap;
+}
+
+.recommend-item:last-child {
+  border: none
+}
+
+.recommend-item-head {
+  font-size: 24rpx;
+  color: #9b9b9b;
+}
+
+.recommend-item-head image {
+  width: 40rpx;
+  min-width: 40rpx;
+  height: 40rpx;
+  margin-right: 16rpx;
+}
+
+.recommend-item-company {
+  font-size: 28rpx;
+  color: #333;
+}
+
+.recommend-item-distance {
+  width: 100%;
+  text-align: right;
+}
+
+.recommend-item-detail {
+  margin-top: 12rpx;
+}
+
+.recommend-item-pic {
+  width: 300rpx;
+  min-width: 300rpx;
+  height: 300rpx;
+  margin: 4rpx 16rpx 0 0;
+  border-radius: 12rpx;
+}
+
+.recommend-item-info {
+  width: 100%;
+  flex-direction: column;
+  padding-bottom: 16rpx;
+}
+
+.recommend-item-name {
+  width: 370rpx;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  white-space: pre-wrap;
+  color: #333;
+}
+
+.recommend-item-time {
+  font-weight: 400;
+  color: rgba(166, 166, 166, 1);
+  line-height: 34rpx;
+  font-size: 24rpx;
+  margin-top: 14rpx;
+}
+
+.recommend-item-price {
+  margin-top: 8rpx;
+  align-items: baseline
+}
+
+.recommend-item-price-new {
+  margin-right: 10rpx;
+  font-size: 44rpx;
+  font-weight: 500;
+  color: #f8524e;
+}
+
+.recommend-item-price-new text {
+  font-size: 24rpx;
+}
+
+.recommend-item-price-old {
+  font-size: 24rpx;
+  color: #9b9b9b;
+  text-decoration: line-through;
+}
+
+.recommend-item-btn {
+  width: 144rpx;
+  height: 58rpx;
+  background: rgba(255, 102, 50, 1);
+  border-radius: 6rpx;
+  text-align: center;
+  line-height: 58rpx;
+  font-size: 28rpx;
+  margin-right: 2rpx;
+  color: #fff;
+}
+
+.recommend-list-more {
+  padding: 20rpx 0;
+  text-align: center;
+  color: #d0021b;
+  font-size: 24rpx;
+  font-weight: 500;
+}
+
+/* recommend-end */

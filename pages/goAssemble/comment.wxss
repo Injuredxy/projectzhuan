@@ -1,0 +1,121 @@
+/* 1 */
+
+.one-view {
+  padding: 28rpx 24rpx 28rpx 32rpx;
+  background: #fff;
+  margin: 16rpx 0;
+}
+
+.one-image {
+  width: 140rpx;
+  height: 140rpx;
+  border-radius: 8rpx;
+  margin-right: 20rpx;
+}
+
+.one-text {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 40rpx;
+  font-size: 28rpx;
+  width: 534rpx;
+  height: 86rpx;
+  margin-bottom: 8rpx;
+}
+
+.one-title {
+  font-weight: 500;
+  color: rgba(208, 2, 27, 1);
+  line-height: 40rpx;
+  font-size: 28rpx;
+}
+
+/* 2 */
+
+.two-view {
+  width: 100%;
+  height: 100vh;
+  background: #fff;
+}
+
+.two-top {
+  padding: 24rpx 182rpx 24rpx 30rpx;
+  border-bottom: 1rpx solid rgba(155, 155, 155, 0.2);
+}
+
+.two-image {
+  width: 48rpx;
+  height: 48rpx;
+  margin-right: 12rpx;
+}
+
+.two-top-text {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 40rpx;
+  font-size: 28rpx;
+  margin-right: 30rpx;
+}
+
+.two-top-title {
+  font-weight: 400;
+  color: rgba(155, 155, 155, 1);
+  line-height: 34rpx;
+  font-size: 24rpx;
+  margin-left: 20rpx;
+}
+
+.two-top-middle {
+  padding: 16rpx 0;
+}
+
+/* 3 */
+
+.three-view {
+  padding: 24rpx 42rpx 28rpx;
+}
+
+.three-text {
+  margin-left: 4rpx;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.85);
+  line-height: 44rpx;
+  font-size: 32rpx;
+  margin-bottom: 32rpx;
+}
+
+.three-value {
+  font-weight: 300;
+  color: rgba(155, 155, 155, 1);
+  line-height: 40rpx;
+  font-size: 28rpx;
+}
+
+.three-area {
+  width: 680rpx;
+  height: 270rpx;
+  background: rgba(248, 248, 248, 1);
+  border-radius: 8rpx;
+  margin-bottom: 84rpx;
+  font-size: 28rpx;
+  font-weight: 300;
+  line-height: 40rpx;
+  padding: 24rpx 22rpx;
+  box-sizing: border-box;
+}
+
+.three-button {
+  width: 470rpx;
+  height: 104rpx;
+  background: rgba(208, 2, 27, 0.9);
+  box-shadow: 0 4rpx 16rpx 0 rgba(218, 30, 53, 0.6);
+  border-radius: 52rpx;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 1);
+  line-height: 50rpx;
+  font-size: 36rpx;
+}
+
+.three-button{
+  
+}

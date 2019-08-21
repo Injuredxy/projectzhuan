@@ -1,0 +1,289 @@
+<!-- 首页 -->
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<view wx:if='{{show&&location}}'>
+  <!-- <view class='launchapp'>
+    <button open-type="launchApp" app-parameter="wechat" binderror="launchAppError" class='appbut flex-rc-cc'>在App打开
+      <image lazy-load src='/images/ic_home_enter@2x.png' class='appimage'></image>
+    </button>
+  </view> -->
+
+  <!-- <view class='android-view' style="padding-top:{{statusBarHeight}}rpx;{{iosModel!='-1'?'height: 88rpx':''}}">
+    <view class='flex-rb-cc android-views' style="{{iosModel!='-1'?'height: 88rpx':''}}">
+      <view class='android-text1'>深圳站</view>
+      <view class='android-text2 center'>聚装修</view>
+    </view>
+  </view> -->
+
+  <!-- <order-socket value='home' type='2'></order-socket> -->
+
+  <!-- 导航栏 -->
+  <view class='scroll-views flex' wx:if='{{showList}}'>
+    <view class='first-text flex-rc-cc {{firstIndex ? "active1" : ""}}' bindtap="switchCategory1">首页</view>
+    <scroll-view scroll-x class='scroll-fixed' scroll-left='{{offsetLeft-proportion+70*pixe+50}}'>
+      <view class="flex category-list">
+        <view class="category-item {{current === index && !firstIndex ? 'active' : ''}}" wx:for="{{category.list}}" wx:key="category" data-index="{{index}}" data-id="{{item.id}}" bindtap="switchCategory">{{item.name}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class='swiper-view'>
+    <view>
+      <!-- 首页 -->
+      <view wx:if='{{firstIndex}}'>
+        <!-- 轮播图 -->
+        <swiper indicator-dots="{{indicatorDots}}" class='home-swiper' indicator-color="#E0E0E1" interval='6000' circular autoplay indicator-active-color="#FD5739">
+          <swiper-item wx:for="{{banner}}" class='home-swiper-item' wx:key="pic" catchtap='goBanner' data-item='{{item}}'>
+            <image lazy-load class='swiper-image' mode='aspectFill' src="{{item.url}}"></image>
+          </swiper-item>
+        </swiper>
+
+        <!-- 聚拼团导航 -->
+        <view class="flex-rb activities">
+          <view class='flex-rb activities-image'>
+            <navigator class="activity flex-cc" hover-class='none' url='assemble'>
+              <image lazy-load src="/images/ic_home_group@2x.png" style='width: 84rpx;height: 84rpx'></image>
+            </navigator>
+            <navigator class="activity flex-cc" hover-class="none" url='sample'>
+              <image lazy-load src="/images/ic_home_sale@2x.png" style='width: 84rpx;height: 84rpx'></image>
+            </navigator>
+            <!-- <navigator class="activity flex-cc" hover-class="none" url='treasure'>
+            <image lazy-load src="/images/ic_home_new@2x.png" style='width: 84rpx;height: 86rpx'></image>
+          </navigator> -->
+            <navigator class="activity flex-cc" hover-class="none" url='sweep'>
+              <image lazy-load src="/images/ic_home_pay@2x.png" style='width: 84rpx;height: 84rpx'></image>
+            </navigator>
+            <navigator class="activity flex-cc" hover-class="none" url='union'>
+              <image lazy-load src="/images/ic_home_shop@2x.png" style='width: 84rpx;height: 84rpx'></image>
+            </navigator>
+            <!-- <navigator class="activity flex-cc" hover-class="none" url='clearance'>
+            <image lazy-load src="/images/ic_home_shop@2x.png" style='width: 84rpx;height: 86rpx'></image>
+          </navigator> -->
+          </view>
+          <view class='activities-text flex-rb-cc'>
+            <view style='margin-right: 94rpx' class='flex-rc-cc'>聚拼团</view>
+            <view class='flex-rb-cc' style='width: 73%'>
+              <view>特价样品</view>
+              <view>优惠买单</view>
+              <view>联盟商户</view>
+            </view>
+          </view>
+        </view>
+        <view class='treasure-view'>
+          <view class='flex-rc-cc'>
+            <image lazy-load src='/images/index@2x.png' class='treasure-image'></image>
+          </view>
+          <view class='flex-rc-cc treasure-view1'>
+            <view class='treasure-top-text1'>新人免费领</view>
+            <view class='treasure-top-text2'>厂商赞助</view>
+            <view class='treasure-top-text3'>千元商品免费领</view>
+            <view class='flex-cc' bindtap='toTrealist'>
+              <view class='treasure-top-text4'>查看更多</view>
+              <view class='flex-cc'>
+                <image lazy-load src='/images/ic_home_right1@2x.png' class='treasure-icon'></image>
+              </view>
+            </view>
+          </view>
+          <view class='treasure-view2'>
+            <swiper class='treasure-swiper' indicator-dots='{{dots}}' circular autoplay interval='3000' indicator-color='#ccc' indicator-active-color='#f8524e'>
+              <swiper-item wx:for='{{groupedArray}}' wx:key='index' class='treasure-item'>
+                <view class='flex-cc'>
+                  <view class='treasure-item-view' wx:for='{{item}}' wx:key='index' data-item="{{item}}" catchtap='goTreasures'>
+                    <view class='treasure-goods-text1'>{{item.store.brand}}</view>
+                    <view class='flex treasure-goods'>
+                      <image lazy-load class='treasure-goods-image' src='{{item.goods.img_url}}' style='{{item.stock-item.sold-item.frozen_num==0?"opacity: 0.3":""}}'></image>
+                      <view class='treasure-goods-view-text flex-rc-cc' wx:if='{{item.stock-item.sold-item.frozen_num==0}}'>已抢光</view>
+                      <view class='treasure-goods-view-text1 flex-rc-cc' wx:elif='{{item.stock-item.sold-item.frozen_num<6}}'>剩余{{item.stock-item.sold-item.frozen_num}}件</view>
+                      <!-- <image class='treasur'></image> -->
+                    </view>
+                    <view class='treasure-goods-text2' style='{{item.stock-item.sold-item.frozen_num==0?"color: #999":""}}'>{{item.goods.product_sub_name}}</view>
+                    <view class='flex treasure-goods-view'>
+                      <view class='treasure-goods-text3'>¥{{item.group_buy_price-0}}</view>
+                      <view class='treasure-goods-text4'>¥{{item.origin_price-0}}</view>
+                    </view>
+                  </view>
+                </view>
+              </swiper-item>
+            </swiper>
+          </view>
+        </view>
+
+        <!-- 品质生活 -->
+        <view>
+          <view class="flex-rc-cc recommend-title">
+            <image lazy-load src='/images/img_life@2x.png' class='recommend-view-image'></image>
+          </view>
+          <view class="recommend-list">
+            <view class="recommend-item" wx:for="{{recommend.list}}" wx:key="recommend" bindtap="toGroup" data-index="{{index}}">
+              <view class="flex-rc-cc recommend-item-head">
+                <image lazy-load src="/images/ic_shop_shangjiaxinxi@2x.png"></image>
+                <view class="recommend-item-company">{{item.store.brand}}</view>
+                <view class="recommend-item-shop">（{{item.store.market}}）</view>
+                <view class="recommend-item-distance">{{item.distance ? common.tDistance(item.distance) : ''}}</view>
+              </view>
+              <view class="flex recommend-item-detail">
+                <image lazy-load class="recommend-item-pic" src="{{item.goods.img_url}}"></image>
+                <view class="recommend-item-info flex-rb">
+                  <view>
+                    <view class="text-over-2 recommend-item-name">{{item.goods.product_name}}</view>
+                    <view class="flex-wrap recommend-item-services">
+                      <view class="recommend-item-service" wx:for="{{item.goods.product_service_label}}" wx:key="service" wx:if='{{index<4}}'>{{item.content}}</view>
+                    </view>
+                  </view>
+                  <view class="flex-rb">
+                    <view class="flex-cc recommend-item-price">
+                      <view class="recommend-item-price-new" style='{{item.progress_bar==1?"color: rgba(153, 153, 153, 1)":""}}'>
+                        <text>¥</text> {{item.group_buy_price-0}}</view>
+                      <view class="recommend-item-price-old">¥{{item.origin_price-0}}</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <!-- 其他分类 -->
+      <view wx:else>
+        <view>
+          <view class="recommend-list" wx:if='{{length>0}}'>
+            <view class="recommend-item" wx:for="{{nice}}" wx:key="niceList" bindtap="{{item.activity_type==1?'goGroup':'goTreasure'}}" data-id="{{item.activity_id}}">
+              <view class="flex-rc-cc recommend-item-head">
+                <image lazy-load src="/images/ic_shop_shangjiaxinxi@2x.png"></image>
+                <view class="recommend-item-company">{{item.store.brand}}</view>
+                <view class="recommend-item-shop">（{{item.store.market}}）</view>
+                <view class="recommend-item-distance">{{item.distance ? common.tDistance(item.distance) : ''}}</view>
+              </view>
+              <view class="flex recommend-item-detail">
+                <image lazy-load class="recommend-item-pic" src="{{item.goods.img_url}}"></image>
+                <view class="recommend-item-info flex-rb">
+                  <view>
+                    <view class="text-over-2 recommend-item-name">{{item.goods.product_name}}</view>
+                    <view class="flex-wrap recommend-item-services" wx:if='{{item.activity_type == 1}}'>
+                      <view class="recommend-item-service" wx:for="{{item.goods.product_service_label}}" wx:key="service" wx:if='{{index<4}}'>{{item.content}}</view>
+                    </view>
+                    <!-- <view class='flex-cc recommend-progress-view'>
+                      <progress class='recommend-progress' stroke-width='16rpx' border-radius='22rpx' percent='{{item.progress_bar*100}}' activeColor='#FEAD11' backgroundColor='#EDEDED'></progress>
+                      <view class='progress-text'>剩余{{item.stock-item.sold-item.frozen_num}}件</view>
+                    </view> -->
+
+                  </view>
+                  <view style='margin-bottom: 14rpx'>
+                    <view class="flex" style='{{item.activity_type==3?"margin-bottom: 4rpx":""}}; align-items: baseline '>
+                      <view class="recommend-item-price-new" style='{{item.progress_bar==1&&item.activity_type == 3?"color: rgba(153, 153, 153, 1)":""}}'>
+                        <text>¥</text> {{item.group_buy_price-0}}</view>
+                      <view class="recommend-item-price-old">¥{{item.origin_price-0}}</view>
+                    </view>
+                    <view class="flex-rb-cc">
+                      <view class='flex-cc recommend-progress-view' wx:if='{{item.activity_type == 3}}'>
+                        <progress class='recommend-progress' stroke-width='12rpx' border-radius='22rpx' percent='{{item.progress_bar*100}}' activeColor='#FF4B2B' backgroundColor='#EDEDED'></progress>
+                        <view class='progress-text'>剩余{{item.stock-item.sold-item.frozen_num}}件</view>
+                      </view>
+                      <view class="{{item.progress_bar==1?'recommend-btn-end':'recommend-item-btn2'}} flex-rc-cc" wx:if='{{item.activity_type == 3}}'>{{item.progress_bar==1?'已抢完':'免费领'}}</view>
+                    </view>
+                  </view>
+                </view>
+              </view>
+            </view>
+          </view>
+          <!-- 缺省页 -->
+          <view wx:else class='flex-rc-cc else-view'>
+            <view>
+              <image lazy-load src='/images/img_focus_emptystate.png' class='else-image'></image>
+              <view class='else-text flex-rc-cc'>暂无数据</view>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view class='cushion' style='{{modelX!="-1"?"height: 180rpx":""}}'></view>
+    </view>
+
+    <view class='tabbar-view flex-rb-cc border-top' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'>
+      <view class='flex-rc-cc tabbar-image-view '>
+        <image lazy-load src='/images/ic_tabbar_home_pre@2x.png' class='tabbar-index'></image>
+        <view class='tabbar-index-text'>首页</view>
+      </view>
+      <navigator open-type='switchTab' hover-class='none' url='/pages/index/treasure' class='flex-rc-cc tabbar-image-view'>
+        <image lazy-load src='/images/btn_newpeoplezone@2x.png' class='tabbar-middle'></image>
+        <view></view>
+      </navigator>
+      <navigator open-type='switchTab' hover-class='none' url='/pages/user/index' class='flex-rc-cc tabbar-image-view'>
+        <image lazy-load src='/images/ic_tabbar_my_def@2x.png' class='tabbar-me'></image>
+        <view class='tabbar-me-text'>我的</view>
+      </navigator>
+    </view>
+
+    <!-- 去登陆 -->
+    <view class='gift-view' catchtouchmove='preventMove' wx:if='{{!token&&login}}'>
+      <view class='gift-image-view'>
+        <image lazy-load lazy-load class="gift-image" src="/images/img_xinrenli@2x.png"></image>
+        <button class='gift' bindgetuserinfo='bindgetuserinfo' open-type='getUserInfo'></button>
+        <image lazy-load src='/images/ic_signin_close@2x.png' class='gift-close gift-animation' catchtap='goAll'></image>
+      </view>
+    </view>
+
+    <!-- 进行中订单 -->
+    <view class='viewBG' style='z-index: 9999' catchtouchmove='preventMove' catchtap='goAll' wx:if='{{order}}'>
+      <view class='list-view' catchtap='goClick'>
+        <image lazy-load src='{{orderList.length == 1 ? "/images/img_order1@2x.png" : "/images/img_order@2x.png"}}' class='{{orderList.length == 1 ? "list-image1" : "list-image"}}'>
+          <view class='list-text-view flex-cc' style='{{orderList.length == 1 ? "height: 444rpx":""}}'>
+            <view class='list-text'>进行中订单</view>
+            <view class='list-text1' catchtap='goOrder'>查看所有订单</view>
+            <scroll-view scroll-y class='list-scroll' style='{{orderList.length == 1 ? "height: 208rpx":""}}'>
+              <view class='list-scroll-item' wx:for='{{orderList}}' wx:key='index'>
+                <view class='flex-cc'>
+                  <view class='flex-cc'>
+                    <image lazy-load src='{{item.data.goods.product_img[0]}}' class='list-scroll-image'></image>
+                  </view>
+                  <view style='width: 100%'>
+                    <view class='flex-cc'>
+                      <view class='list-scroll-icon flex-rc-cc' style='background:linear-gradient(142deg,rgba(255,90,95,1) 0%,rgba(255,58,84,1) 100%);' wx:if='{{item.type == "group_buy"}}'>聚拼团</view>
+                      <view class='list-scroll-icon flex-rc-cc' wx:else>免费领</view>
+                      <view class='list-scroll-text three'>{{item.data.goods.product_name}}</view>
+                    </view>
+                    <view class='list-scroll-view1 flex-rb-cc'>
+                      <view class='flex-cc'>
+                        <view class='list-scroll-text1'>{{item.type == 'spike'?"砍价":"拼团"}}倒计时</view>
+                        <view class='flex-cc'>
+                          <view class='list-left-text flex-rc-cc'>{{common.difference_time(item.time).hour}}</view>
+                          <view class='list-left-dian'>:</view>
+                          <view class='list-left-text flex-rc-cc'>{{common.difference_time(item.time).min}}</view>
+                          <view class='list-left-dian'>:</view>
+                          <view class='list-left-text flex-rc-cc'>{{common.difference_time(item.time).second}}</view>
+                        </view>
+                      </view>
+                      <view class='list-scroll-but flex-rc-cc' catchtap='goHelp' data-item='{{item}}'>邀请{{item.type == 'spike'?"砍价":"参团"}}</view>
+                    </view>
+                  </view>
+                </view>
+                <view>
+                  <view class='flex-cc list-scroll-pic-view' wx:if='{{item.type=="spike"}}'>
+                    <view wx:for='{{item.data.likes_list}}' wx:key='index'>
+                      <image lazy-load mode='aspectFill' src='{{item.head_pic}}' class='flex list-scroll-pic'></image>
+                    </view>
+                    <view wx:for='{{item.data.need_spike_likes-item.data.has_spike_likes}}' wx:key='index'>
+                      <image lazy-load src='/images/ic_queren@2x.png' class='flex list-scroll-pic'></image>
+                    </view>
+                  </view>
+                  <view class='flex-cc list-scroll-pic-view' wx:else>
+                    <view wx:for='{{item.data.users}}' wx:key='index'>
+                      <image lazy-load mode='aspectFill' src='{{item}}' class='flex list-scroll-pic'></image>
+                    </view>
+                    <view wx:for='{{item.data.need_num-item.data.has_num}}' wx:key='index'>
+                      <image lazy-load src='/images/ic_queren@2x.png' class='flex list-scroll-pic'></image>
+                    </view>
+                    <view class='list-group_buy'>还差{{item.data.need_num-item.data.has_num}}人拼团成功</view>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+          </view>
+        </image>
+        <image lazy-load src='/images/ic_order_close@2x.png' class='list-close' catchtap='goAll'></image>
+      </view>
+    </view>
+  </view>
+
+</view>

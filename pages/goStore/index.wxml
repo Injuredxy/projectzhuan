@@ -1,0 +1,267 @@
+<view wx:if='{{show}}' style='z-index: 999'>
+  <!-- 1 -->
+  <view class='store-one'>
+    <view class='flex-rb-cc one-left'>
+      <view class='flex-rb one-text'>
+        <view class='one-text-big'>{{store.brand}}（{{store.market}}）</view>
+        <view class='flex-cc one-right-icon'>
+          <image lazy-load src='/images/ic_shop_clock@2x.png' class='one-icon'></image>
+          <view class='one-right-title'>营业时间：{{store.business_hours_begin}}{{store.business_hours_end}}</view>
+        </view>
+      </view>
+      <image lazy-load class='store-top-image' wx:for='{{nice}}' wx:key='nice' src='{{item.url}}'></image>
+    </view>
+    <view class='one-middle flex'>
+      <view class='flex' bindtap='goMap'>
+        <view>
+          <image lazy-load class='one-middle-icon' src='/images/ic_goods_location@2x.png'></image>
+        </view>
+        <view class='one-middle-text'>{{store.city.name}}{{store.area.name}}{{store.address}}
+          <!-- <text class='one-middle-title'> | 最近地铁：4号线上梅林站E口</text> -->
+        </view>
+      </view>
+      <view class='flex-rb-cc one-middle-xin'>
+        <image lazy-load class='one-middle-iphon1' src='/images/ic_dianpuysc@2x.png' wx:if='{{is_concern}}' bindtap='goCollection'></image>
+        <image lazy-load class='one-middle-iphon1' src='/images/ic_dianpusc@2x.png' wx:else bindtap='goCollection'></image>
+        <view class='icon-button flex' catchtap='goShare'>
+          <image lazy-load class='one-middle-iphon2 flex' src='/images/ic_goods_share_2@2x.png'></image>
+        </view>
+        <!-- <button class='icon-button flex' bindtap='goToast' wx:else>
+          <image lazy-load class='one-middle-iphon2 flex' src='/images/ic_goods_share_2@2x.png'></image>
+        </button> -->
+      </view>
+    </view>
+    <view class='flex-rb-cc one-view'>
+      <view class='flex-cc one-one'>
+        <image lazy-load src='/images/ic_telephone@2x.png' class='one-iphon' catchtap='goIphon'></image>
+        <view class='one-num' catchtap='goIphon'>{{store.mobile}}</view>
+      </view>
+      <view class='store-num' wx:if='{{store.monthly_sales>0.1}}'>
+        月销售额：{{store.monthly_sales}}w
+      </view>
+    </view>
+    <view class='one-bottom'>
+      <view class='one-bottom-text'>店铺图片</view>
+      <scroll-view scroll-x class='bottom-scroll'>
+        <view class='flex-cc'>
+          <view wx:for='{{store_image}}' wx:key='scroll' class='flex-cc'>
+            <image lazy-load src='{{item}}' class='one-bottom-image' bindtap='goImage' data-itemurl='{{item}}'></image>
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+  </view>
+
+  <!-- 2 -->
+  <view class='store-two' wx:if='{{indexShow}}'>
+    <view class='two-text'>商品活动</view>
+    <view class='two-list'>
+      <view class='flex-cc two-list-all' wx:for='{{indexShow}}' wx:key='show' bindtap='goShop' data-item='{{item}}'>
+        <view class='flex-cc'>
+          <image lazy-load class='two-image' src='{{item.data.goods.img_url}}'></image>
+        </view>
+        <view class='bottom-view' wx:if='{{item.type=="group_buy"}}'>
+          <view class='two-top-text'>{{item.data.goods.product_name}}</view>
+          <view class='flex-cc two-middle'>
+            <view wx:for='{{item.data.goods.product_service_label}}' wx:key='label' class='two-middle-text flex-cc' wx:if='{{index<4}}'>{{item.content}}</view>
+          </view>
+          <view class='flex-rb two-bottom-nice'>
+            <view class='flex-cc two-bottom'>
+              <view class='two-bottom-text'>拼团价</view>
+              <view class='two-bottom-price'>¥{{item.data.group_buy_price-0}}</view>
+              <view class='two-bottom-oldPrice'>¥{{item.data.origin_price-0}}</view>
+            </view>
+            <view class='two-button flex-rc-cc'>去拼团</view>
+          </view>
+        </view>
+        <view class='bottom-view' wx:elif='{{item.type=="spike"}}'>
+          <view class='two-top-text'>{{item.data.goods.product_name}}</view>
+          <view class='middle_desc'>{{item.data.goods.product_desc}}</view>
+          <view class='flex-rb-cc middle-nice'>
+            <view>
+              <view class='flex-cc'>
+                <progress class='middle-progress' stroke-width='16rpx' activeColor='#FEAC3D' border-radius='11rpx' backgroundColor='#EDEDED' percent='{{item.data.sold/item.data.stock_has*100}}'></progress>
+                <view class='progress-text'>剩余{{item.data.stock_has}}件</view>
+              </view>
+              <view class='flex-cc'>
+                <view class='flex-cc bottom-icon-view'>
+                  <view class='bottom-icon'>¥</view>
+                  <view class='bottom-price'>{{item.data.group_buy_price-0}}</view>
+                </view>
+                <view class='bottom-old-price'>门市价:
+                  <text>¥{{item.data.origin_price-0}}</text>
+                </view>
+              </view>
+            </view>
+            <view class='bottom-button flex-rc-cc'>免费领</view>
+          </view>
+        </view>
+        <view class='bottom-view' wx:elif='{{item.type=="temai"}}'>
+          <view class='two-top-text'>{{item.data.goods.product_name}}</view>
+          <view class='middle_desc'>{{item.data.goods.product_desc}}</view>
+          <view class='flex-rb two-bottom-nice'>
+            <view class='flex-cc two-bottom'>
+              <view class='two-bottom-text'>样品价</view>
+              <view class='two-bottom-price'>¥{{item.data.group_buy_price-0}}</view>
+              <view class='two-bottom-oldPrice'>¥{{item.data.origin_price-0}}</view>
+            </view>
+            <view class='two-button1 flex-rc-cc'>去抢购</view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <assemble-sales vest='{{store.vest}}'></assemble-sales>
+
+
+  <!-- 4 -->
+
+  <view class='six-forward' wx:if='{{follow != ""}}'>
+    <view class='flex-rb-cc'>
+      <view class='six-top-text'>店铺评价</view>
+      <view class='flex-cc' bindtap='goEvaluate'>
+        <view class='six-top-title'>查看全部评论</view>
+      </view>
+    </view>
+    <view wx:for='{{follow}}' wx:key='index'>
+      <view class='flex six-bottom'>
+        <view>
+          <image lazy-load mode='aspectFill' lazy-load class='six-image' src='{{item.user.head_pic}}'></image>
+        </view>
+        <view class='six-bottom-right'>
+          <view class='flex-rb-cc'>
+            <view class='six-bottom-phone'>{{item.user.nickname}}</view>
+            <view class='six-bottom-time'>{{item.comment.add_time}}</view>
+          </view>
+          <view class='flex-cc six-bottom-hearts'>
+            <view class='flex-cc six-bottom-heart'>
+              <view class='six-bottom-star'>导购：</view>
+              <image lazy-load wx:for='{{item.comment.vest_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_pre2@2x.png'></image>
+              <image lazy-load wx:for='{{5-item.comment.vest_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_def2@2x.png'></image>
+            </view>
+            <view class='flex-cc six-bottom-heart'>
+              <view class='six-bottom-star'>商品：</view>
+              <image lazy-load wx:for='{{item.comment.goods_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_pre2@2x.png'></image>
+              <image lazy-load wx:for='{{5-item.comment.goods_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_def2@2x.png'></image>
+            </view>
+            <view class='flex-cc six-bottom-heart'>
+              <view class='six-bottom-star'>送装：</view>
+              <image lazy-load wx:for='{{item.comment.load_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_pre2@2x.png'></image>
+              <image lazy-load wx:for='{{5-item.comment.load_comment}}' wx:key='index' class='six-heart' src='/images/ic_goods_star_def2@2x.png'></image>
+            </view>
+          </view>
+          <view class='six-bottom-text'>{{item.comment.content}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 5 -->
+
+  <view class='store-five'>
+    <view class='five-text'>往期精彩</view>
+    <view class='flex-cc'>
+      <view class='{{type=="group_buy"?"five-qiang":"five-ju"}} flex-rc-cc' style='margin-left: 40rpx;' bindtap='goPast1'>聚拼团</view>
+      <view class='{{type=="spike"?"five-qiang":"five-ju"}} flex-rc-cc' style='margin: 0 40rpx' bindtap='goPast2'>新人免费领</view>
+      <view class='{{type=="sample"?"five-qiang":"five-ju"}} flex-rc-cc' bindtap='goPast3'>特价清样</view>
+    </view>
+    <view style='padding-left: 32rpx;' wx:for='{{past}}' wx:key='past'>
+      <view class='flex-cc five-list' wx:if='{{type=="group_buy"}}'>
+        <view class='flex-cc'>
+          <image lazy-load class='five-image' src='{{item.goods.img_url}}'></image>
+        </view>
+        <view class='five-view'>
+          <view class='five-top-text'>{{item.goods.product_name}}</view>
+          <view class='flex-cc five-middle-view'>
+            <view wx:for='{{item.goods.product_service_label}}' wx:key='index' class='five-middle-text1' wx:if='{{index<4}}'>{{item.content}}</view>
+          </view>
+          <text class='five-button-buy flex'>已结束</text>
+          <view class='flex-rb-cc five-buy'>
+            <view class='flex-cc five-buy'>
+              <view class='five-buy-text'>拼团价</view>
+              <view class='five-buy-price'>¥{{item.group_buy_price-0}}</view>
+              <view class='five-buy-old'>¥{{item.origin_price-0}}</view>
+            </view>
+            <view class='five-buy-num'>成团数: {{item.record_number}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class='flex-cc five-list' wx:if='{{type=="spike"}}'>
+        <view class='flex-cc'>
+          <image lazy-load class='five-image' src='{{item.goods.img_url}}'></image>
+        </view>
+        <view class='five-view'>
+          <view class='five-top-text'>{{item.goods.product_name}}</view>
+          <view class='flex-cc five-middle-text'>{{item.goods.product_desc}}</view>
+          <view class='flex-rb-cc five-bottom'>
+            <view class='flex-cc'>
+              <progress percent='{{item.progress_bar*100}}' stroke-width='16rpx' border-radius='11rpx' activeColor='#FEAC3D' backgroundColor='#EDEDED' class='five-progress'></progress>
+              <view class='five-bottom-text'>剩余{{item.stock-item.sold}}件</view>
+            </view>
+            <view class='five-button'>已结束</view>
+          </view>
+          <view class='flex-cc five-oldPrice'>
+            <view class='flex-cc five-num'>
+              <view class='five-icon'>¥</view>
+              <view class='five-price'>{{item.group_buy_price-0}}</view>
+            </view>
+            <view class='flex five-old-price'>门市价：¥{{item.origin_price-0}}</view>
+          </view>
+        </view>
+      </view>
+
+      <view class='flex-cc five-list' wx:if='{{type=="sample"}}'>
+        <view class='flex-cc'>
+          <image lazy-load class='five-image' src='{{item.goods.img_url}}'></image>
+        </view>
+        <view class='five-view'>
+          <view class='five-top-text'>{{item.goods.product_name}}</view>
+          <view class='flex-cc five-middle-text'>{{item.goods.product_desc}}</view>
+          <view class='flex' style='justify-content: flex-end'>
+            <view class='five-button'>已结束</view>
+          </view>
+          <view class='flex-rb-cc five-buy'>
+            <view class='flex-cc five-buy'>
+              <view class='five-buy-text'>样品价</view>
+              <view class='five-buy-price'>¥{{item.group_buy_price-0}}</view>
+              <view class='five-buy-old'>¥{{item.origin_price-0}}</view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='five-bottom-button' bindtap='goMore' wx:if='{{past.length>5 && showBut}}'>点击加载更多</view>
+  </view>
+
+  <!-- 6 -->
+  <view class='discount flex-rb-cc' style='{{modelX!="-1"?"padding-bottom: 68rpx;height: 164rpx":""}}' wx:if='{{store.qrcode_status}}'>
+    <view class='flex-cc'>
+      <view class='discount-text'>优惠买单</view>
+      <view class='discount-title'>每满{{store.scan_pay_full_price}}减{{store.scan_pay_discount_price}}元</view>
+    </view>
+    <view class='discount-button flex-rc-cc' bindtap='toSweep'>买单</view>
+  </view>
+
+  <!-- 垫子 -->
+  <view class='cushion' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}'></view>
+
+</view>
+
+<!-- 分享 -->
+<view class='viewBG' catchtouchmove='preventMove' catchtap='goAll' wx:if='{{share}}'>
+</view>
+<view class='share-view {{share?"openBG1":""}}' catchtouchmove='preventMove' catchtap='goClick' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}' wx:if='{{share}}'>
+  <view class='share-text1 flex-rc-cc'>分享到</view>
+  <button class='share-button' open-type='share' hover-class='none' data-item='{{item}}'>
+    <image lazy-load src='/images/ic_wechat_share@2x.png' class='share-image'></image>
+  </button>
+  <view class='share-text2 flex-rc-cc border-bottom'>微信</view>
+  <!-- <view class='share-text3 flex-rc-cc' catchtap='goAll'>取消</view> -->
+</view>
+
+<view style='height:0;width:0;overflow:hidden;z-index: -1'>
+  <canvas style='width: {{canvasWidth}}px;height: {{canvasHeight}}px; position:fixed; left:100000px' canvas-id="canvas">
+  </canvas>
+</view>

@@ -1,0 +1,139 @@
+<view wx:if='{{show}}'>
+  <!-- 任务中心 -->
+  <!-- <view class='image-header' style="background: url('http://file.zhuangxiumall.cn/uploads/official/task/yellow.png');background-size: cover"> -->
+  <view class='image-view'>
+    <view class='flex-cc image-view'>
+      <image lazy-load src='/images/img_zige@2x.png' class='image-views'></image>
+    </view>
+    <view class='top-button flex-rc-cc' bindtap='goRecord'>免费领记录
+      <image lazy-load src='/images/ic_jiantou@2x.png'></image>
+    </view>
+    <view class='head-text flex-rc-cc'>
+      <view class='head-num flex-rc-cc'>{{core.treasure?core.treasure:0}}</view>次
+    </view>
+  </view>
+  <view class='core-bottom'>
+    <view wx:for='{{list}}' wx:key='list'>
+      <view class='flex-rb-cc bottom-list' bindtap='{{notoken?item.status!=3 && item.id==6?"goSweep":"goBargain":""}}' data-item='{{item}}'>
+        <view class='flex-cc'>
+          <view class='bottom-text-left'>
+            <view class=' flex-cc'>
+              <view class='bottom-text-text'>{{item.title}}</view>
+              <text class='bottom-text-text1'>活动资格+1</text>
+            </view>
+            <view class='text-left-bot'>{{item.content_info}}</view>
+          </view>
+        </view>
+        <button open-type="getPhoneNumber" bindgetphonenumber="getPhoneNumber" class='bottom-ba flex-rc-cc' wx:if='{{!token}}'>领取任务</button>
+        <block wx:else>
+          <view class='bottom-ba flex-rc-cc' wx:if='{{item.status == 0}}' catchtap='goCore' data-item='{{item}}'>领取任务</view>
+          <view class='bottom-bc flex-rc-cc' wx:elif='{{item.status == 1}}' catchtap='goComplete' data-item='{{item}}'>{{item.button_value}}</view>
+          <view class='bottom-bg flex-rc-cc' wx:elif='{{item.status == 2}}' catchtap='goReward' data-item='{{item}}'>领取奖励</view>
+          <view class='bottom-bd flex-rc-cc' wx:elif='{{item.status == 3}}'>已完成</view>
+        </block>
+      </view>
+    </view>
+    <view class='flex-rc-cc bottom-last'>
+      <view class='bottom-last-text'>更多任务, 敬请期待</view>
+      <image lazy-load src='/images/ic_xiaolian@2x.png' class='bottom-icon'></image>
+    </view>
+  </view>
+</view>
+
+<!-- 遮盖层 -->
+
+<!-- 说明弹窗 -->
+
+<!-- <view class='sweep-view' wx:if='{{bargain}}' catchtouchmove='preventMove' bindtap='goAll'>
+  <image lazy-load src='/images/img_one_rectangle1@2x.png' class='sweep-image'></image>
+  <view class='sweep' catchtap='goClick'>
+    <view class='sweep-son flex-rc-cc'>
+      <view class='sweep-top-text'>一次性任务</view>
+      <view class='sweep-num'>活动资格 +1</view>
+      <image lazy-load src='/images/img_one_shape@2x.png' class='sweep-icon1'></image>
+      <view class='sweep-icon-text1'>任务说明</view>
+      <block>
+        <view class='sweep-text'>帮好友砍价</view>
+        <view class='sweep-title'>首次帮好友砍价，即可获得一次活动资格。</view>
+      </block>
+      <image lazy-load src='/images/img_one_shape@2x.png' class='sweep-icon2'></image>
+      <view class='sweep-icon-text2'>当前状态</view>
+      <view class='sweep-bottom-text'>待完成</view>
+      <view class='sweep-button flex-rc-cc' bindtap='goAll' data-item='{{item}}'>我知道了</view>
+    </view>
+  </view>
+</view> -->
+
+<view class='sweep-view' wx:if='{{sweep}}' catchtouchmove='preventMove' bindtap='goAll'>
+  <view class='to-sweep' catchtap='goClick'>
+    <view class='flex-rc-cc to-sweep-del-view' catchtap='goAll'>
+      <image lazy-load class='to-sweep-del' src='/images/ic_youhui_close@2x.png'></image>
+    </view>
+    <view class='to-sweep-view'>
+      <view class='flex-rc-cc'>
+        <image lazy-load src='/images/img_youhui_1@2x.png' class='to-sweep-image'></image>
+      </view>
+      <view class='flex-rc-cc'>
+        <view class='to-sweep-btn flex-rc-cc' catchtap='goSweeps'>点击买单</view>
+      </view>
+    </view>
+    <!-- <view class='sweep-son flex-rc-cc'>
+      <view class='sweep-top-text'>一次性任务</view>
+      <view class='sweep-num'>活动资格 +1</view>
+      <image lazy-load src='/images/img_one_shape@2x.png' class='sweep-icon1'></image>
+      <view class='sweep-icon-text1'>任务说明</view>
+      <block>
+        <view class='sweep-text'>帮好友砍价</view>
+        <view class='sweep-title'>首次帮好友砍价，即可获得一次活动资格。</view>
+      </block>
+      <image lazy-load src='/images/img_one_shape@2x.png' class='sweep-icon2'></image>
+      <view class='sweep-icon-text2'>当前状态</view>
+      <view class='sweep-bottom-text'>待完成</view>
+      <view class='sweep-button flex-rc-cc' bindtap='goAll' data-item='{{item}}'>我知道了</view>
+    </view> -->
+  </view>
+</view>
+
+<!-- 玩法介绍 -->
+<view class='play-view' wx:if='{{play}}' catchtouchmove='preventMove' bindtap='goAll'>
+  <image lazy-load src='/images/img_wanfabeijing@2x.png' class='play-image'></image>
+  <view class='play'>
+    <view class='play-son'>
+      <image lazy-load src='/images/ic_wanfa_longline@2x.png' class='play-xian'></image>
+      <view class='play-fa flex-rc-cc'>— 砍价玩法 —</view>
+      <view class='flex-cc'>
+        <view>
+          <image lazy-load class='flex-cc play-icon1' src='/images/ic_wanfa_one@2x.png'></image>
+        </view>
+        <view class='play-text1'>获取新人免费领资格。</view>
+      </view>
+      <view class='flex-cc'>
+        <view>
+          <image lazy-load class='flex-cc play-icon2' src='/images/ic_wanfa_two@2x.png'></image>
+        </view>
+        <view class='play-text2'>支付0.01元，锁定商品。</view>
+      </view>
+      <view class='flex-cc'>
+        <view>
+          <image lazy-load class='flex-cc play-icon3' src='/images/ic_wanfa_three@2x.png'></image>
+        </view>
+        <view class='play-text3'>分享到业主群，让好友帮忙砍价。</view>
+      </view>
+      <view class='flex-cc'>
+        <view>
+          <image lazy-load class='flex-cc play-icon4' src='/images/ic_wanfa_four@2x.png'></image>
+        </view>
+        <view class='play-text4'>砍够8刀，发放券码，到店兑换。</view>
+      </view>
+      <view class='play-button flex-rc-cc' bindtap='goAll'>我知道了</view>
+    </view>
+  </view>
+</view>
+
+<view class='viewBG' catchtouchmove='preventMove' wx:if='{{bargain}}'>
+  <image lazy-load src='/images/img_qukanjia@2x.png' class='bargain-image center45'>
+    <view class='bargain-text'>快去分享商品到业主群 让大家发起活动吧～</view>
+    <view class='bargain-but flex-rc-cc' catchtap='goTreasure'>去逛逛</view>
+    <image lazy-load class='bargin-close' src='/images/ic_one_close@2x.png' catchtap='goAll'></image>
+  </image>
+</view>

@@ -1,0 +1,103 @@
+
+<view wx:if='{{show}}'>
+<!-- 5 -->
+<view class='five-forward flex'>
+  <view class='five-text'>商家信息</view>
+  <view class='flex-rb-cc' bindtap='goStore'>
+    <view class='flex five-left-text'>
+      <view>
+        <view>
+          <image lazy-load class='five-left-image' src='{{details.store_info.store_cover.url}}'></image>
+        </view>
+      </view>
+      <view class='five-middle'>
+        <view class='flex-cc'>
+          <view class='middle-top'>{{details.store_info.brand}}</view>
+          <view class='middle-top-title'>（{{details.store_info.market}}）</view>
+        </view>
+        <view class='flex-cc'>
+          <image lazy-load class='five-icon' src='/images/ic_goods_clock@2x.png'></image>
+          <view class='middle-mid-title'>营业时间: {{details.store_info.business_hours_begin}}{{details.store_info.business_hours_end}}</view>
+        </view>
+        <view class='flex-cc'>
+          <image lazy-load class='five-icon' src='/images/ic_goods_location@2x.png'></image>
+          <view class='top-left-tilte'>{{details.store_info.city.name}}{{details.store_info.area.name}}{{details.store_info.address}}</view>
+        </view>
+      </view>
+    </view>
+    <view>
+      <image lazy-load class='five-right-image' src='/images/ic_goods_phone@2x.png' catchtap='goIphon'></image>
+    </view>
+  </view>
+</view>
+
+<!-- 6 -->
+<view class='six-view'>
+  <view class='six-view1'>
+    <view class='six-content flex-rb-cc'>
+      <view class='six-text'>订单编号：</view>
+      <view class='six-tilte'>{{details.order_info.order_sn}}</view>
+    </view>
+    <view class='six-content flex-rb-cc'>
+      <view class='six-text'>消费门店：</view>
+      <view class='six-tilte'>{{details.store_info.brand}}({{details.store_info.market}})</view>
+    </view>
+    <view class='six-content flex-rb-cc' wx:if='{{details.order_info.remarks}}'>
+      <view class='six-text'>付款备注：</view>
+      <view class='six-tilte'>{{details.order_info.remarks}}</view>
+    </view>
+    <view class='six-content flex-rb-cc'>
+      <view class='six-text'>消费时间：</view>
+      <view class='six-tilte'>{{details.order_info.pay_time}}</view>
+    </view>
+  </view>
+  <view class='six-xian'></view>
+  <view class='six-view2'>
+    <view class='six-content flex-rb-cc'>
+      <view class='six-text'>消费总金额：</view>
+      <view class='six-tilte'>￥{{details.order_info.pay_total_price}}</view>
+    </view>
+    <view class='six-content flex-rb-cc'>
+      <view class='six-text'>优惠金额：</view>
+      <view class='six-tilte'>￥{{details.order_info.free}}</view>
+    </view>
+    <view class='six-content flex-rb-cc'>
+      <view class='six-text'>实际支付金额：</view>
+      <view class='six-tilte'>￥{{details.order_info.price}}</view>
+    </view>
+  </view>
+</view>
+
+<!-- 推荐 -->
+<view>
+  <view class='flex-rc-cc hide-image-view'>
+    <image lazy-load src='/images/img_recommend_02@2x.png' class='hide-image'></image>
+    <view class='hide-image-text'>为你推荐</view>
+    <image lazy-load src='/images/img_recommend_02@2x.png' class='hide-image'></image>
+  </view>
+  <view class='four-botom'>
+    <view class='four-bottom-list' wx:for='{{list}}' wx:key='index' bindtap='goOther' data-item='{{item}}'>
+      <view class='flex-cc four-image-view'>
+        <image lazy-load class='four-image' src='{{item.data.goods.img_url}}'></image>
+        <view class='four-image-text1 flex-rc-cc' wx:if='{{item.type=="group_buy"}}'>{{item.data.assemble_people_number}}人团</view>
+        <view class='four-image-text2 flex-rc-cc' wx:elif='{{item.type=="spike"}}'>免费领</view>
+        <view class='four-image-text3 flex-rc-cc' wx:elif='{{item.type=="temai"}}'>特价样品</view>
+      </view>
+      <view class='flex-rb four-view'>
+        <view class='four-bottom-text'>{{item.data.goods.product_name}}</view>
+        <view class='flex-cc four-content-view'>
+          <view class='four-content flex-rc-cc' wx:for='{{item.data.goods.product_service_label}}' wx:key='index'>{{item.content}}</view>
+        </view>
+        <view class='flex-cc four-bottom-view'>
+          <view style='color: #F8524E' class='flex four-bottom-nice'>
+            <view class='four-bottom-icon'>¥</view>
+            <view class='four-bottom-num'>{{item.data.group_buy_price-0}}</view>
+          </view>
+          <view class='four-bottom-price'>¥{{item.data.origin_price-0}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+
+</view>

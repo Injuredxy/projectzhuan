@@ -1,0 +1,191 @@
+var tDistance = function(d) {
+  d = Number(d)
+  if (d >= 1000) {
+    return Number(d / 1000).toFixed(1) + 'km'
+  } else {
+    return Number(Math.floor(d)) + 'm'
+  }
+}
+
+var tTime = function(timestamp, type) {
+  var time = getDate(timestamp * 1000);
+
+  var Y = time.getFullYear()
+  var M = (time.getMonth() + 1 < 10 ? '0' + (time.getMonth() + 1) : time.getMonth() + 1)
+  var D = (time.getDate() < 10 ? '0' + (time.getDate()) : time.getDate())
+  var h = (time.getHours() < 10 ? '0' + time.getHours() : time.getHours())
+  var m = (time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes())
+  var s = (time.getSeconds() < 10 ? '0' + time.getSeconds() : time.getSeconds())
+
+  if (type == 'date') {
+    return (h + ':' + m + ':' + s)
+  } else if (type == 'dates') {
+    return (M + '-' + D + ' ' + ' ' + h + ':' + m + ':' + s)
+  } else if (type == 'setting') {
+    return (Y + '-' + M + '-' + D + ' ' + h + ':' + m)
+  } else if (type == 'year') {
+    return (Y)
+  } else if (type == 'day') {
+    return (Y + '-' + M + '-' + D)
+  } else if (type == 'hour') {
+    return (h + ':' + m)
+  } else if (type == 'secord') {
+    return (h + ':' + m + ':' + s)
+  } else if (type == 'months') {
+    return (M + '-' + D)
+  } else if (type == 'order') {
+    return (h + '小时' + m + '分')
+  } else if (type == 'month') {
+    return (M + '-' + D + ' ' + h + ':' + m)
+  } else {
+    return (Y + '-' + M + '-' + D + ' ' + h + ':' + m + ':' + s)
+  }
+}
+
+var codeFun = function(order_id) {
+  
+}
+
+var formatSeconds = function(time) {
+  if (time == undefined) {
+    time = 0;
+  }
+  var second = parseInt(time)
+  var min = 0; // 分
+  var hour = 0; // 小时
+  var day = 0; //天
+  if (second >= 60) {
+    min = parseInt(second / 60);
+    second = parseInt(second % 60);
+    if (min >= 60) {
+      hour = parseInt(min / 60);
+      min = parseInt(min % 60);
+      if (hour >= 24) {
+        day = parseInt(hour / 24)
+        hour = parseInt(hour % 24)
+      }
+    }
+  }
+  if (day > 0) {
+    var result = ''
+    result = parseInt(day) + '天' + result
+    return result;
+    console.log(result)
+  } else {
+    var result = ''
+    if (min > 0) {
+      result = parseInt(min) + "分" + result;
+    }
+    if (hour > 0) {
+      result = parseInt(hour) + "小时" + result;
+    }
+    return result;
+  }
+}
+
+var remainTime = function(time) {
+  var second = parseInt(time); // 秒
+  var min = 0; // 分
+  if (second >= 60) {
+    min = parseInt(second / 60);
+    second = parseInt(second % 60);
+    if (min >= 60) {
+      hour = parseInt(min / 60);
+      min = parseInt(min % 60);
+    }
+  }
+  min = parseInt(min) + "分";
+  return {
+    min
+  }
+}
+
+var difference_time = function(time) {
+  if (time == undefined) {
+    time = 0;
+  }
+  var second = parseInt(time); // 秒
+  var min = 0; // 分
+  var hour = 0; // 小时
+  var day = 0;
+  if (second >= 60) {
+    min = parseInt(second / 60);
+    second = parseInt(second % 60);
+    if (min >= 60) {
+      hour = parseInt(min / 60);
+      min = parseInt(min % 60);
+      if (hour >= 24) {
+        day = parseInt(hour / 24)
+        hour = parseInt(hour % 24)
+      }
+    }
+  }
+  if (day > 0) {
+    day = Number(day)
+  }
+  if (second > 9) {
+    second = parseInt(second);
+  } else {
+    second = '0' + parseInt(second);
+  }
+  if (min > 9) {
+    min = parseInt(min);
+  } else {
+    min = '0' + parseInt(min);
+  }
+  if (hour > 9) {
+    hour = parseInt(hour);
+  } else {
+    hour = '0' + parseInt(hour);
+  }
+  return {
+    second,
+    min,
+    hour,
+    day
+  }
+}
+
+var difference_time1 = function(time) {
+  if (time == undefined) {
+    time = 0;
+  }
+  var second = parseInt(time); // 秒
+  var min = 0; // 分
+  var hour = 0; // 小时
+  var day = 0;
+  if (second >= 60) {
+    min = parseInt(second / 60);
+    second = parseInt(second % 60);
+    if (min >= 60) {
+      hour = parseInt(min / 60);
+      min = parseInt(min % 60);
+      if (hour >= 24) {
+        day = parseInt(hour / 24)
+        hour = parseInt(hour % 24)
+      }
+    }
+  }
+  if (day > 0) {
+    day = Number(day)
+  }
+  second = parseInt(second);
+  min = parseInt(min);
+  hour = parseInt(hour);
+  
+  return {
+    second,
+    min,
+    hour,
+    day
+  }
+}
+
+module.exports = {
+  tDistance: tDistance,
+  tTime: tTime,
+  remainTime: remainTime,
+  formatSeconds: formatSeconds,
+  difference_time: difference_time,
+  difference_time1: difference_time1
+};

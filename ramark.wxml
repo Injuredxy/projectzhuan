@@ -1,0 +1,29 @@
+groupBuy
+  各种订单状态
+
+index
+  index 首页
+  log 不知道干啥的
+
+login
+  aulthorize  我的授权登录
+  login  他的授权登录
+
+order
+  order 订单首页
+
+user
+  collection  收藏和足迹
+  comment  评价
+  follow  关注
+  index   我的首页
+  message 消息
+  payment 支付记录的子页面
+  record  支付记录
+  setting 设置
+
+web
+  web  web-view页面
+
+component
+  order 新人有礼

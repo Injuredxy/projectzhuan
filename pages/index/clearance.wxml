@@ -1,0 +1,30 @@
+<!-- 清仓 -->
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<view class="recommend-list" wx:if='{{show}}'>
+  <view class="recommend-item" wx:for="{{recommend.list}}" wx:key="recommend" bindtap="toGroup" data-item="{{item}}">
+    <view class="flex-rc-cc recommend-item-head">
+      <image lazy-load src="/images/ic_shop_shangjiaxinxi@2x.png"></image>
+      <view class="recommend-item-company">{{item.store.brand}}</view>
+      <view class="recommend-item-shop">（{{item.store.market}}）</view>
+      <view class="recommend-item-distance">{{item.market_distance ? common.tDistance(item.market_distance) : ''}}</view>
+    </view>
+    <view class="flex recommend-item-detail">
+      <image lazy-load class="recommend-item-pic" src="{{item.goods.img_url}}"></image>
+      <view class="recommend-item-info flex-rb">
+        <view>
+          <view class="text-over-2 recommend-item-name">{{item.goods.product_name}}</view>
+          <view class='recommend-item-time'>剩余：{{item.has_place_time}}件</view>
+        </view>
+        <view class="flex-rb">
+          <view class="flex recommend-item-price">
+            <view class="recommend-item-price-new">
+              <text>¥ </text>{{item.group_buy_price-0}}</view>
+            <view class="recommend-item-price-old">¥{{item.origin_price-0}}</view>
+          </view>
+          <!-- <view class="recommend-item-btn">立即抢购</view> -->
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "order-socket1": "/component/order/socket"
+  },
+  "enablePullDownRefresh": true
+}

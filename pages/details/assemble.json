@@ -1,0 +1,9 @@
+{
+  "usingComponents": {
+    "order-list": "/component/order/list",
+    "order-socket": "/component/order/socket",
+    "assemble-sales": "/component/assemble/sales"
+  },
+  "navigationBarTitleText": "商品详情",
+  "enablePullDownRefresh": true
+}

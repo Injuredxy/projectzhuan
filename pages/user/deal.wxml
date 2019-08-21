@@ -1,0 +1,19 @@
+<view wx:if='{{show}}'>
+<!-- 成交商家 -->
+<wxs src="../../wxs/common.wxs" module="common"></wxs>
+
+<view class='deal-top'>
+  <view class='flex deal' wx:for='{{deal}}' wx:key='index' data-index='{{index}}' bindtap='goStore'>
+    <view class='flex-cc'>
+      <image lazy-load class='deal-image' src='{{item.store_cover}}'></image>
+    </view>
+    <view class='deal-view'>
+      <view class='flex-rb-cc deal-views'>
+        <view class='deal-text'>{{item.brand}}（{{item.market}}）</view>
+        <view class='deal-num'>{{item.distance ? common.tDistance(item.distance) : ''}}</view>
+      </view>
+      <view class='deal-logo flex-cc'>{{item.category}}</view>
+    </view>
+  </view>
+</view>
+</view>

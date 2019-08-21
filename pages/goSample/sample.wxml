@@ -1,0 +1,50 @@
+<view wx:if="{{show}}">
+  <!-- 清样订单页 -->
+  <view class='wrap'>
+    <view class='wrap_goods'>
+      <view class='goods'>
+        <view class='goods_left flex-cc'>
+          <image lazy-load wx:for='{{nice}}' wx:key='index' src='{{item.url}}' style="width: 144rpx; height: 144rpx;border-radius:8rpx;"></image>
+        </view>
+        <view class='goods_right'>
+          <view class='goods_right_top'>
+            <view class='goods_right_tit'>{{mini.goods.product_name}}</view>
+            <view class='goods_right_pri'>￥{{mini.origin_price-0}}</view>
+          </view>
+          <view class='goods_right_mid'>
+            <view class='goods_right_mid_item' wx:for="{{mini.goods.product_service_label}}" wx:key="index" wx:if='{{index<4}}'>{{item.content}}</view>
+          </view>
+          <view class='goods_right_bot'>
+            <view wx:for="{{mini.goods.product_label}}" wx:key="index" class='flex-cc goods_view'>
+              <view class='goods_right_bot_item'>{{item.content}}</view>
+              <view class='goods_right_dian'></view>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="submit-info">
+      <view class="flex-cc submit-info-item">
+        <view class="submit-info-item-name">样品价格</view>
+        <view class='flex-cc'>
+          <image lazy-load src="/images/ic_yang@2x.png" class='flex-cc submit-info-image'></image>
+        </view>
+        <view class="submit-info-item-value1">{{mini.group_buy_price-0}}</view>
+      </view>
+      <view class="flex-rb-cc submit-info-item">
+        <view class="submit-info-item-name">每满{{mini.sample_pay_full_price}}元立减{{mini.sample_pay_discount_price}}元</view>
+        <view class="submit-info-item-value">
+          <text>{{mini.sample_pay_discount_price*num}}</text>
+        </view>
+      </view>
+      <view class="flex-rb-cc submit-info-item">
+        <view class="submit-info-item-name">实付金额</view>
+        <view class="submit-info-item-price">{{mini.group_buy_price-mini.sample_pay_discount_price*num}}</view>
+      </view>
+    </view>
+
+    <view class='submit-btn' bindtap='goList' wx:if='{{token}}'>提交订单</view>
+    <button class='submit-btn' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" wx:else>提交订单</button>
+  </view>
+</view>

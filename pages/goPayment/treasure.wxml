@@ -1,0 +1,49 @@
+<view wx:if='{{show}}'>
+  <!-- 免费领订单详情 -->
+
+  <!-- 上 -->
+  <view class='treasure-top flex'>
+    <view wx:for='{{nice}}' wx:key='store'>
+      <image lazy-load src='{{item.url}}' class='top-image'></image>
+    </view>
+    <view class='top-text' style='width: 100%'>
+      <view class='flex-rb-cc'>
+        <view class='top-top'>{{list.goods.product_name}}</view>
+        <view class='top-price'>
+          <text>￥</text>1222</view>
+      </view>
+      <view class='flex top-middle' wx:key='{{list.goods.product_service_label}}' wx:key='content'>
+        <view wx:for="{{list.goods.product_service_label}}" class='middle-mid' wx:key="goods"  wx:if='{{index<4}}'>{{item.content}}</view>
+      </view>
+      <view class='flex top-bottom'>
+        <view wx:for='{{list.goods.product_label}}' wx:key='label' class='flex-cc goods_view'>
+          <view class='bottom-suishi'>{{item.content}}</view>
+          <view class='goods_right_dian'></view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 下 -->
+  <view class='treasure-bottom'>
+    <view class='flex-rb-cc bottom-top'>
+      <view class='bottom-top-text'>门店零售价</view>
+      <view class='bottom-old_price'>{{list.origin_price-0}}</view>
+    </view>
+
+    <view class='flex-rb-cc bottom-bot'>
+      <view class='flex-rc-cc'>
+        <view class='bottom-top-text'>活动价格</view>
+        <view class='flex-rc-cc bottom-bot-icon'>
+          <image lazy-load src='../../images/ic_miao@2x.png' class='icon-image flex'></image>
+        </view>
+      </view>
+      <view class='bottom-bot-text2'>{{list.group_buy_price-0}}</view>
+    </view>
+  </view>
+
+
+  <!-- 按钮 -->
+  <button class='flex-rc-cc sweep-button-text' bindtap='goBuy' wx:if='{{token}}'>提交订单</button>
+  <button class='flex-rc-cc sweep-button-text' open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber" wx:else>提交订单</button>
+</view>

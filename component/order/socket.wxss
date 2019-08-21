@@ -1,0 +1,168 @@
+@import "/wxss/common.wxss";
+
+/* 弹幕 */
+
+@keyframes mySocket {
+  0% {
+    opacity: 0;
+  }
+
+  30.3% {
+    opacity: 0;
+  }
+
+  34.8% {
+    opacity: 1;
+  }
+
+  95.4% {
+    opacity: 1;
+    top: 58rpx;
+  }
+
+  100% {
+    top: -60rpx;
+  }
+}
+
+.socket-animation {
+  animation: mySocket 6.6s ease-in both;
+  animation-iteration-count: infinite;
+}
+
+@keyframes myHome {
+  0% {
+    opacity: 0;
+  }
+
+  30.3% {
+    opacity: 0;
+  }
+
+  34.8% {
+    opacity: 1;
+  }
+
+  95.4% {
+    opacity: 1;
+    top: 130rpx;
+  }
+
+  100% {
+    top: -60rpx;
+  }
+}
+
+.home-animation {
+  animation: myHome 5s ease-in both;
+  animation-iteration-count: infinite;
+}
+
+.barrage-view {
+  height: 56rpx;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 12rpx;
+  position: fixed;
+  top: 58rpx;
+  left: 30rpx;
+  z-index: 999;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 40rpx;
+  font-size: 28rpx;
+  padding-right: 30rpx;
+  /* margin: auto 0 */
+}
+
+.socket-name {
+  /* padding-right: 30rpx; */
+}
+
+.nodes-view {
+  max-width: 140rpx;
+  display: inline-block;
+}
+
+.barrage-text {
+  font-weight: 400;
+  color: rgba(255, 255, 255, 1);
+  line-height: 40rpx;
+  font-size: 28rpx;
+}
+
+.barrage-image {
+  width: 44rpx;
+  height: 44rpx;
+  border-radius: 50%;
+  margin-left: 6rpx;
+  margin-right: 10rpx;
+}
+
+.barrage-icon {
+  width: 24rpx;
+  height: 24rpx;
+  margin-left: 4rpx;
+}
+
+@keyframes mySocket1 {
+  0% {
+    width: 0;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+
+.swiper-animation {
+  animation: mySocket1 0.5s ease-in both;
+  animation-direction: normal;
+}
+
+@keyframes mySweep {
+  0% {
+    opacity: 0;
+  }
+
+  12.5% {
+    opacity: 1;
+  }
+
+  87.5% {
+    top: 10rpx;
+  }
+
+  100% {
+    top: -50rpx;
+  }
+}
+
+.sweep-animation {
+  animation: mySweep 4s both;
+  animation-iteration-count: infinite;
+}
+
+.socket-image1 {
+  width: 48rpx;
+  height: 48rpx;
+  border-radius: 50%;
+  margin-right: 16rpx;
+}
+
+.sweep-view {
+  width: 100%;
+  height: 68rpx;
+  background: #ffe6c0;
+  overflow: hidden;
+  white-space: nowrap;
+  font-weight: 400;
+  color: #333;
+  line-height: 40rpx;
+  font-size: 28rpx;
+  position: relative;
+}
+
+.sweep-text {
+  position: absolute;
+  top: 10rpx;
+}

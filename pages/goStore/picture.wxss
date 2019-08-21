@@ -1,0 +1,11 @@
+.picture {
+  margin: 40rpx 42rpx;
+  flex-flow: row wrap
+}
+
+.picture-image {
+  width: 316rpx;
+  height: 240rpx;
+  margin-bottom: 30rpx;
+  border-radius: 20rpx;
+}

@@ -1,0 +1,4 @@
+<!-- 去登陆按钮 -->
+<image class="icon" src="{{current.icon}}"></image>
+<view class="msg">{{current.msg}}</view>
+<view class="flex-rb btn" wx:if="{{current.btn}}" bindtap="tap"><view>{{current.btn}}</view></view>

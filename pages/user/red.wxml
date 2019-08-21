@@ -1,0 +1,115 @@
+<view class='red-view'>
+  <view class="flex order-type">
+    <view class="order-type-item {{current == 1 ? 'active' : ''}} flex-rc-cc" catchtap="clickTab1">未使用(3)</view>
+    <view class="order-type-item {{current == 2 ? 'active' : ''}} flex-rc-cc" catchtap="clickTab2">使用记录</view>
+    <view class="order-type-item {{current == 3 ? 'active' : ''}} flex-rc-cc" catchtap="clickTab3">已过期</view>
+    <view class='weui-navbar__slider' style="transform: translateX({{sliderOffset}}rpx); -webkit-transform: translateX({{sliderOffset}}rpx);"></view>
+  </view>
+  <view style='margin-top: 86rpx;'>
+    <view class='flex-rc-cc' wx:for='{{3}}' wx:key='index' wx:if='{{current == 1}}'>
+      <image lazy-load class='red-image' src='/images/img_ticket_def@2x.png'>
+        <view class='red-image-view flex-cc'>
+          <view class='red-image-left flex-rc-cc'>
+            <view class='red-image-price'>
+              <text>¥</text>500</view>
+            <view class='red-image-left-text'>平台红包</view>
+          </view>
+          <view class='red-image-right'>
+            <view class='red-right-text'>到店消费满1000元可用</view>
+            <!-- <view class='flex-cc red-right-text1'>
+            <view class='list-left-text flex-rc-cc'>{{common.difference_time(countDownNum[index]).hour}}</view>
+            <view class='list-left-dian'>天</view>
+            <view class='list-left-text flex-rc-cc'>{{common.difference_time(countDownNum[index]).min}}</view>
+            <view class='list-left-dian'>时</view>
+            <view class='list-left-text flex-rc-cc'>{{common.difference_time(countDownNum[index]).second}}</view>
+            <view class='list-left-dian'>分后过期</view>
+          </view> -->
+            <view class='flex-cc red-right-text1'>
+              <view class='list-left-text flex-rc-cc'>00</view>
+              <view class='list-left-dian'>天</view>
+              <view class='list-left-text flex-rc-cc'>00</view>
+              <view class='list-left-dian'>时</view>
+              <view class='list-left-text flex-rc-cc'>00</view>
+              <view class='list-left-dian'>分后过期</view>
+            </view>
+            <view class='flex-rb-cc'>
+              <view class='red-right-text2'>部分店铺可用</view>
+              <view class='red-right-text3 flex-rc-cc'>立即使用</view>
+            </view>
+            <view class='flex-cc'>
+              <image lazy-load class='red-xian' src='/images/line@2x.png'></image>
+            </view>
+            <view class='flex-rb-cc' catchtap='goTitle' data-=''> 
+              <view class='red-icon-text'>详细信息</view>
+              <view class='flex-cc'>
+                <image lazy-load src='/images/ic_goods_enter@2x.png' class='red-icon'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </image>
+    </view>
+     <view class='flex-rc-cc' wx:for='{{3}}' wx:key='index' wx:if='{{current==2}}'>
+      <image lazy-load class='red-image' src='/images/img_ticket_dis@2x.png'>
+        <view class='red-image-view flex-cc'>
+          <image lazy-load src='/images/ic_redpacket_use@2x.png' class='red-redpacket'></image>
+          <view class='red-image-left flex-rc-cc'>
+            <view class='red-image-price'>
+              <text>¥</text>500</view>
+            <view class='red-image-left-text'>平台红包</view>
+          </view>
+          <view class='red-image-right'>
+            <view class='red-right-text' style='margin-bottom: 12rpx;'>到店消费满1000元可用</view>
+            <view class='flex-cc red-right-text1' style='margin-bottom: 12rpx'>限2019-07-12当天可用</view>
+            <view class='flex-rb-cc'>
+              <view class='red-right-text2'>部分店铺可用</view>
+            </view>
+            <view class='flex-cc'>
+              <image lazy-load class='red-xian' src='/images/line@2x.png'></image>
+            </view>
+            <view class='flex-rb-cc' catchtap='goTitle' data-item='{{item}}'>
+              <view class='red-icon-text'>详细信息</view>
+              <view class='flex-cc'>
+                <image lazy-load src='/images/ic_goods_enter@2x.png' class='red-icon'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </image>
+    </view>
+    <view class='flex-rc-cc' wx:for='{{3}}' wx:key='index' wx:if='{{current==3}}'>
+      <image lazy-load class='red-image' src='/images/img_ticket_dis@2x.png'>
+        <view class='red-image-view flex-cc'>
+          <view class='red-image-left flex-rc-cc'>
+            <view class='red-image-price'>
+              <text>¥</text>500</view>
+            <view class='red-image-left-text'>平台红包</view>
+          </view>
+          <view class='red-image-right'>
+            <view class='red-right-text' style='margin-bottom: 12rpx; color: #999'>到店消费满1000元可用</view>
+            <view class='flex-cc red-right-text1' style='margin-bottom: 12rpx'>限2019-07-12当天可用</view>
+            <view class='flex-rb-cc'>
+              <view class='red-right-text2'>部分店铺可用</view>
+            </view>
+            <view class='flex-cc'>
+              <image lazy-load class='red-xian' src='/images/line@2x.png'></image>
+            </view>
+            <view class='flex-rb-cc'>
+              <view class='red-icon-text' style='color: #999'>详细信息</view>
+              <view class='flex-cc'>
+                <image lazy-load src='/images/ic_goods_enter@2x.png' class='red-icon'></image>
+              </view>
+            </view>
+          </view>
+        </view>
+      </image>
+    </view>
+    <view class='flex-rc-cc' wx:if='{{title}}'>
+      <view class='red-brand-view flex-rc-cc'>
+        <view class='flex-rc-cc red-brand-name'>
+          可用品牌：品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名、品牌名。
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

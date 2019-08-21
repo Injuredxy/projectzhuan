@@ -1,0 +1,285 @@
+<wxs src="../../wxs/common.wxs" module="common" />
+
+<view wx:if='{{show}}'>
+  <view class="flex order-type">
+    <view wx:for="{{order_type}}" wx:key="index" class="order-type-item {{current == index ? 'active' : ''}}" catchtap="clickTab" data-index="{{index}}">{{item}}</view>
+    <view class='weui-navbar__slider' style="{{current==0||current==4?'width:124rpx;':''}} transform: translateX({{sliderOffset*pixe}}px); -webkit-transform: translateX({{sliderOffset*pixe}}px);"></view>
+  </view>
+
+  <view class='order'>
+    <view wx:if="{{order.length==0}}" class='order-none'>
+      <view class='flex-rc'>
+        <image lazy-load class='order-none-image' src='/images/img_order_emptystate@2x.png'></image>
+      </view>
+      <view class='order-none-text flex-rc'>暂没有相关订单</view>
+    </view>
+    <swiper bindchange='swiperChange' skip-hidden-item-layout class='swiper' current='{{current}}' easing-function='linear'>
+      <block wx:for='{{5}}' wx:key='index'>
+        <swiper-item class='swiper-item'>
+          <scroll-view scroll-y class='scroll-view'>
+            <view wx:for="{{order}}" wx:key="{{index}}" class='store'>
+              <view class='flex-cc store-name' bindtap='goStore' data-id='{{item.id}}'>
+                <image lazy-load src="/images/ic_shop_shangjiaxinxi@2x.png" style='width:40rpx;height:40rpx'></image>
+                <view class='store-1'>{{item.brand}}</view>
+                <view class='store-2'>（{{item.market}}）</view>
+                <image lazy-load src="/images/ic_home_right@2x.png" style='width:24rpx;height:24rpx'></image>
+              </view>
+              <view class='store-order'>
+                <block wx:for="{{item.order_lists}}" wx:for-item="sub_item" wx:key="{{sub_index}}">
+                  <view class='flex-cc store-order-item' bindtap='goFund' data-item="{{sub_item}}">
+                    <image lazy-load class='store-order-item-left' src="{{sub_item.order.goods.img_url}}" style='width:140rpx;height:140rpx' wx:if='{{sub_item.type!="scan"}}'></image>
+                    <view class='store-order-right flex-rb'>
+                      <view class='flex-rb' wx:if='{{sub_item.type!="scan"}}'>
+                        <view class='store-order-right-tit'>{{sub_item.order.goods.product_name}}</view>
+                        <view class='store-order-right-tip'>
+                          <block>
+                            <block wx:if="{{sub_item.order.order_status==1}}">
+                              <text wx:if='{{sub_item.order.is_close==0}}'>{{sub_item.order.is_pay == 0?"待付款":"已付款"}}</text>
+                              <text wx:else>已关闭</text>
+                            </block>
+                            <text wx:elif="{{sub_item.order.order_status==2}}">待兑换</text>
+                            <text wx:elif="{{sub_item.order.order_status==3}}">待评价</text>
+                            <text wx:elif="{{sub_item.order.order_status==4}}">已评价</text>
+                            <text wx:elif="{{sub_item.order.order_status==7}}">已关闭</text>
+                            <text wx:elif="{{sub_item.order.order_status==8}}">已退款</text>
+                            <text wx:elif="{{sub_item.order.order_status==9}}">已退款</text>
+                          </block>
+                        </view>
+                      </view>
+                      <view class='{{sub_item.order.exchange_code_status == 2?"":"flex-rb-cc"}}'>
+                        <view class='store-order-right-bot-left'>
+                          <view class='flex' wx:if="{{sub_item.order.order_status != 3}}">
+                            <view wx:if="{{sub_item.type =='group_buy'}}">
+                              <view class='flex-cc'>
+                                <view class='flex-rc-cc store-order-right-mid1'>{{sub_item.order.group_buy_people_number}}人团</view>
+                                <view class='store-order-right-txt'>团购价:{{sub_item.order.price-0}}</view>
+                              </view>
+                            </view>
+                            <view wx:if="{{sub_item.type =='spike'}}">
+                              <view class='flex-cc'>
+                                <view class='flex-rc-cc store-order-right-mid2'>免费领</view>
+                                <view class='store-order-right-txt' style='margin-right:18rpx' style=' margin-right:30rpx'>￥{{sub_item.order.price}}</view>
+                                <view class='store-order-right-txt'>数量:{{sub_item.order.direct_num}}</view>
+                              </view>
+                            </view>
+                            <view wx:if="{{sub_item.type =='sample'}}">
+                              <view class='flex-cc'>
+                                <view class='flex-rc-cc store-order-right-mid3'>特价样品</view>
+                                <view class='store-order-right-txt'>样品价:{{sub_item.order.price-0}}</view>
+                              </view>
+                            </view>
+                            <view wx:if="{{sub_item.type =='group_buy_direct'}}">
+                              <view class='flex-cc'>
+                                <view class='store-order-right-txt' style='margin-right:20rpx'>数量:{{sub_item.order.direct_num}}</view>
+                                <view class='store-order-right-txt'>总价:{{sub_item.order.price-0}}</view>
+                              </view>
+                            </view>
+                          </view>
+                          <view class='store-order-right-txt' wx:else>兑换时间: {{sub_item.order.write_time}}</view>
+                          <view wx:if='{{sub_item.type =="scan"}}' class='flex-rc scan-view'>
+                            <view>
+                              <image lazy-load src='/images/ic_order_pay@2x.png' class='images-scan'></image>
+                            </view>
+                            <view class='flex-rb scan-title'>
+                              <view class='scan-price'>支付金额：¥{{sub_item.order.price-0}}</view>
+                              <view class='scan-text'>{{sub_item.order.pay_time}}</view>
+                            </view>
+                          </view>
+                        </view>
+                        <view class='flex-rb-cc {{sub_item.order.is_pay == 1 && sub_item.type == "group_buy" && sub_item.order.exchange_code_status == 1?"":"store-order"}}'>
+
+                          <view class='store-order-right-txt' wx:if="{{sub_item.order.exchange_code_status == 2}}"> 截止时间：{{common.tTime(sub_item.order.exchange_code_end_time,"months")}}</view>
+
+
+                          <view class='flex-rc-cc store-order-right-btn' wx:if="{{sub_item.order.is_pay == 0 && sub_item.type == 'group_buy_direct'&&sub_item.order.is_close ==0 }}" catchtap='goPay' data-order_id='{{sub_item}}'>去支付</view>
+                          <view class='flex-rc-cc button-share' wx:elif="{{sub_item.order.is_pay == 1 && sub_item.type == 'group_buy' && sub_item.order.exchange_code_status == 1}}" catchtap='goShare' data-order_id='{{sub_item}}'>找拼友</view>
+                          <view class='flex-cc' wx:elif="{{sub_item.type =='group_buy' && sub_item.order.record_status==1 && sub_item.order.exchange_code_status == 1 || sub_item.order.exchange_code_status == 2}}">
+                            <view class='flex-rc-cc store-order-right-btn' catchtap='webSocket' data-order_id="{{sub_item}}">查看券码</view>
+                            <view class='flex-rc-cc store-order-right-btn' style='margin-left: 12rpx' catchtap='goWrite' data-order_id="{{sub_item}}">确认兑换</view>
+                          </view>
+                          <view class='flex-rc-cc store-order-right-btn' wx:elif="{{sub_item.order.order_status==3}}" catchtap='goComment' data-order_id="{{sub_item}}">去评价</view>
+                          <view class='flex-rc-cc button-share' wx:elif="{{sub_item.order.is_pay == 1 && sub_item.type == 'spike' && sub_item.order.exchange_code_status == 1}}" catchtap='goShare' data-order_id="{{sub_item}}">邀请砍价</view>
+                        </view>
+                      </view>
+                    </view>
+                  </view>
+                </block>
+
+                <block wx:if="{{item.order_lists.length <2 || all_order[index].order_lists.length==2}}">
+                </block>
+                <block wx:else>
+                  <view wx:if="{{all_order[index].order_lists.length>item.order_lists.length}}" class="flex-rc-cc order-item-more" data-index="{{index}}" bindtap='chc_more'>
+                    查看更多该店订单
+                    <image lazy-load src="/images/ic_down_def@2x.png"></image>
+                  </view>
+                  <view wx:else class='flex-rc-cc order-item-more' bindtap='chc_more' bindtap='chc_less' data-index="{{index}}">
+                    收起该店订单
+                    <image lazy-load src="/images/ic_one_up@2x.png" style=' margin-left:6rpx;width:16rpx;height:16rpx;'></image>
+                  </view>
+                </block>
+
+              </view>
+            </view>
+          </scroll-view>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+</view>
+
+<!-- <van-tabs swipeable sticky animated title-active-color='#f8524E' title-inactive-color='#000' active="{{current}}" bind:click="clickTab" bind:change='swiperChange' swipe-threshold='5' color='#D0021B'
+  tab-class='van-tab-class'>
+  <van-tab wx:for='{{order_type}}' wx:key='index' title='{{item}}' class='van-tab-view'>
+    <scroll-view scroll-y class='scroll-view'>
+      <view>
+        <view wx:if="{{order.length==0}}" class='order-none'>
+          <view class='flex-rc'>
+            <image lazy-load class='order-none-image' src='/images/img_order_emptystate@2x.png'></image>
+          </view>
+          <view class='order-none-text flex-rc'>暂没有相关订单</view>
+        </view>
+        <view wx:for="{{order}}" wx:key="{{index}}" class='store'>
+          <view class='flex-cc store-name' bindtap='goStore' data-id='{{item.id}}'>
+            <image lazy-load src="/images/ic_shop_shangjiaxinxi@2x.png" style='width:40rpx;height:40rpx'></image>
+            <view class='store-1'>{{item.brand}}</view>
+            <view class='store-2'>（{{item.market}}）</view>
+            <image lazy-load src="/images/ic_home_right@2x.png" style='width:24rpx;height:24rpx'></image>
+          </view>
+          <view class='store-order'>
+            <block wx:for="{{item.order_lists}}" wx:for-item="sub_item" wx:key="{{sub_index}}">
+              <view class='flex store-order-item' bindtap='goFund' data-item="{{sub_item}}">
+                <image lazy-load class='store-order-item-left' src="{{sub_item.order.goods.img_url}}" style='width:140rpx;height:140rpx' wx:if='{{sub_item.type!="scan"}}'></image>
+                <view class='store-order-right'>
+                  <view class='flex-rb' wx:if='{{sub_item.type!="scan"}}'>
+                    <view class='store-order-right-tit'>{{sub_item.order.goods.product_name}}</view>
+                    <view class='store-order-right-tip'>
+                      <block>
+                        <block wx:if="{{sub_item.order.order_status==1}}">
+                          <text wx:if='{{sub_item.order.is_close==0}}'>{{sub_item.order.is_pay == 0?"待付款":"已付款"}}</text>
+                          <text wx:else>已关闭</text>
+                        </block>
+                        <text wx:elif="{{sub_item.order.order_status==2}}">待兑换</text>
+                        <text wx:elif="{{sub_item.order.order_status==3}}">待评价</text>
+                        <text wx:elif="{{sub_item.order.order_status==4}}">已评价</text>
+                        <text wx:elif="{{sub_item.order.order_status==7}}">已关闭</text>
+                        <text wx:elif="{{sub_item.order.order_status==8}}">已退款</text>
+                      </block>
+                    </view>
+                  </view>
+                  <view class='flex-rb-cc {{sub_item.order.is_pay == 1 && sub_item.type == "group_buy" && sub_item.order.exchange_code_status == 1?"":"store-order"}}'>
+                    <view class='store-order-right-bot-left'>
+                      <view class='flex' wx:if="{{sub_item.order.order_status != 3}}">
+                        <view wx:if="{{sub_item.type =='group_buy'}}" style='{{sub_item.order.order_status==2?"":"margin-top: 20rpx"}}'>
+                          <view class='flex-cc'>
+                            <view class='flex-rc-cc store-order-right-mid1'>{{sub_item.order.group_buy_people_number}}人团</view>
+                            <view class='store-order-right-txt'>团购价:{{sub_item.order.price-0}}</view>
+                          </view>
+                          <view class='store-order-right-txt' wx:if="{{sub_item.order.exchange_code_status == 2}}"> 截止时间：{{sub_item.order.end_time}}</view>
+                        </view>
+                        <view wx:if="{{sub_item.type =='spike'}}" style='{{sub_item.order.is_fund==0?"":"margin-top: 20rpx"}}'>
+                          <view class='flex-cc'>
+                            <view class='flex-rc-cc store-order-right-mid2'>免费领</view>
+                            <view class='store-order-right-txt' style='margin-right:18rpx' style=' margin-right:30rpx'>￥{{sub_item.order.price}}</view>
+                            <view class='store-order-right-txt'>数量:{{sub_item.order.direct_num}}</view>
+                          </view>
+                          <view class='store-order-right-txt' wx:if="{{sub_item.order.exchange_code_status == 2}}"> 截止时间：{{sub_item.order.end_time}}</view>
+                        </view>
+                        <view wx:if="{{sub_item.type =='sample'}}" style='{{sub_item.order.is_fund==0?"":"margin-top: 20rpx"}}'>
+                          <view class='flex-cc'>
+                            <view class='flex-rc-cc store-order-right-mid3'>特价样品</view>
+                            <view class='store-order-right-txt'>样品价:{{sub_item.order.price-0}}</view>
+                          </view>
+                          <view class='store-order-right-txt' wx:if="{{sub_item.order.exchange_code_status == 2}}"> 截止时间：{{common.tTime(sub_item.order.exchange_code_end_time)}}</view>
+                        </view>
+                        <view wx:if="{{sub_item.type =='group_buy_direct'}}" style='margin-top: 16rpx'>
+                          <view class='flex-cc'>
+                            <view class='store-order-right-txt' style='margin-right:20rpx'>数量:{{sub_item.order.direct_num}}</view>
+                            <view class='store-order-right-txt'>总价:{{sub_item.order.price}}</view>
+                          </view>
+                          <view class='store-order-right-txt' wx:if="{{sub_item.order.exchange_code_status == 2}}"> 截止时间：{{common.tTime(sub_item.order.exchange_code_end_time)}}</view>
+                        </view>
+                      </view>
+                      <view class='store-order-right-txt' wx:else>兑换时间: {{sub_item.order.write_time}}</view>
+                      <view wx:if='{{sub_item.type =="scan"}}' class='flex-rc scan-view'>
+                        <view>
+                          <image lazy-load src='/images/ic_order_pay@2x.png' class='images-scan'></image>
+                        </view>
+                        <view class='flex-rb scan-title'>
+                          <view class='scan-price'>支付金额：¥{{sub_item.order.price-0}}</view>
+                          <view class='scan-text'>{{sub_item.order.pay_time}}</view>
+                        </view>
+                      </view>
+                    </view>
+
+
+                    <view class='flex-rc-cc store-order-right-btn' wx:if="{{sub_item.order.is_pay == 0 && sub_item.type == 'group_buy_direct'&&sub_item.order.is_close ==0 }}" catchtap='goPay' data-order_id='{{sub_item}}'>去支付</view>
+                    <button class='flex-rc-cc button-share' open-type='share' wx:elif="{{sub_item.order.is_pay == 1 && sub_item.type == 'group_buy' && sub_item.order.exchange_code_status == 1}}" catchtap='goFriend' data-order_id='{{sub_item}}'>找拼友</button>
+                    <view class='flex-rc-cc store-order-right-btn' wx:elif="{{sub_item.type =='group_buy' && sub_item.order.record_status==1 && sub_item.order.exchange_code_status == 1 || sub_item.order.exchange_code_status == 2}}" catchtap='goVolume' data-order_id="{{sub_item}}">查看券码</view>
+                    <view class='flex-rc-cc store-order-right-btn' wx:elif="{{sub_item.order.order_status==3}}" catchtap='goComment' data-order_id="{{sub_item}}">去评价</view>
+                    <button class='flex-rc-cc button-share' open-type='share' wx:elif="{{sub_item.order.is_pay == 1 && sub_item.type == 'spike' && sub_item.order.exchange_code_status == 1}}" catchtap='goHelp' data-order_id="{{sub_item}}">邀请砍价</button>
+                  </view>
+                </view>
+              </view>
+            </block>
+
+            <block wx:if="{{item.order_lists.length <2 || all_order[index].order_lists.length==2}}">
+            </block>
+            <block wx:else>
+              <view wx:if="{{all_order[index].order_lists.length>item.order_lists.length}}" class="flex-rc-cc order-item-more" data-index="{{index}}" bindtap='chc_more'>
+                查看更多该店订单
+                <image lazy-load src="/images/ic_down_def@2x.png"></image>
+              </view>
+              <view wx:else class='flex-rc-cc order-item-more' bindtap='chc_more' bindtap='chc_less' data-index="{{index}}">
+                收起该店订单
+                <image lazy-load src="/images/ic_one_up@2x.png" style=' margin-left:6rpx;width:16rpx;height:16rpx;'></image>
+              </view>
+            </block>
+
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </van-tab>
+</van-tabs> -->
+<!-- 覆盖层 -->
+
+<!-- 查看券码 -->
+<view class='viewBG' wx:if='{{code_image}}' catchtouchmove='preventMove' catchtap='goAll'>
+  <view class='code-tan flex-rc-cc' catchtap='goClick'>
+    <image lazy-load src='/images/img_ticket@2x.png' class='code-image'></image>
+    <view class='code-text flex-rc-cc' style='z-index: 9' wx:if='{{codeLayer}}'>
+      <view class='code-close' style='background: #fff'></view>
+      <view class='code-layer-text flex'>系统检测到截图，为保障您个人财产安全，该截图无效，请亲自到线下兑换</view>
+      <view class='code-know flex-rc-cc' catchtap='goLayer'>知道了</view>
+    </view>
+    <view class='flex-cc code-text' wx:else>
+      <view class='code-close' catchtap='goAll'></view>
+      <view class='code-text-top'>商家扫描券码即可消费</view>
+      <view class='code-xian'></view>
+      <image lazy-load class='code-text-image' src='{{code_image}}'></image>
+      <view class='code-text-bottom'>请亲自到线下兑换</view>
+    </view>
+  </view>
+</view>
+
+<view class='viewBG' catchtouchmove='preventMove' catchtap='goAll' wx:if='{{write}}'>
+  <view class='refuse-concent center45 flex-rc-cc' catchtap='goClick'>
+    <view class='refuse-title flex-rc-cc'>是否确定兑换该商品？</view>
+    <view class='flex-ra-cc refuse-button'>
+      <view class='refuse-left flex-rc-cc' catchtap='goAll'>取消</view>
+      <view class='refuse-right flex-rc-cc' catchtap='goCode'>确定</view>
+    </view>
+  </view>
+</view>
+
+<!-- 分享 -->
+<view class='viewBG' catchtouchmove='preventMove' catchtap='goAll' wx:if='{{share}}'>
+</view>
+<view class='share-view {{share?"openBG1":""}}' catchtouchmove='preventMove' catchtap='goClick' style='{{modelX!="-1"?"padding-bottom: 68rpx":""}}' wx:if='{{share}}'>
+  <view class='share-text1 flex-rc-cc'>分享到业主群</view>
+  <button class='share-button' open-type='share' hover-class='none' data-item='{{item}}'>
+    <image src='/images/ic_wechat_share@2x.png' class='share-image'></image>
+  </button>
+  <view class='share-text2 flex-rc-cc border-bottom'>微信</view>
+  <!-- <view class='share-text3 flex-rc-cc' catchtap='goAll'>取消</view> -->
+</view>
